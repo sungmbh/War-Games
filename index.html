@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CES Sales Rush - Mentor Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.9em;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e0e0e0;
+            overflow-x: auto;
+        }
+
+        .nav-tab {
+            padding: 20px 30px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1em;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-tab:hover {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+
+        .nav-tab.active {
+            background: white;
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 30px;
+            cursor: pointer;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #667eea;
+            transition: all 0.3s;
+        }
+
+        .timeline-item:hover::before {
+            background: #667eea;
+            transform: scale(1.3);
+        }
+
+        .timeline-time {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+
+        .mentor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .mentor-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid #667eea30;
+        }
+
+        .mentor-card.war-room {
+            background: linear-gradient(135deg, #f093fb15 0%, #f5576c15 100%);
+            border-color: #f093fb50;
+        }
+
+        .mentor-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .mentor-role {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .mentor-capacity {
+            background: #667eea;
+            color: white;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin: 10px 0;
+        }
+
+        .rubric-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .rubric-table th,
+        .rubric-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .rubric-table th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        .rubric-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .points-positive {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .points-negative {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid;
+        }
+
+        .alert-info {
+            background: #e3f2fd;
+            border-color: #2196f3;
+            color: #1565c0;
+        }
+
+        .alert-warning {
+            background: #fff3e0;
+            border-color: #ff9800;
+            color: #e65100;
+        }
+
+        .alert-success {
+            background: #e8f5e9;
+            border-color: #4caf50;
+            color: #2e7d32;
+        }
+
+        .quick-ref {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .quick-ref-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .quick-ref-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .quick-ref-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .phase-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .phase-research {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .phase-booking {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .phase-meeting {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .phase-surprise {
+            background: #fce4ec;
+            color: #c2185b;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .mentor-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 CES SALES RUSH: WAR GAMES</h1>
+            <p class="subtitle">Mentor Guide | November 5, 2025 | Taiwan Tech Arena</p>
+            <div>
+                <span class="badge">20 Startups</span>
+                <span class="badge">7 Mentors</span>
+                <span class="badge">16 Meeting Slots</span>
+                <span class="badge">$500 Prize</span>
+            </div>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('overview')">📋 Overview</button>
+            <button class="nav-tab" onclick="showTab('mentors')">👔 Your Role</button>
+            <button class="nav-tab" onclick="showTab('timeline')">⏰ Timeline</button>
+            <button class="nav-tab" onclick="showTab('meetings')">🤝 Meetings</button>
+            <button class="nav-tab" onclick="showTab('scoring')">📊 Scoring</button>
+            <button class="nav-tab" onclick="showTab('quick')">⚡ Quick Ref</button>
+        </div>
+
+        <div class="content">
+            <!-- OVERVIEW TAB -->
+            <div id="overview" class="tab-content active">
+                <div class="alert alert-info">
+                    <strong>🎯 Mission:</strong> Simulate a high-pressure CES sales cycle where startups compete for scarce meeting slots with corporate buyers, forcing strategic decisions about targeting, timing, and execution quality.
+                </div>
+
+                <div class="quick-ref">
+                    <div class="quick-ref-item">
+                        <div class="quick-ref-number">20</div>
+                        <div class="quick-ref-label">Startups Competing</div>
+                    </div>
+                    <div class="quick-ref-item">
+                        <div class="quick-ref-number">16</div>
+                        <div class="quick-ref-label">Meeting Slots</div>
+                    </div>
+                    <div class="quick-ref-item">
+                        <div class="quick-ref-number">4</div>
+                        <div class="quick-ref-label">Teams Will Fail</div>
+                    </div>
+                    <div class="quick-ref-item">
+                        <div class="quick-ref-number">8h</div>
+                        <div class="quick-ref-label">Total Duration</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>🔑 Key Design Elements</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 10px 0; border-bottom: 1px solid #eee;">✅ <strong>Real Research</strong> - Startups build actual CES target lists (usable output)</li>
+                        <li style="padding: 10px 0; border-bottom: 1px solid #eee;">✅ <strong>Real Scarcity</strong> - Only 16 meeting slots for 20 teams (4 teams will fail to book)</li>
+                        <li style="padding: 10px 0; border-bottom: 1px solid #eee;">✅ <strong>Strategic Complexity</strong> - War Room advisor costs points, buyer selection matters, quality determines acceptance</li>
+                        <li style="padding: 10px 0; border-bottom: 1px solid #eee;">✅ <strong>Pressure Elements</strong> - Limited slots, Hot Lead bonus surprise, partnership opportunities</li>
+                        <li style="padding: 10px 0;">✅ <strong>Clear Consequences</strong> - Negative points for spam, no-shows, lateness, unprofessional behavior</li>
+                    </ul>
+                </div>
+
+                <div class="alert alert-warning">
+                    <strong>⚠️ Expected Outcomes:</strong> 14-16 teams book initial meetings (4-6 fail) → 2 partnerships form (covering 4 more) → Final result: 18-19 teams participate, 1-2 teams completely shut out
+                </div>
+            </div>
+
+            <!-- MENTORS TAB -->
+            <div id="mentors" class="tab-content">
+                <div class="card">
+                    <h3>👥 The 6 Corporate Buyers</h3>
+                    <div class="mentor-grid">
+                        <div class="mentor-card">
+                            <div class="mentor-name">Johnny Yu</div>
+                            <div class="mentor-role">Healthcare Venture Investor</div>
+                            <div>Mosaic Venture Lab</div>
+                            <div class="mentor-capacity">3 Meeting Slots</div>
+                            <p><strong>Perfect For:</strong> Anivance, G1 Technologies, HUA TEC, Aitronics, mycomfytech</p>
+                            <p><strong>You Evaluate:</strong> Clinical validation, regulatory pathway, healthcare economics</p>
+                        </div>
+
+                        <div class="mentor-card">
+                            <div class="mentor-name">Josh Fu</div>
+                            <div class="mentor-role">Consumer/Retail Strategist</div>
+                            <div>Akohub (CRO), ex-TimeWarner</div>
+                            <div class="mentor-capacity">3 Meeting Slots</div>
+                            <p><strong>Perfect For:</strong> ible, mycomfytech, Serafim, Optiqb, LightMatrix</p>
+                            <p><strong>You Evaluate:</strong> Product-market fit, unit economics, retail viability</p>
+                            <p><strong>Special:</strong> Teaches 10-min cold outreach lesson at 10:15 AM</p>
+                        </div>
+
+                        <div class="mentor-card">
+                            <div class="mentor-name">Deborah Magid</div>
+                            <div class="mentor-role">Enterprise Strategic Partnerships</div>
+                            <div>Independent VC, ex-IBM VP</div>
+                            <div class="mentor-capacity">3 Meeting Slots</div>
+                            <p><strong>Perfect For:</strong> BarkingDog, King One, Meta Intelligence, MOOOORE, Nexera, AIRA</p>
+                            <p><strong>You Evaluate:</strong> Enterprise readiness, 18-month sales cycles, Fortune 500 integration</p>
+                        </div>
+
+                        <div class="mentor-card">
+                            <div class="mentor-name">Dr. Volker Kaese</div>
+                            <div class="mentor-role">Automotive & Mobility Innovation</div>
+                            <div>Ingenev Mobility CEO, ex-Audi</div>
+                            <div class="mentor-capacity">2 Meeting Slots</div>
+                            <p><strong>Perfect For:</strong> mLAB, All Good Energy, AIRA (automotive security)</p>
+                            <p><strong>You Evaluate:</strong> Automotive-grade standards, scalability, OEM integration potential</p>
+                        </div>
+
+                        <div class="mentor-card">
+                            <div class="mentor-name">Ashley Hsueh</div>
+                            <div class="mentor-role">Corporate Strategy Consultant</div>
+                            <div>Bain & Company (Partner)</div>
+                            <div class="mentor-capacity">2 Meeting Slots</div>
+                            <p><strong>Perfect For:</strong> All B2B startups (universal strategist)</p>
+                            <p><strong>You Evaluate:</strong> Business model defensibility, competitive positioning, M&A potential</p>
+                        </div>
+
+                        <div class="mentor-card">
+                            <div class="mentor-name">Shafeen Charania</div>
+                            <div class="mentor-role">Enterprise Operations & Scaling</div>
+                            <div>fluency COO, ex-Microsoft/IBM</div>
+                            <div class="mentor-capacity">3 Meeting Slots</div>
+                            <p><strong>Perfect For:</strong> Enterprise SaaS, deep tech, healthcare B2B, hardware scaling</p>
+                            <p><strong>You Evaluate:</strong> Operations at scale, customer onboarding, what breaks at 1000x</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>🏴 War Room Advisor</h3>
+                    <div class="mentor-card war-room">
+                        <div class="mentor-name">Ken Huang</div>
+                        <div class="mentor-role" style="color: #f093fb;">Investor & Due Diligence Expert</div>
+                        <div>Mosaic Venture Lab</div>
+                        <p><strong>Role:</strong> Strategic consultations during research and booking phases</p>
+                        <p><strong>Cost to Teams:</strong> 5-min consultation = -10 points | 10-min consultation = -15 points</p>
+                        <p><strong>Location:</strong> Dedicated "War Room" station in main hall</p>
+                        <p><strong>Available:</strong> 10:45 AM - 12:00 PM</p>
+                        <p><strong>Helps With:</strong> Buyer targeting, email quality, positioning, objection prep</p>
+                    </div>
+                </div>
+
+                <div class="alert alert-success">
+                    <strong>✅ Your Authority:</strong> You have EXPLICIT authority to DECLINE startups if they're wrong fit, poor email quality, or better options available. This creates real scarcity.
+                </div>
+            </div>
+
+            <!-- TIMELINE TAB -->
+            <div id="timeline" class="tab-content">
+                <div class="card">
+                    <h3>⏰ Master Schedule (9:30 AM - 5:30 PM)</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-time">09:30-10:00 (30 min)</div>
+                            <div class="timeline-content">
+                                <span class="phase-badge phase-research">OPENING</span>
+                                <strong>Rules of Engagement</strong>
+                                <p>Volker introduces program, reveals 6 buyers (you!), explains War Room, scoring system, and scarcity. You give 90-second intro in character.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">10:00-10:45 (45 min)</div>
+                            <div class="timeline-content">
+                                <span class="phase-badge phase-research">ROUND 1A</span>
+                                <strong>Real CES Target Research</strong>
+                                <p>Teams build 20-person CES target lists. You're available for questions. Josh Fu teaches cold outreach at 10:15.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">10:45-11:30 (45 min)</div>
+                            <div class="timeline-content">
+                                <span class="phase-badge phase-research">ROUND 1B</span>
+                                <strong>War Games Prep</strong>
+                                <p>Teams study you, draft emails, make strategic decisions. Ken's War Room opens. <strong>You're at your HQ station, available but not actively engaging.</strong></p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">11:30-12:00 (30 min)</div>
+                            <div class="timeline-content">
+                                <span class="phase-badge phase-booking">ROUND 2</span>
+                                <strong>THE BOOKING BATTLE</strong>
+                                <p><strong>🚨 YOU'RE ACTIVE:</strong> Check email every 5 min (11:35, 11:40, 11:45, 11:50, 11:55, 12:00). Evaluate emails. Accept/Decline. Text Kyle when you book someone. ONLY 16 total slots available!</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">12:00-13:00 (60 min)</div>
+                            <div class="timeline-content">
+                                <span class="phase-badge phase-research">LUNCH</span>
+                                <strong>Results Reveal + Mentor Panel</strong>
+                                <p>Volker reveals who booked. You share email insights (90 sec): what made best email stand out, why you declined others.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">13:00-13:30 (30 min)</div>
+                            <div class="timeline-content">
+                                <span class="phase-badge phase-meeting">BLOCK 1</span>
+                                <strong>Meeting Waves 1 & 2</strong>
+                                <p><strong>🚨 YOU'RE ACTIVE:</strong> Conduct 15-min meetings. Wave 1 (1:00-1:15) → 6 simultaneous. Wave 2 (1:15-1:30) → 4 simultaneous. Score each meeting using rubric.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">13:30-14:00 (30 min)</div>
+                            <div class="timeline-content">
+                                <span class="phase-badge phase-surprise">BREAK</span>
+                                <strong>Hot Lead Bonus Surprise</strong>
+                                <p>At 2:00 PM: Volker randomly selects one buyer (might be you!). That buyer gets 1 extra meeting slot. Teams scramble to email in 5 min. You pick best email.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">14:00-15:00 (60 min)</div>
+                            <div class="timeline-content">
+                                <span class="phase-badge phase-research">HYBRID TIME</span>
+                                <strong>Observe/Network/Prep</strong>
+                                <p>Teams choose their own path. You're available informally for casual conversations.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">15:00-15:15 (15 min)</div>
+                            <div class="timeline-content">
+                                <span class="phase-badge phase-surprise">SURPRISE</span>
+                                <strong>Partnership Announcement + Booking</strong>
+                                <p>Volker announces 2 buyers want integrated solutions (might be you!). Teams form partnerships, email jointly. You respond immediately (accept/decline).</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">15:15-15:30 (15 min)</div>
+                            <div class="timeline-content">
+                                <span class="phase-badge phase-meeting">BLOCK 2</span>
+                                <strong>Meeting Wave 3</strong>
+                                <p><strong>🚨 YOU'RE ACTIVE:</strong> Final 6 solo meetings simultaneously (3:15-3:30). Same 15-min format and scoring.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">15:30-16:10 (40 min)</div>
+                            <div class="timeline-content">
+                                <span class="phase-badge phase-meeting">PARTNERSHIPS</span>
+                                <strong>Partnership Meetings</strong>
+                                <p>If you accepted partnerships: conduct 2 joint meetings (20 min each, 3:30-3:50, 3:50-4:10). Score both teams identically.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">16:10-16:40 (30 min)</div>
+                            <div class="timeline-content">
+                                <span class="phase-badge phase-surprise">AWARDS</span>
+                                <strong>Champion Crowned</strong>
+                                <p>Volker reveals final leaderboard. You announce your "Best Email" winner (+10 points). You share one CES lesson (60 sec).</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">16:40-17:30 (50 min)</div>
+                            <div class="timeline-content">
+                                <span class="phase-badge phase-research">RECEPTION</span>
+                                <strong>Beer + Celebration</strong>
+                                <p>Casual networking. Competition over. You circulate informally, give individual feedback, build relationships.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MEETINGS TAB -->
+            <div id="meetings" class="tab-content">
+                <div class="card">
+                    <h3>📧 Email Evaluation (11:30-12:00 PM)</h3>
+                    <p><strong>Check email every 5 minutes:</strong> 11:35, 11:40, 11:45, 11:50, 11:55, 12:00</p>
+                    
+                    <h4 style="margin-top: 20px;">Evaluation Criteria:</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 8px 0;">✅ Did they research ME specifically? (mentioned detail about my background)</li>
+                        <li style="padding: 8px 0;">✅ Is their value prop relevant to MY buyer role?</li>
+                        <li style="padding: 8px 0;">✅ Is it personalized or generic template?</li>
+                        <li style="padding: 8px 0;">✅ Is their startup a good fit for what I evaluate?</li>
+                        <li style="padding: 8px 0;">✅ Clear, professional meeting request?</li>
+                    </ul>
+
+                    <h4 style="margin-top: 20px;">Your Response Options:</h4>
+                    
+                    <div class="alert alert-success">
+                        <strong>✅ ACCEPT (Book Them):</strong><br>
+                        Reply: "Confirmed for [Block 1: 1:00 PM / 1:15 PM] or [Block 2: 3:15 PM]. See you then."<br>
+                        <strong>→ Text Kyle immediately: "Booked [Team Name] for [Time]"</strong><br>
+                        → Team gets +30 points
+                    </div>
+
+                    <div class="alert alert-warning">
+                        <strong>⚠️ DECLINE - Wrong Fit:</strong><br>
+                        Reply: "Thanks for reaching out. My focus is [your specialty], and your solution seems better suited for [other buyer]. Good luck!"<br>
+                        → Team gets 0 points
+                    </div>
+
+                    <div class="alert alert-warning">
+                        <strong>⚠️ DECLINE - Poor Quality:</strong><br>
+                        Reply: "Thanks for your interest. Your email didn't provide enough detail for me to evaluate fit. Best of luck at CES."<br>
+                        → Team gets 0 points
+                    </div>
+
+                    <div style="background: #ffebee; padding: 15px; border-radius: 8px; border-left: 4px solid #f44336; margin-top: 15px;">
+                        <strong style="color: #c62828;">🚫 SPAM (Do NOT respond):</strong><br>
+                        Forward to Volker: "Spam from [Team Name] - generic template"<br>
+                        Criteria: Obviously generic, could be sent to anyone, zero personalization<br>
+                        → Team gets <strong>-15 points</strong>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>🤝 Meeting Structure (15 minutes each)</h3>
+                    
+                    <table class="rubric-table">
+                        <tr>
+                            <th style="width: 25%;">Time</th>
+                            <th>Activity</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Minutes 0-8</strong></td>
+                            <td>
+                                <strong>Pitch & Q&A</strong><br>
+                                • Team pitches (5-6 min): Problem, solution, traction, why you specifically<br>
+                                • You ask questions (2-3 min): Use your buyer persona lens<br>
+                                <em>Examples: Johnny asks about regulatory pathway, Josh asks about unit economics, Ashley asks about competitive moat</em>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Minutes 8-12</strong></td>
+                            <td>
+                                <strong>Paid Pilot Negotiation</strong><br>
+                                • You raise 1-2 objections (price, risk, timing, competition)<br>
+                                • Team addresses objections<br>
+                                • You evaluate internally: Would I actually commit to paid pilot?
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Minutes 12-15</strong></td>
+                            <td>
+                                <strong>Scoring & Feedback</strong><br>
+                                • Fill out scoring rubric (see Scoring tab)<br>
+                                • Give 2-min feedback: what worked, what needs work, advice for CES<br>
+                                • Submit score to Kyle via Google Form
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>🤝 Partnership Meetings (20 minutes each)</h3>
+                    <p>If you accept partnerships, conduct 20-minute joint meetings where 2 teams pitch together.</p>
+                    
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 8px 0;"><strong>Minutes 0-2:</strong> Opening</li>
+                        <li style="padding: 8px 0;"><strong>Minutes 2-11:</strong> Dual pitch (Team A: 5 min, Team B: 4 min) + integration Q&A (2 min)</li>
+                        <li style="padding: 8px 0;"><strong>Minutes 11-17:</strong> Paid pilot negotiation (address integration complexity)</li>
+                        <li style="padding: 8px 0;"><strong>Minutes 17-20:</strong> Scoring & feedback</li>
+                    </ul>
+                    
+                    <div class="alert alert-info">
+                        <strong>Important:</strong> Score BOTH teams identically. Same meeting score, same pilot decision. If you award Paid Pilot, BOTH teams get +50 points.
+                    </div>
+                </div>
+            </div>
+
+            <!-- SCORING TAB -->
+            <div id="scoring" class="tab-content">
+                <div class="card">
+                    <h3>📊 Meeting Performance Rubric</h3>
+                    <p>Fill out this rubric during Minutes 12-15 of each meeting:</p>
+                    
+                    <table class="rubric-table">
+                        <tr>
+                            <th>Criterion</th>
+                            <th>Points</th>
+                            <th>What to Evaluate</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Research Quality</strong></td>
+                            <td>0-5 points</td>
+                            <td>Did they research me specifically? Mentioned details about my background?</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Relevance</strong></td>
+                            <td>0-5 points</td>
+                            <td>Value prop relevant to MY buyer needs and evaluation criteria?</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Proof Points</strong></td>
+                            <td>0-5 points</td>
+                            <td>Credible evidence: customers, metrics, awards, traction data?</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pitch Delivery</strong></td>
+                            <td>0-5 points</td>
+                            <td>Clear, structured, professional presentation?</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Objection Handling</strong></td>
+                            <td>0-5 points</td>
+                            <td>Addressed my concerns effectively? Prepared responses?</td>
+                        </tr>
+                        <tr style="background: #f0f0f0; font-weight: bold;">
+                            <td colspan="2"><strong>TOTAL MEETING SCORE</strong></td>
+                            <td><strong>___/25 points</strong></td>
+                        </tr>
+                    </table>
+
+                    <h4 style="margin-top: 30px;">Paid Pilot Decision:</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
+                        <div style="background: #e8f5e9; padding: 20px; border-radius: 8px; border-left: 4px solid #4caf50;">
+                            <strong class="points-positive">✅ YES (+50 bonus)</strong><br>
+                            Would commit to paid pilot<br>
+                            <em>Concrete plan, addressed concerns, ready to move forward</em>
+                        </div>
+                        <div style="background: #fff3e0; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9800;">
+                            <strong style="color: #f57c00;">🤔 MAYBE (+25 bonus)</strong><br>
+                            Interested, need more info<br>
+                            <em>Good potential but questions remain</em>
+                        </div>
+                        <div style="background: #ffebee; padding: 20px; border-radius: 8px; border-left: 4px solid #f44336;">
+                            <strong class="points-negative">❌ NO (0 bonus)</strong><br>
+                            Not ready for pilot<br>
+                            <em>Not convinced or wrong fit</em>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>⚠️ Penalties You Can Issue</h3>
+                    <table class="rubric-table">
+                        <tr>
+                            <th>Penalty</th>
+                            <th>Points</th>
+                            <th>When to Issue</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Late Arrival</strong></td>
+                            <td class="points-negative">-10</td>
+                            <td>Team shows up 5+ minutes after meeting start time. They only get remaining time.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Unprofessional Behavior</strong></td>
+                            <td class="points-negative">-5</td>
+                            <td>Rude/dismissive responses, arguing with you, ignoring questions, unprofessional language. Note specific behavior on rubric.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Spam Email</strong></td>
+                            <td class="points-negative">-15</td>
+                            <td>Generic template, zero personalization, could be sent to anyone. Forward to Volker, don't respond.</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>🏆 Complete Scoring System</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div>
+                            <h4 style="color: #28a745;">Positive Points</h4>
+                            <table style="width: 100%;">
+                                <tr><td>Book a meeting</td><td class="points-positive">+30</td></tr>
+                                <tr><td>"Best Email" award</td><td class="points-positive">+10</td></tr>
+                                <tr><td>Meeting performance</td><td class="points-positive">+25</td></tr>
+                                <tr><td>Paid Pilot secured</td><td class="points-positive">+50</td></tr>
+                                <tr><td>"Maybe" Pilot</td><td class="points-positive">+25</td></tr>
+                                <tr><td>Hot Lead Bonus</td><td class="points-positive">+20</td></tr>
+                            </table>
+                        </div>
+                        <div>
+                            <h4 style="color: #dc3545;">Negative Points</h4>
+                            <table style="width: 100%;">
+                                <tr><td>Ken War Room (5 min)</td><td class="points-negative">-10</td></tr>
+                                <tr><td>Ken War Room (10 min)</td><td class="points-negative">-15</td></tr>
+                                <tr><td>Spam email</td><td class="points-negative">-15</td></tr>
+                                <tr><td>No-show to meeting</td><td class="points-negative">-20</td></tr>
+                                <tr><td>Late to meeting</td><td class="points-negative">-10</td></tr>
+                                <tr><td>Unprofessional</td><td class="points-negative">-5</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info" style="margin-top: 20px;">
+                        <strong>Expected Score Ranges:</strong><br>
+                        🥇 Champions: 140-180 points | 🥈 Strong: 100-139 points | 🥉 Average: 60-99 points | ⚠️ Struggled: 0-59 points
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUICK REF TAB -->
+            <div id="quick" class="tab-content">
+                <div class="card">
+                    <h3>⚡ Quick Reference for Mentors</h3>
+                    
+                    <h4 style="color: #667eea; margin-top: 20px;">🚨 When You're Actively Working</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 1.1em;">
+                        <li style="padding: 12px; background: #fff3e0; margin: 8px 0; border-radius: 8px; border-left: 4px solid #ff9800;">
+                            <strong>11:30-12:00 PM:</strong> Email evaluation (check every 5 min, accept/decline, text Kyle)
+                        </li>
+                        <li style="padding: 12px; background: #e8f5e9; margin: 8px 0; border-radius: 8px; border-left: 4px solid #4caf50;">
+                            <strong>1:00-1:30 PM:</strong> Block 1 meetings (Wave 1 + Wave 2)
+                        </li>
+                        <li style="padding: 12px; background: #fce4ec; margin: 8px 0; border-radius: 8px; border-left: 4px solid #c2185b;">
+                            <strong>2:00 PM:</strong> Possible Hot Lead selection (if chosen, evaluate 5-min scramble emails)
+                        </li>
+                        <li style="padding: 12px; background: #fce4ec; margin: 8px 0; border-radius: 8px; border-left: 4px solid #c2185b;">
+                            <strong>3:00 PM:</strong> Possible Partnership opportunity (if chosen, accept/decline joint emails)
+                        </li>
+                        <li style="padding: 12px; background: #e8f5e9; margin: 8px 0; border-radius: 8px; border-left: 4px solid #4caf50;">
+                            <strong>3:15-3:30 PM:</strong> Block 2 meetings (Wave 3)
+                        </li>
+                        <li style="padding: 12px; background: #e8f5e9; margin: 8px 0; border-radius: 8px; border-left: 4px solid #4caf50;">
+                            <strong>3:30-4:10 PM:</strong> Partnership meetings (if applicable, 20 min each)
+                        </li>
+                    </ul>
+
+                    <h4 style="color: #667eea; margin-top: 30px;">📝 Your Key Actions</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 15px;">
+                        <div style="background: #e3f2fd; padding: 20px; border-radius: 10px;">
+                            <strong style="color: #1976d2;">During Booking (11:30-12:00)</strong>
+                            <ol style="margin-top: 10px;">
+                                <li>Check email every 5 minutes</li>
+                                <li>Evaluate: research, fit, quality</li>
+                                <li>Reply: Accept, Decline, or Spam</li>
+                                <li>Text Kyle when you book someone</li>
+                            </ol>
+                        </div>
+                        
+                        <div style="background: #e8f5e9; padding: 20px; border-radius: 10px;">
+                            <strong style="color: #388e3c;">During Meetings (15 min each)</strong>
+                            <ol style="margin-top: 10px;">
+                                <li>Listen to pitch & ask questions (8 min)</li>
+                                <li>Raise objections & negotiate (4 min)</li>
+                                <li>Fill rubric & give feedback (3 min)</li>
+                                <li>Submit score via Google Form</li>
+                            </ol>
+                        </div>
+                        
+                        <div style="background: #fff3e0; padding: 20px; border-radius: 10px;">
+                            <strong style="color: #f57c00;">At Awards (4:10 PM)</strong>
+                            <ol style="margin-top: 10px;">
+                                <li>Announce "Best Email" winner (+10 pts)</li>
+                                <li>Share one CES lesson (60 sec)</li>
+                                <li>Celebrate with teams at reception</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>💡 Mentor Tips</h3>
+                    <div style="display: grid; gap: 15px;">
+                        <div style="padding: 15px; background: #f8f9fa; border-left: 4px solid #667eea; border-radius: 4px;">
+                            <strong>✅ Be Your Persona:</strong> Stay in character. Johnny asks about clinical validation. Josh asks about retail economics. Volker asks about automotive standards. Your expertise shapes the evaluation.
+                        </div>
+                        <div style="padding: 15px; background: #f8f9fa; border-left: 4px solid #667eea; border-radius: 4px;">
+                            <strong>⚡ Speed Matters in Booking:</strong> First-come-first-served within quality threshold. If two great emails arrive, earlier one wins. This creates urgency.
+                        </div>
+                        <div style="padding: 15px; background: #f8f9fa; border-left: 4px solid #667eea; border-radius: 4px;">
+                            <strong>🎯 Scarcity is Real:</strong> You CAN and SHOULD decline startups. Wrong fit? Decline. Generic email? Decline. Better options? Decline. This creates the war.
+                        </div>
+                        <div style="padding: 15px; background: #f8f9fa; border-left: 4px solid #667eea; border-radius: 4px;">
+                            <strong>📊 Be Tough But Fair:</strong> Paid Pilots should go to truly impressive startups with concrete 90-day plans. Don't give +50 points lightly—it's the grand prize.
+                        </div>
+                        <div style="padding: 15px; background: #f8f9fa; border-left: 4px solid #667eea; border-radius: 4px;">
+                            <strong>🎓 Feedback Matters:</strong> Your 2-minute feedback in meetings is gold. Be specific, actionable, and encouraging even when critical. They'll use this at real CES.
+                        </div>
+                        <div style="padding: 15px; background: #f8f9fa; border-left: 4px solid #667eea; border-radius: 4px;">
+                            <strong>🤝 Community Over Competition:</strong> At the reception, drop the persona. Be warm, make intros, build relationships. The competition is over—now it's Taiwan startup community heading to CES together.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-success">
+                    <strong>🎯 Remember:</strong> This program is designed to prepare startups for real CES. Your tough evaluation today = better performance in Vegas. You're helping them level up. 💪
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active class from all nav tabs
+            const navTabs = document.querySelectorAll('.nav-tab');
+            navTabs.forEach(nav => nav.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabId).classList.add('active');
+            
+            // Add active class to clicked nav tab
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
