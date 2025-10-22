@@ -58,6 +58,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem; /* 8px */
+            white-space: nowrap; /* Prevent tabs wrapping */
         }
 
         .nav-tab:hover {
@@ -97,6 +98,7 @@
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
+            height: 8px; /* For horizontal scrollbar on tabs */
         }
         ::-webkit-scrollbar-track {
             background: #F0F4F8;
@@ -181,6 +183,173 @@
              border-radius: 1rem; /* 16px */
          }
 
+        /* Flowchart Styles */
+        .flowchart-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem; /* Space between steps */
+        }
+        .flowchart-step {
+            background: #F0F4F8;
+            box-shadow: inset 4px 4px 8px #bec3c9, inset -4px -4px 8px #ffffff;
+            border-radius: 0.75rem; /* 12px */
+            padding: 1rem 1.5rem; /* 16px 24px */
+            text-align: center;
+            width: 80%;
+            max-width: 400px;
+        }
+        .flowchart-step strong {
+            color: #2563EB; /* Blue accent */
+            display: block;
+            margin-bottom: 0.25rem;
+            font-size: 0.9em;
+        }
+         .flowchart-step p {
+             font-size: 0.95em;
+             color: #4B5563; /* Medium gray */
+         }
+        .flowchart-arrow {
+            width: 3px;
+            height: 1.5rem; /* 24px */
+            background-color: #D1D5DB; /* Light gray */
+            position: relative;
+        }
+        .flowchart-arrow::after {
+             content: '';
+             position: absolute;
+             left: 50%;
+             bottom: -2px;
+             transform: translateX(-50%);
+             border-left: 6px solid transparent;
+             border-right: 6px solid transparent;
+             border-top: 8px solid #D1D5DB;
+        }
+         .flowchart-decision {
+            background: #F0F4F8;
+            box-shadow: inset 4px 4px 8px #bec3c9, inset -4px -4px 8px #ffffff;
+             border-radius: 0.5rem; /* 8px */
+             padding: 1rem;
+             width: 60%;
+             max-width: 300px;
+             transform: rotate(45deg);
+             margin: 1.5rem 0; /* Extra space around diamond */
+         }
+         .flowchart-decision p {
+             transform: rotate(-45deg);
+             text-align: center;
+             font-weight: 600;
+             color: #2563EB; /* Blue accent */
+         }
+         .flowchart-paths {
+             display: flex;
+             justify-content: space-around;
+             width: 100%;
+             position: relative;
+             margin-top: 1rem;
+             margin-bottom: 0.5rem; /* Reduce bottom margin before arrow */
+         }
+         .flowchart-path {
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+             width: 45%;
+             position: relative;
+         }
+          .flowchart-path-label {
+             font-weight: 600;
+             font-size: 0.9em;
+             color: #4B5563;
+             margin-bottom: 0.5rem;
+             text-align: center;
+             padding: 0.25rem 0.5rem;
+             background: #E0E5EC; /* Slightly darker bg for labels */
+             border-radius: 0.5rem;
+             box-shadow: 3px 3px 6px #bec3c9, -3px -3px 6px #ffffff;
+             display: inline-block;
+         }
+          /* Simple line connectors for paths */
+         .flowchart-path::before {
+             content: '';
+             position: absolute;
+             top: -1.5rem; /* Connect from above the path label */
+             height: 1.5rem; /* Length of the vertical line */
+             width: 3px;
+             background-color: #D1D5DB;
+         }
+         /* Horizontal line connecting from diamond */
+         .flowchart-paths::before {
+             content: '';
+             position: absolute;
+             top: -1.5rem; /* Above the paths */
+             left: 25%; /* Start near first path */
+             right: 25%; /* End near second path */
+             height: 3px;
+             background-color: #D1D5DB;
+         }
+          .flowchart-merge {
+             width: 3px;
+             height: 1.5rem; /* 24px */
+             background-color: #D1D5DB;
+             position: relative;
+             margin-top: 1rem; /* Space after parallel paths */
+         }
+         /* Lines coming from paths into the merge point */
+         .flowchart-merge::before, .flowchart-merge::after {
+             content: '';
+             position: absolute;
+             bottom: 100%; /* Start from the top of the merge line */
+             width: 50%; /* Adjusted width */
+             height: 3px;
+             background-color: #D1D5DB;
+         }
+         .flowchart-merge::before {
+             left: 50%;
+             transform: translateX(-100%); /* Position left line */
+         }
+         .flowchart-merge::after {
+             right: 50%;
+             transform: translateX(100%); /* Position right line */
+         }
+          /* Vertical lines from paths down to horizontal line */
+         .flowchart-path::after {
+             content: '';
+             position: absolute;
+             bottom: -1rem; /* Adjust position relative to the last step in the path */
+             height: 1rem; /* Length of vertical line */
+             width: 3px;
+             background-color: #D1D5DB;
+         }
+         /* Mission Briefing list styles */
+         .mission-list {
+             list-style: none;
+             padding-left: 0;
+         }
+         .mission-list li {
+             position: relative;
+             padding-left: 2.5rem; /* Space for icon */
+             margin-bottom: 1.5rem; /* Space between items */
+         }
+         .mission-list li .icon-wrapper {
+             position: absolute;
+             left: 0;
+             top: 0;
+             width: 1.75rem; /* 28px */
+             height: 1.75rem; /* 28px */
+             border-radius: 50%;
+             background: #DBEAFE; /* Light blue background */
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             box-shadow: inset 3px 3px 6px #a8b9cf, inset -3px -3px 6px #ffffff;
+         }
+          .mission-list li .icon-wrapper i {
+             color: #2563EB; /* Blue icon */
+             width: 1rem; /* 16px */
+             height: 1rem; /* 16px */
+         }
+
+
     </style>
 </head>
 <body class="p-6 md:p-12 min-h-screen">
@@ -204,10 +373,15 @@
 
         <!-- Sticky Tab Navigation -->
         <div class="sticky-header mb-8 overflow-x-auto">
+            <!-- Scrollable container for tabs -->
             <div class="flex items-center p-2 space-x-2 min-w-max">
                 <button class="nav-tab active" onclick="showTab('overview', this)">
                     <i data-lucide="compass"></i>
                     <span>Overview</span>
+                </button>
+                 <button class="nav-tab" onclick="showTab('mission', this)">
+                    <i data-lucide="rocket"></i>
+                    <span>Your Mission</span>
                 </button>
                 <button class="nav-tab" onclick="showTab('schedule', this)">
                     <i data-lucide="calendar"></i>
@@ -216,6 +390,10 @@
                 <button class="nav-tab" onclick="showTab('phases', this)">
                     <i data-lucide="milestone"></i>
                     <span>Phase-by-Phase</span>
+                </button>
+                 <button class="nav-tab" onclick="showTab('flowchart', this)">
+                    <i data-lucide="git-branch-plus"></i>
+                    <span>Program Flow</span>
                 </button>
                 <button class="nav-tab" onclick="showTab('scoring', this)">
                     <i data-lucide="check-check"></i>
@@ -237,7 +415,7 @@
                 
                 <div class="inner-shadow-card p-6 mb-6 border-l-4 border-blue-600">
                     <p class="text-lg leading-relaxed text-gray-700">
-                        To simulate a complete, high-pressure CES sales cycle in one day, maximizing learning and minimizing frustration. Startups compete for scarce meeting slots, forcing quality execution, while ensuring *all* participants remain engaged and receive value.
+                        To simulate a complete, high-pressure CES sales cycle in one day, maximizing learning and minimizing frustration. Startups compete for scarce meeting slots, forcing quality execution, while ensuring <strong>all</strong> participants remain engaged and receive value.
                     </p>
                 </div>
 
@@ -246,7 +424,7 @@
                     <div class="score-card p-4">
                         <i data-lucide="search" class="w-8 h-8 text-blue-600 mb-3"></i>
                         <h4 class="font-bold text-lg text-gray-900 mb-1">Real Research, Real Tools</h4>
-                        <p class="text-gray-600 text-sm">Build *actual* CES target lists using tactics from a 15-min lesson on LinkedIn Sales Navigator & Apollo.io.</p>
+                        <p class="text-gray-600 text-sm">Build <strong>actual</strong> CES target lists using tactics from a 15-min lesson on LinkedIn Sales Navigator & Apollo.io.</p>
                     </div>
                     <div class="score-card p-4">
                         <i data-lucide="zap" class="w-8 h-8 text-blue-600 mb-3"></i>
@@ -288,6 +466,53 @@
                         <p class="text-gray-600">Voted by the 16 "Booked" teams for the best pitch in the "4-Minute Finale."</p>
                     </div>
                 </div>
+            </div>
+
+             <!-- Your Mission Briefing Tab (NEW) -->
+            <div id="mission" class="tab-content">
+                 <h2 class="text-3xl font-bold mb-6 accent-text">🚀 Your Mission Briefing</h2>
+                 <p class="text-lg text-gray-700 mb-6">Welcome, Startup Teams! Your objective today is to navigate the CES sales battlefield, secure meetings, refine your pitch, and build strategic alliances. Here are your key tasks:</p>
+
+                 <ul class="mission-list">
+                     <li>
+                         <div class="icon-wrapper"><i data-lucide="brain"></i></div>
+                         <h4 class="font-bold text-lg text-gray-900 mb-1">Absorb the Sales Tech Lesson (10:00 AM)</h4>
+                         <p class="text-gray-600">Pay close attention to Josh Fu's 15-minute crash course on using LinkedIn Sales Navigator & Apollo.io. You'll need these skills immediately.</p>
+                     </li>
+                     <li>
+                         <div class="icon-wrapper"><i data-lucide="list-checks"></i></div>
+                         <h4 class="font-bold text-lg text-gray-900 mb-1">Build Your CES Target List (10:15 AM)</h4>
+                         <p class="text-gray-600">Create a list of 20 <strong>real</strong> people you want to meet at CES 2026 using the tools and techniques just learned. This is a usable output for your actual CES prep!</p>
+                     </li>
+                     <li>
+                         <div class="icon-wrapper"><i data-lucide="mail"></i></div>
+                         <h4 class="font-bold text-lg text-gray-900 mb-1">Craft & Send Your Booking Email (10:45 AM - 12:00 PM)</h4>
+                         <p class="text-gray-600">Research the mentors (their <strong>real</strong> backgrounds!). Draft ONE highly personalized email targeting your #1 choice. **Crucially, list your #2 and #3 ranked choices** in the email body. Aim for 15/15 on the rubric (Personalization, Relevance, Clarity). Send it between 11:30 AM and 12:00 PM sharp!</p>
+                     </li>
+                     <li>
+                         <div class="icon-wrapper"><i data-lucide="swords"></i></div>
+                         <h4 class="font-bold text-lg text-gray-900 mb-1">Engage in the Speed Networking Challenge (12:00 PM)</h4>
+                         <p class="text-gray-600">While mentors score emails, practice your 60-second pitch with fellow teams. Use this active waiting time productively.</p>
+                     </li>
+                      <li>
+                         <div class="icon-wrapper"><i data-lucide="git-branch"></i></div>
+                         <h4 class="font-bold text-lg text-gray-900 mb-1">Execute Your Afternoon Mission (13:00 PM)</h4>
+                         <p class="text-gray-600 mb-2">Based on your private email result at 12:45 PM:</p>
+                         <ul class="list-disc list-outside ml-5 text-gray-600 space-y-1 text-sm">
+                            <li><strong>If Booked (16 Teams):</strong> Attend your 30-min meeting, complete the "Partnership Bingo" challenge (+15 pts), and find a "Floating Mentor" for feedback on your target list.</li>
+                            <li><strong>If Workshop Track (4 Teams):</strong> Attend the intensive 90-min coaching session with Ken Huang (13:00-14:30), then prepare your killer 4-minute pitch for the finale.</li>
+                         </ul>
+                     </li>
+                      <li>
+                         <div class="icon-wrapper"><i data-lucide="flag"></i></div>
+                         <h4 class="font-bold text-lg text-gray-900 mb-1">Deliver/Judge in the Finale (15:30 PM)</h4>
+                         <p class="text-gray-600 mb-2">Showcase what you've learned:</p>
+                         <ul class="list-disc list-outside ml-5 text-gray-600 space-y-1 text-sm">
+                              <li><strong>Workshop Track Teams:</strong> Give your polished 4-minute pitch on the main stage.</li>
+                              <li><strong>Booked Teams:</strong> Listen critically and vote for the "Peer's Choice Award" winner (+20 pts).</li>
+                         </ul>
+                     </li>
+                 </ul>
             </div>
 
             <!-- Master Schedule Tab (V2.2 CONTENT) -->
@@ -418,7 +643,7 @@
                         <p class="text-sm font-semibold text-blue-600 mb-3">Lead: Volker (MC)</p>
                         <div class="inner-shadow-card p-4">
                             <ul class="list-disc list-outside ml-5 space-y-2 text-gray-600">
-                                <li>Volker welcomes teams, introduces Mentors (with **slot capacities**).</li>
+                                <li>Volker welcomes teams, introduces Mentors (with <strong>slot capacities</strong>).</li>
                                 <li>Explains "Ranked Choice Booking" and "Strategic War Room" (-5 pts).</li>
                                 <li>Frames the "Workshop Track" as a positive, selective coaching path.</li>
                             </ul>
@@ -432,9 +657,9 @@
                         <div class="inner-shadow-card p-4">
                             <p class="text-gray-600 mb-2">Josh delivers a 15-min lesson on:</p>
                             <ol class="list-decimal list-outside ml-5 space-y-2 text-gray-600">
-                                <li>**Find Targets:** Using LinkedIn Sales Navigator.</li>
-                                <li>**Find Emails:** Using Apollo.io / Hunter.io.</li>
-                                <li>**Hook Them:** The 15-point email formula.</li>
+                                <li><strong>Find Targets:</strong> Using LinkedIn Sales Navigator.</li>
+                                <li><strong>Find Emails:</strong> Using Apollo.io / Hunter.io.</li>
+                                <li><strong>Hook Them:</strong> The 15-point email formula.</li>
                             </ol>
                         </div>
                     </div>
@@ -445,9 +670,9 @@
                         <p class="text-sm font-semibold text-blue-600 mb-3">Lead: Teams + Ken</p>
                         <div class="inner-shadow-card p-4">
                             <ul class="list-disc list-outside ml-5 space-y-2 text-gray-600">
-                                <li>**10:15-10:45:** Teams build their 20-person "Real CES Target List."</li>
-                                <li>**10:45-11:30:** Teams study mentors, draft one email, and **rank their Top 3 mentor preferences.**</li>
-                                <li>**War Room** opens for strategic -5 point consultations.</li>
+                                <li><strong>10:15-10:45:</strong> Teams build their 20-person "Real CES Target List."</li>
+                                <li><strong>10:45-11:30:</strong> Teams study mentors, draft one email, and <strong>rank their Top 3 mentor preferences.</strong></li>
+                                <li><strong>War Room</strong> opens for strategic -5 point consultations.</li>
                             </ul>
                         </div>
                     </div>
@@ -458,9 +683,9 @@
                         <p class="text-sm font-semibold text-blue-600 mb-3">Lead: Teams, Mentors, Staff</p>
                         <div class="inner-shadow-card p-4">
                             <ul class="list-disc list-outside ml-5 space-y-2 text-gray-600">
-                                <li>**11:30-12:00:** Booking Window is OPEN. Teams email their #1 mentor (with Top 3 ranks listed).</li>
-                                <li>**12:00-12:30 (Active Wait):** Teams engage in "Speed Networking Challenge." Staff display live score distribution.</li>
-                                <li>**12:30-12:45 (Admin):** Mentors submit scores. Kyle runs Ranked Choice assignment.</li>
+                                <li><strong>11:30-12:00:</strong> Booking Window is OPEN. Teams email their #1 mentor (with Top 3 ranks listed).</li>
+                                <li><strong>12:00-12:30 (Active Wait):</strong> Teams engage in "Speed Networking Challenge." Staff display live score distribution.</li>
+                                <li><strong>12:30-12:45 (Admin):</strong> Mentors submit scores. Kyle runs Ranked Choice assignment.</li>
                             </ul>
                         </div>
                     </div>
@@ -471,8 +696,8 @@
                         <p class="text-sm font-semibold text-blue-600 mb-3">Lead: Kyle & Volker</p>
                         <div class="inner-shadow-card p-4">
                              <ul class="list-disc list-outside ml-5 space-y-2 text-gray-600">
-                                <li>**12:45:** Kyle sends **private emails** to all 20 teams with their status (Booked or Workshop Track).</li>
-                                <li>**12:50:** Volker makes **public announcement** of the 16 *booked* teams and their times.</li>
+                                <li><strong>12:45:</strong> Kyle sends <strong>private emails</strong> to all 20 teams with their status (Booked or Workshop Track).</li>
+                                <li><strong>12:50:</strong> Volker makes <strong>public announcement</strong> of the 16 <strong>booked</strong> teams and their times.</li>
                             </ul>
                         </div>
                     </div>
@@ -487,7 +712,7 @@
                                 <h4 class="font-bold text-lg text-green-700 mb-2">Track 1: 16 "Booked Teams"</h4>
                                 <ol class="list-decimal list-outside ml-5 space-y-2 text-gray-600">
                                     <li>Attend your 30-min meeting.</li>
-                                    <li>Complete **"Partnership Bingo"** (+15 bonus).</li>
+                                    <li>Complete <strong>"Partnership Bingo"</strong> (+15 bonus).</li>
                                     <li>Find a "Floating Mentor" for target list feedback.</li>
                                 </ol>
                             </div>
@@ -495,8 +720,8 @@
                             <div class="inner-shadow-card p-4 border-l-4 border-red-500">
                                 <h4 class="font-bold text-lg text-red-700 mb-2">Track 2: 4 "Workshop Teams"</h4>
                                 <ol class="list-decimal list-outside ml-5 space-y-2 text-gray-600">
-                                    <li>**13:00-14:30 (90 mins):** Attend exclusive Workshop with Ken.</li>
-                                    <li>**14:30-15:30:** Refine and practice 4-minute finale pitch.</li>
+                                    <li><strong>13:00-14:30 (90 mins):</strong> Attend exclusive Workshop with Ken.</li>
+                                    <li><strong>14:30-15:30:</strong> Refine and practice 4-minute finale pitch.</li>
                                 </ol>
                             </div>
                         </div>
@@ -509,7 +734,7 @@
                         <div class="inner-shadow-card p-4">
                             <ul class="list-disc list-outside ml-5 space-y-2 text-gray-600">
                                 <li>The 4 "Workshop Track" startups give their new 4-minute pitch on the main stage.</li>
-                                <li>The 16 "Booked" teams vote for the **"Peer's Choice Award"** (+20 pts).</li>
+                                <li>The 16 "Booked" teams vote for the <strong>"Peer's Choice Award"</strong> (+20 pts).</li>
                             </ul>
                         </div>
                     </div>
@@ -522,13 +747,107 @@
                             <ul class="list-disc list-outside ml-5 space-y-2 text-gray-600">
                                 <li>Volker announces the "Peer's Choice Award" winner.</li>
                                 <li>Jade presents the final leaderboard.</li>
-                                <li>Volker announces the **Grand Champion** ($500 prize).</li>
-                                <li>The champion's math-based score is shown to prove *why* they won.</li>
+                                <li>Volker announces the <strong>Grand Champion</strong> ($500 prize).</li>
+                                <li>The champion's math-based score is shown to prove <strong>why</strong> they won.</li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Program Flow Tab -->
+            <div id="flowchart" class="tab-content">
+                <h2 class="text-3xl font-bold mb-8 accent-text">📊 Program Flow (V2.2)</h2>
+                <div class="flowchart-container">
+                    <!-- Step 1: Opening -->
+                    <div class="flowchart-step">
+                        <strong>09:30</strong>
+                        <p>Opening & Rules</p>
+                    </div>
+                    <div class="flowchart-arrow"></div>
+                    <!-- Step 2: Lesson -->
+                    <div class="flowchart-step">
+                        <strong>10:00</strong>
+                        <p>Sales Tech Lesson (Josh Fu)</p>
+                    </div>
+                    <div class="flowchart-arrow"></div>
+                    <!-- Step 3: Research & Prep -->
+                    <div class="flowchart-step">
+                        <strong>10:15 - 11:30</strong>
+                        <p>Research Targets & Draft Email (Rank Top 3 Mentors)</p>
+                        <p class="text-xs text-orange-600 mt-1">(War Room Open: -5 Pts)</p>
+                    </div>
+                    <div class="flowchart-arrow"></div>
+                    <!-- Step 4: Booking -->
+                    <div class="flowchart-step">
+                        <strong>11:30 - 12:00</strong>
+                        <p>Booking Battle: Send Email</p>
+                    </div>
+                    <div class="flowchart-arrow"></div>
+                     <!-- Step 5: Active Wait -->
+                    <div class="flowchart-step">
+                        <strong>12:00 - 12:30</strong>
+                        <p>Active Waiting: Speed Networking Challenge</p>
+                    </div>
+                    <div class="flowchart-arrow"></div>
+                    <!-- Step 6: Admin & Results -->
+                    <div class="flowchart-step">
+                        <strong>12:30 - 13:00</strong>
+                        <p>Admin Sort (Ranked Choice) & Private Email Results</p>
+                    </div>
+                    <!-- Decision Point -->
+                    <div class="flowchart-decision"><p>Meeting Booked?</p></div>
+                    <!-- Parallel Paths -->
+                    <div class="flowchart-paths">
+                        <!-- Path 1: Booked -->
+                        <div class="flowchart-path">
+                            <div class="flowchart-path-label">Yes: 16 Booked Teams</div>
+                            <div class="flowchart-arrow"></div>
+                            <div class="flowchart-step !w-full">
+                                <strong>13:00 - 15:30</strong>
+                                <ul class="list-disc list-inside text-left text-sm text-gray-600">
+                                    <li>Attend 30-min Meeting</li>
+                                    <li>Complete Partnership Bingo (+15)</li>
+                                    <li>Floating Mentor Q&A</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Path 2: Workshop -->
+                        <div class="flowchart-path">
+                            <div class="flowchart-path-label">No: 4 Workshop Teams</div>
+                             <div class="flowchart-arrow"></div>
+                            <div class="flowchart-step !w-full">
+                                <strong>13:00 - 15:30</strong>
+                                <ul class="list-disc list-inside text-left text-sm text-gray-600">
+                                    <li>Attend 90-min Workshop</li>
+                                    <li>Prepare Finale Pitch</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Merge Point -->
+                    <div class="flowchart-merge"></div>
+                    <div class="flowchart-arrow"></div>
+                     <!-- Step 7: Finale -->
+                    <div class="flowchart-step">
+                        <strong>15:30 - 16:15</strong>
+                        <p>4-Minute Finale: Workshop Teams Pitch, Peers Vote (+20)</p>
+                    </div>
+                    <div class="flowchart-arrow"></div>
+                     <!-- Step 8: Awards -->
+                    <div class="flowchart-step">
+                        <strong>16:15 - 17:00</strong>
+                        <p>Awards Ceremony</p>
+                    </div>
+                     <div class="flowchart-arrow"></div>
+                    <!-- Step 9: Reception -->
+                    <div class="flowchart-step">
+                        <strong>17:00</strong>
+                        <p>Reception</p>
+                    </div>
+                </div>
+            </div>
+
 
             <!-- Scoring System Tab (V2.2 CONTENT) -->
             <div id="scoring" class="tab-content">
@@ -536,7 +855,7 @@
                 <div class="inner-shadow-card p-6 mb-6 border-l-4 border-blue-600">
                     <h4 class="text-xl font-bold text-gray-900 mb-2">Critical Design Principle</h4>
                     <p class="text-lg leading-relaxed text-gray-700">
-                        Every point is **mathematically defensible**. At the awards ceremony, we will display the champion's complete score breakdown. No subjectivity. Pure merit.
+                        Every point is <strong>mathematically defensible</strong>. At the awards ceremony, we will display the champion's complete score breakdown. No subjectivity. Pure merit.
                     </p>
                 </div>
 
@@ -554,7 +873,7 @@
                     <div class="score-card score-card-positive">
                         <h4 class="text-lg font-bold text-gray-900 mb-2">Phase 1: Booking Success</h4>
                         <p class="text-3xl font-black text-green-600 mb-2">+30 <span class="text-lg font-normal text-gray-600">Points</span></p>
-                        <p class="text-gray-600 text-sm">Awarded to the Top 16 scores via **Ranked Choice Booking**.</p>
+                        <p class="text-gray-600 text-sm">Awarded to the Top 16 scores via <strong>Ranked Choice Booking</strong>.</p>
                     </div>
 
                     <!-- Phase 2 -->
@@ -571,7 +890,7 @@
                     </div>
                     <div class="score-card score-card-positive">
                         <h4 class="text-lg font-bold text-gray-900 mb-2">Phase 2: Paid Pilot (Formula)</h4>
-                        <p class="text-gray-600 text-sm mb-2">The Meeting Score *determines* the pilot bonus:</p>
+                        <p class="text-gray-600 text-sm mb-2">The Meeting Score <strong>determines</strong> the pilot bonus:</p>
                         <ul class="list-none text-gray-600 space-y-1">
                             <li><strong class="text-green-600">Score 20-25</strong> = YES (+50 Pts)</li>
                             <li><strong class="text-yellow-600">Score 15-19</strong> = MAYBE (+25 Pts)</li>
@@ -634,7 +953,7 @@ TOTAL SCORE =
                 <div class="inner-shadow-card p-6 mb-6 border-l-4 border-blue-600">
                     <h4 class="text-xl font-bold text-gray-900 mb-2">Mentor Briefing Note</h4>
                     <p class="text-lg leading-relaxed text-gray-700">
-                        You are playing **yourself**. Startups are researching your *actual* LinkedIn. Be ready for the **Ranked Choice** system (you may get teams that ranked you #2 or #3). When not in a meeting, please **"Float"** the room for Q&A.
+                        You are playing <strong>yourself</strong>. Startups are researching your <strong>actual</strong> LinkedIn. Be ready for the <strong>Ranked Choice</strong> system (you may get teams that ranked you #2 or #3). When not in a meeting, please <strong>"Float"</strong> the room for Q&A.
                     </p>
                 </div>
                 
@@ -684,8 +1003,8 @@ TOTAL SCORE =
                     <div class="score-card p-5 border-l-4 border-orange-500">
                         <h4 class="text-xl font-bold text-gray-900">🧠 Ken Huang</h4>
                         <p class="text-orange-600 font-semibold mb-2">War Room Advisor</logo>
-                        <p class="text-sm text-gray-600">**Role 1:** Consultations (-5 Pts)</p>
-                        <p class="text-sm text-gray-600">**Role 2:** Leads 90-min Workshop Track</p>
+                        <p class="text-sm text-gray-600"><strong>Role 1:</strong> Consultations (-5 Pts)</p>
+                        <p class="text-sm text-gray-600"><strong>Role 2:</strong> Leads 90-min Workshop Track</p>
                     </div>
                     <!-- Admin 1 -->
                     <div class="score-card p-5 border-l-4 border-cyan-500">
