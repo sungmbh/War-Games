@@ -8,148 +8,76 @@
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
 
     :root{
-      /* Slightly lighter palette */
-      --bg-primary:#12163a;          /* was #0a0e27 */
-      --bg-secondary:#1b2350;        /* was #151b3d */
-      --bg-card:#202a5a;             /* was #1a2142 */
-      --accent-cyan:#29ddff;         /* was #00d4ff */
-      --accent-purple:#c05bff;       /* was #b026ff */
-      --accent-pink:#ff55aa;         /* was #ff2e97 */
-      --accent-gold:#ffd95a;         /* was #ffd700 */
+      --bg-primary:#12163a;
+      --bg-secondary:#1b2350;
+      --bg-card:#202a5a;
+      --accent-cyan:#29ddff;
+      --accent-purple:#c05bff;
+      --accent-pink:#ff55aa;
+      --accent-gold:#ffd95a;
       --text-primary:#ffffff;
-      --text-secondary:#c6d0e1;      /* was #a0aec0 */
-      --success:#14d7a4;             /* was #10b981 */
-      --warning:#ffc34d;             /* was #f59e0b */
-      --danger:#ff6464;              /* was #ef4444 */
-      --shadow-glow:0 0 40px rgba(41,221,255,.28);
+      --text-secondary:#c6d0e1;
+      --success:#14d7a4;
+      --warning:#ffc34d;
+      --danger:#ff6464;
       --shadow-card:0 20px 50px rgba(0,0,0,.45);
       --gradient-cyber:linear-gradient(135deg, rgba(41,221,255,.10) 0%, rgba(192,91,255,.10) 100%);
     }
 
     *{margin:0;padding:0;box-sizing:border-box}
-
-    body{
-      font-family:'Inter',sans-serif;
-      background:var(--bg-primary);
-      color:var(--text-primary);
-      line-height:1.6;
-      overflow-x:hidden;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-    }
-
-    .bg-animation{
-      position:fixed;inset:0;z-index:0;
-      background:
-        radial-gradient(circle at 20% 50%, rgba(41,221,255,.12) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(192,91,255,.12) 0%, transparent 50%);
-      pointer-events:none;
-    }
-
+    body{font-family:'Inter',sans-serif;background:var(--bg-primary);color:var(--text-primary);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    .bg-animation{position:fixed;inset:0;z-index:0;background:
+      radial-gradient(circle at 20% 50%, rgba(41,221,255,.12) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(192,91,255,.12) 0%, transparent 50%);
+      pointer-events:none}
     .container{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:1.5rem 1rem}
 
-    .header{
-      text-align:center;padding:2.5rem 1.5rem;background:var(--gradient-cyber);
-      border-radius:20px;margin-bottom:1.25rem;position:relative;transform-style:preserve-3d;
-      box-shadow:var(--shadow-card);border:1px solid rgba(41,221,255,.35)
-    }
-    .header::before{
-      content:'';position:absolute;inset:-2px;border-radius:20px;z-index:-1;opacity:.35;filter:blur(10px);
-      background:linear-gradient(45deg,var(--accent-cyan),var(--accent-purple),var(--accent-pink));
-    }
+    .header{ text-align:center;padding:2.5rem 1.5rem;background:var(--gradient-cyber);
+      border-radius:20px;margin-bottom:1.25rem;position:relative;box-shadow:var(--shadow-card);
+      border:1px solid rgba(41,221,255,.35)}
+    .header::before{content:'';position:absolute;inset:-2px;border-radius:20px;z-index:-1;opacity:.35;filter:blur(10px);
+      background:linear-gradient(45deg,var(--accent-cyan),var(--accent-purple),var(--accent-pink))}
     .header h1{
       font-size:clamp(2rem,5vw,3.25rem);font-weight:800;margin-bottom:.5rem;
       background:linear-gradient(135deg,var(--accent-cyan) 0%,var(--accent-purple) 100%);
-      -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-      text-shadow:0 0 26px rgba(41,221,255,.45);animation:pulse 3s ease-in-out infinite;
-    }
-    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.015)}}
+      -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
     .header-subtitle{font-size:1.05rem;color:var(--text-secondary);margin-bottom:1.5rem}
 
-    .stats-grid{
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-      gap:1rem;margin:1.25rem 0;perspective:1000px
-    }
-    .stat-card{
-      background:var(--bg-card);padding:1.25rem;border-radius:14px;text-align:center;
-      border:1px solid rgba(41,221,255,.30);transform-style:preserve-3d;transition:.25s ease;
-      box-shadow:0 10px 26px rgba(0,0,0,.28)
-    }
-    .stat-card:hover{transform:translateY(-8px) rotateX(4deg);box-shadow:0 18px 44px rgba(41,221,255,.35);border-color:var(--accent-cyan)}
-    .stat-number{
-      font-size:2.1rem;font-weight:800;
-      background:linear-gradient(135deg,var(--accent-cyan),var(--accent-purple));
-      -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-    }
+    .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin:1.25rem 0}
+    .stat-card{background:var(--bg-card);padding:1.25rem;border-radius:14px;text-align:center;border:1px solid rgba(41,221,255,.30);transition:.25s;box-shadow:0 10px 26px rgba(0,0,0,.28)}
+    .stat-card:hover{transform:translateY(-6px);border-color:var(--accent-cyan)}
+    .stat-number{font-size:2.1rem;font-weight:800;background:linear-gradient(135deg,var(--accent-cyan),var(--accent-purple));
+      -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
     .stat-label{font-size:.8rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.08em}
 
-    .tabs-container{
-      position:sticky;top:0;z-index:100;background:rgba(18,22,58,.8);padding:.6rem 0;margin-bottom:1rem;backdrop-filter:blur(10px)
-    }
-    .tabs{
-      display:flex;gap:.5rem;overflow-x:auto;padding:.75rem;background:var(--bg-secondary);
-      border-radius:14px;box-shadow:0 10px 26px rgba(0,0,0,.45);-webkit-overflow-scrolling:touch;scrollbar-width:thin
-    }
+    .tabs-container{position:sticky;top:0;z-index:100;background:rgba(18,22,58,.8);padding:.6rem 0;margin-bottom:1rem;backdrop-filter:blur(10px)}
+    .tabs{display:flex;gap:.5rem;overflow-x:auto;padding:.75rem;background:var(--bg-secondary);
+      border-radius:14px;box-shadow:0 10px 26px rgba(0,0,0,.45);-webkit-overflow-scrolling:touch;scrollbar-width:thin}
     .tabs::-webkit-scrollbar{height:6px}
     .tabs::-webkit-scrollbar-thumb{background:var(--accent-cyan);border-radius:3px}
-    .tab{
-      flex-shrink:0;padding:.6rem 1.1rem;background:var(--bg-card);border:1px solid rgba(41,221,255,.22);
-      color:var(--text-secondary);cursor:pointer;border-radius:10px;font-weight:600;font-size:.92rem;
-      transition:.25s ease;white-space:nowrap;transform-style:preserve-3d
-    }
+    .tab{flex-shrink:0;padding:.6rem 1.1rem;background:var(--bg-card);border:1px solid rgba(41,221,255,.22);
+      color:var(--text-secondary);cursor:pointer;border-radius:10px;font-weight:600;font-size:.92rem;transition:.25s;white-space:nowrap}
     .tab:hover{transform:translateY(-2px);border-color:var(--accent-cyan);color:var(--text-primary)}
-    .tab.active{
-      background:linear-gradient(135deg,var(--accent-cyan),var(--accent-purple));
-      color:#fff;border-color:transparent;box-shadow:0 6px 20px rgba(41,221,255,.45);transform:translateY(-2px) scale(1.04)
-    }
+    .tab.active{background:linear-gradient(135deg,var(--accent-cyan),var(--accent-purple));color:#fff;border-color:transparent;box-shadow:0 6px 20px rgba(41,221,255,.45);transform:translateY(-2px) scale(1.04)}
 
     .quick-nav{background:var(--bg-card);padding:1.25rem;border-radius:14px;margin-bottom:1rem;border:1px solid rgba(41,221,255,.30);box-shadow:var(--shadow-card)}
     .quick-nav h3{color:var(--accent-cyan);margin-bottom:.8rem;font-size:1.15rem}
     .quick-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.6rem}
-    .quick-link{
-      padding:.65rem .9rem;background:var(--bg-secondary);border:1px solid rgba(41,221,255,.22);
-      border-radius:8px;text-decoration:none;color:var(--text-primary);transition:.2s;display:flex;align-items:center;gap:.5rem
-    }
+    .quick-link{padding:.65rem .9rem;background:var(--bg-secondary);border:1px solid rgba(41,221,255,.22);
+      border-radius:8px;text-decoration:none;color:var(--text-primary);transition:.2s;display:flex;align-items:center;gap:.5rem}
     .quick-link:hover{border-color:var(--accent-cyan);transform:translateX(4px);background:rgba(41,221,255,.10)}
 
     .content{display:none;animation:fadeIn .45s ease}
     .content.active{display:block}
     @keyframes fadeIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 
-    .card{
-      background:var(--bg-card);border-radius:18px;padding:1.6rem;margin-bottom:1rem;
-      border:1px solid rgba(41,221,255,.30);box-shadow:var(--shadow-card);transform-style:preserve-3d;transition:.25s
-    }
-    .card:hover{transform:translateY(-4px);box-shadow:0 22px 60px rgba(41,221,255,.28)}
+    .card{background:var(--bg-card);border-radius:18px;padding:1.6rem;margin-bottom:1rem;border:1px solid rgba(41,221,255,.30);box-shadow:var(--shadow-card);transition:.25s}
+    .card:hover{transform:translateY(-4px)}
     .card h2{font-size:1.6rem;color:var(--accent-cyan);margin-bottom:1rem;border-bottom:2px solid rgba(41,221,255,.28);padding-bottom:.6rem}
     .card h3{font-size:1.25rem;color:var(--accent-purple);margin:1.2rem 0 .7rem}
 
-    .flowchart{display:flex;flex-direction:column;gap:1rem;padding:1.3rem;background:var(--gradient-cyber);border-radius:14px;margin:1.2rem 0;perspective:1000px}
-    .flow-node{
-      background:var(--bg-card);padding:1.2rem;border-radius:12px;border:2px solid var(--accent-cyan);text-align:center;font-weight:600;position:relative;
-      transform-style:preserve-3d;transition:.25s;box-shadow:0 10px 26px rgba(0,0,0,.3)
-    }
-    .flow-node:hover{transform:translateZ(16px) scale(1.03);box-shadow:0 14px 38px rgba(41,221,255,.45)}
-    .flow-node.gate{background:linear-gradient(135deg,rgba(41,221,255,.18),rgba(192,91,255,.18));border-color:var(--accent-purple)}
-    .flow-node.checkpoint{background:linear-gradient(135deg,rgba(255,217,90,.18),rgba(255,85,170,.18));border-color:var(--accent-gold)}
-    .flow-arrow{text-align:center;color:var(--accent-cyan);font-size:1.6rem;font-weight:bold;animation:bounce 2s infinite}
-    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-
-    .mental-map{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.2rem;margin:1.2rem 0;perspective:1400px}
-    .mental-node{
-      background:var(--bg-card);padding:1.2rem;border-radius:14px;border:2px solid;text-align:center;transform-style:preserve-3d;transition:.35s;box-shadow:0 14px 38px rgba(0,0,0,.38)
-    }
-    .mental-node:hover{transform:rotateY(8deg) translateZ(22px)}
-    .mental-node.emotion{border-color:var(--accent-pink);background:linear-gradient(135deg,rgba(255,85,170,.1),transparent)}
-    .mental-node.strategy{border-color:var(--accent-cyan);background:linear-gradient(135deg,rgba(41,221,255,.1),transparent)}
-    .mental-node.pressure{border-color:var(--accent-gold);background:linear-gradient(135deg,rgba(255,217,90,.1),transparent)}
-    .mental-icon{font-size:2.2rem;margin-bottom:.4rem}
-    .mental-title{font-size:1.05rem;font-weight:700;margin-bottom:.25rem}
-    .mental-desc{font-size:.92rem;color:var(--text-secondary)}
-
     .role-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin:1.2rem 0}
-    .role-card{background:var(--bg-card);padding:1.1rem;border-radius:14px;border-left:4px solid;transition:.25s;box-shadow:0 10px 26px rgba(0,0,0,.3);transform-style:preserve-3d}
-    .role-card:hover{transform:translateX(8px) rotateY(-4deg);box-shadow:0 18px 44px rgba(0,0,0,.45)}
+    .role-card{background:var(--bg-card);padding:1.1rem;border-radius:14px;border-left:4px solid;box-shadow:0 10px 26px rgba(0,0,0,.3)}
     .role-card.volker{border-left-color:var(--accent-cyan)}
     .role-card.kyle{border-left-color:var(--accent-purple)}
     .role-card.jade{border-left-color:var(--accent-pink)}
@@ -158,12 +86,6 @@
     .role-title{font-size:1.15rem;font-weight:700;margin-bottom:.35rem}
     .role-subtitle{font-size:.9rem;color:var(--text-secondary);margin-bottom:.6rem}
 
-    ul,ol{margin-left:1.25rem;margin-bottom:.8rem}
-    li{margin-bottom:.45rem;color:var(--text-secondary)}
-    .emphasis{color:var(--accent-cyan);font-weight:600}
-    .warning{color:var(--accent-gold);font-weight:600}
-    .danger{color:var(--danger);font-weight:600}
-
     .box{background:rgba(41,221,255,.08);padding:1rem;border-left:4px solid var(--accent-cyan);border-radius:10px;margin:1rem 0;box-shadow:0 5px 20px rgba(0,0,0,.22)}
     .box-warning{background:rgba(255,195,77,.08);border-left-color:var(--warning)}
     .box-danger{background:rgba(255,100,100,.08);border-left-color:var(--danger)}
@@ -171,14 +93,9 @@
 
     .timeline{position:relative;padding-left:2.4rem;margin:1.2rem 0}
     .timeline::before{content:'';position:absolute;left:1rem;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent-cyan),var(--accent-purple))}
-    .timeline-item{
-      position:relative;padding:1rem;background:var(--bg-card);border-radius:10px;margin-bottom:1rem;border:1px solid rgba(41,221,255,.30);transition:.25s
-    }
-    .timeline-item:hover{transform:translateX(8px);box-shadow:0 10px 30px rgba(41,221,255,.28)}
-    .timeline-item::before{
-      content:'';position:absolute;left:-2.2rem;top:1.4rem;width:.9rem;height:.9rem;background:var(--accent-cyan);border-radius:50%;
-      border:3px solid var(--bg-primary);box-shadow:0 0 16px rgba(41,221,255,.75)
-    }
+    .timeline-item{position:relative;padding:1rem;background:var(--bg-card);border-radius:10px;margin-bottom:1rem;border:1px solid rgba(41,221,255,.30)}
+    .timeline-item::before{content:'';position:absolute;left:-2.2rem;top:1.4rem;width:.9rem;height:.9rem;background:var(--accent-cyan);border-radius:50%;
+      border:3px solid var(--bg-primary);box-shadow:0 0 16px rgba(41,221,255,.75)}
     .timeline-time{color:var(--accent-gold);font-weight:700;font-size:1rem;margin-bottom:.25rem}
     .timeline-phase{color:var(--accent-cyan);font-weight:600;font-size:1.05rem;margin-bottom:.35rem}
 
@@ -186,93 +103,63 @@
     .prize-table td{padding:.9rem 1.2rem;background:var(--bg-card);border:1px solid rgba(41,221,255,.30)}
     .prize-table td:first-child{border-radius:10px 0 0 10px;font-weight:700;color:var(--accent-gold)}
     .prize-table td:last-child{border-radius:0 10px 10px 0}
-    .prize-table tr:hover td{background:rgba(41,221,255,.12);transform:scale(1.01)}
 
-    .checklist{list-style:none;margin-left:0}
-    .checklist li{padding-left:1.6rem;position:relative;margin-bottom:.8rem}
-    .checklist li::before{content:'☐';position:absolute;left:0;color:var(--accent-cyan);font-size:1.2rem}
-
-    .decision-matrix{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin:1.2rem 0}
-    .decision-card{background:var(--bg-card);padding:1rem;border-radius:12px;border:2px solid;transition:.25s;transform-style:preserve-3d}
-    .decision-card:hover{transform:translateY(-8px) rotateX(4deg)}
-    .decision-card.accept{border-color:var(--success)}
-    .decision-card.decline{border-color:var(--danger)}
-    .decision-title{font-size:1.05rem;font-weight:700;margin-bottom:.6rem}
-
-    .gate-comparison{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin:1.2rem 0}
-    .gate-column{background:var(--bg-card);padding:1.2rem;border-radius:14px;border-top:4px solid;box-shadow:0 10px 26px rgba(0,0,0,.3);transition:.25s}
-    .gate-column:hover{transform:translateY(-8px)}
-    .gate-column.gate1{border-top-color:var(--accent-cyan)}
-    .gate-column.gate2{border-top-color:var(--accent-purple)}
-    .gate-column.gate3{border-top-color:var(--accent-gold)}
-    .gate-header{font-size:1.2rem;font-weight:700;margin-bottom:.6rem;text-align:center}
+    .grid-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+    .mentor-card{background:var(--bg-card);border:1px solid rgba(41,221,255,.3);border-radius:14px;padding:1rem}
+    .mentor-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.5rem}
+    .mentor-name{font-weight:800}
+    .mentor-title{font-size:.92rem;color:var(--text-secondary)}
+    .chip{font-size:.75rem;padding:.18rem .5rem;border-radius:999px;border:1px solid rgba(41,221,255,.35);background:rgba(41,221,255,.12)}
+    .mini-h{font-size:.85rem;color:var(--accent-purple);margin:.6rem 0 .3rem}
+    ul{margin-left:1.25rem;margin-bottom:.6rem}
+    li{margin-bottom:.35rem;color:var(--text-secondary)}
 
     @media (max-width:768px){
       .header h1{font-size:2rem}
       .stats-grid{grid-template-columns:repeat(2,1fr)}
-      .tabs{gap:.35rem}
       .tab{padding:.5rem .8rem;font-size:.85rem}
       .card{padding:1.15rem}
-      .mental-map{grid-template-columns:1fr}
+      .grid-cards{grid-template-columns:1fr}
     }
   </style>
 </head>
 <body>
   <div class="bg-animation"></div>
-
   <div class="container">
-    <!-- Header -->
     <div class="header">
       <h1>🎯 CES WAR GAMES</h1>
       <p class="header-subtitle">FINAL EXECUTION HANDBOOK - Interactive Edition</p>
-
       <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-number">20</div>
-          <div class="stat-label">Teams</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">7</div>
-          <div class="stat-label">Buyers</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">US$200k</div>
-          <div class="stat-label">Fake Money</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">US$200</div>
-          <div class="stat-label">Real Prize</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">7hrs</div>
-          <div class="stat-label">Duration</div>
-        </div>
+        <div class="stat-card"><div class="stat-number">20</div><div class="stat-label">Teams</div></div>
+        <div class="stat-card"><div class="stat-number">7</div><div class="stat-label">Buyers</div></div>
+        <div class="stat-card"><div class="stat-number">US$200k</div><div class="stat-label">Fake Money</div></div>
+        <div class="stat-card"><div class="stat-number">US$200</div><div class="stat-label">Real Prize</div></div>
+        <div class="stat-card"><div class="stat-number">7hrs</div><div class="stat-label">Duration</div></div>
       </div>
     </div>
 
-    <!-- Quick Navigation -->
     <div class="quick-nav">
       <h3>🚀 Quick Access by Role</h3>
       <div class="quick-links">
         <a href="#" onclick="showTab('roles', this); return false;" class="quick-link">👥 Your Role</a>
+        <a href="#" onclick="showTab('mentors', this); return false;" class="quick-link">🧑‍🏫 Mentor Role Cards</a>
         <a href="#" onclick="showTab('flow-startup', this); return false;" class="quick-link">🚀 Startup Guide</a>
         <a href="#" onclick="showTab('flow-buyer', this); return false;" class="quick-link">💼 Buyer Guide</a>
-        <a href="#" onclick="showTab('flow-mc', this); return false;" class="quick-link">🎤 MC Script</a>
+        <a href="#" onclick="showTab('surprise', this); return false;" class="quick-link">⚡ Surprise & Recovery</a>
         <a href="#" onclick="showTab('schedule', this); return false;" class="quick-link">⏰ Timeline</a>
-        <a href="#" onclick="showTab('mental', this); return false;" class="quick-link">🧠 Mental Map</a>
       </div>
     </div>
 
-    <!-- Tabs -->
     <div class="tabs-container" id="tabsContainer">
       <div class="tabs">
         <div class="tab active" onclick="showTab('overview', this)">📋 Overview</div>
         <div class="tab" onclick="showTab('roles', this)">👥 Roles</div>
+        <div class="tab" onclick="showTab('mentors', this)">🧑‍🏫 Mentor Role Cards</div>
         <div class="tab" onclick="showTab('checklist', this)">✅ Checklist</div>
         <div class="tab" onclick="showTab('prizes', this)">🏆 Prizes</div>
         <div class="tab" onclick="showTab('flow-startup', this)">🚀 Startup Flow</div>
         <div class="tab" onclick="showTab('flow-buyer', this)">💼 Buyer Flow</div>
-        <div class="tab" onclick="showTab('flow-mc', this)">🎤 MC Flow</div>
+        <div class="tab" onclick="showTab('surprise', this)">⚡ Surprise & Recovery</div>
         <div class="tab" onclick="showTab('schedule', this)">⏰ Schedule</div>
         <div class="tab" onclick="showTab('flowchart', this)">📊 Flowchart</div>
         <div class="tab" onclick="showTab('mental', this)">🧠 Mental Map</div>
@@ -280,1239 +167,431 @@
       </div>
     </div>
 
-    <!-- OVERVIEW TAB -->
+    <!-- OVERVIEW -->
     <div id="overview" class="content active">
       <div class="card">
         <h2>📋 Program Overview</h2>
-        <p style="font-size:1.05rem;margin-bottom:1rem;">The CES War Games simulates real-world CES deal-making. 20 startup teams compete to win the most money by pitching to 7 real buyer personas through 3 qualification gates.</p>
-
-        <h3>🎯 Core Concept</h3>
-        <div class="box box-success">
-          <ul>
-            <li><span class="emphasis">Real Sales Funnel:</span> Research → Auction → Pitch → Qualify → Negotiate</li>
-            <li><span class="emphasis">Real Stakes:</span> Teams invest fake money to book meetings, earn it back based on performance</li>
-            <li><span class="emphasis">Real Pressure:</span> Time limits, competition, and authentic buyer evaluation</li>
-            <li><span class="emphasis">Real Learning:</span> Experience actual CES dynamics in a safe environment</li>
-          </ul>
-        </div>
-
+        <p style="font-size:1.05rem;margin-bottom:1rem;">The CES War Games simulates real-world CES deal-making. 20 startup teams compete to win the most money by pitching to 7 buyer mentors through 3 qualification gates.</p>
         <h3>🎮 Game Mechanics Summary</h3>
-        <div class="gate-comparison">
-          <div class="gate-column gate1">
-            <div class="gate-header">GATE 1: PITCH</div>
-            <p><strong>Duration:</strong> 5 minutes</p>
-            <p><strong>Entry Fee:</strong> US$2k–US$5k bid</p>
-            <p><strong>Payout:</strong> US$3k if interested</p>
-            <p><strong>Goal:</strong> Get buyer interested in your startup</p>
-          </div>
-          <div class="gate-column gate2">
-            <div class="gate-header">GATE 2: QUALIFY</div>
-            <p><strong>Duration:</strong> 12 minutes</p>
-            <p><strong>Entry Fee:</strong> US$2k</p>
-            <p><strong>Payout:</strong> US$8k / US$5k / US$0</p>
-            <p><strong>Goal:</strong> Prove you're ready with evidence</p>
-          </div>
-          <div class="gate-column gate3">
-            <div class="gate-header">GATE 3: NEGOTIATE</div>
-            <p><strong>Duration:</strong> 15 minutes</p>
-            <p><strong>Entry Fee:</strong> US$3k</p>
-            <p><strong>Payout:</strong> US$15k / US$10k / US$0</p>
-            <p><strong>Goal:</strong> Structure a real deal</p>
-          </div>
-        </div>
-
-        <h3>🎯 Success Factors</h3>
-        <div class="mental-map">
-          <div class="mental-node strategy">
-            <div class="mental-icon">🎯</div>
-            <div class="mental-title">Target Selection</div>
-            <div class="mental-desc">Choose buyers who actually need your solution</div>
-          </div>
-          <div class="mental-node strategy">
-            <div class="mental-icon">💰</div>
-            <div class="mental-title">Bid Strategy</div>
-            <div class="mental-desc">Balance confidence vs. capital preservation</div>
-          </div>
-          <div class="mental-node strategy">
-            <div class="mental-icon">📧</div>
-            <div class="mental-title">Personalization</div>
-            <div class="mental-desc">Generic emails get rejected immediately</div>
-          </div>
-          <div class="mental-node strategy">
-            <div class="mental-icon">📊</div>
-            <div class="mental-title">Proof Points</div>
-            <div class="mental-desc">Evidence beats promises every time</div>
-          </div>
+        <div class="grid-cards">
+          <div class="mentor-card"><div class="mini-h">Gate 1: Pitch (5m)</div><p><strong>Entry:</strong> Bid US$2k–US$5k · <strong>Payout:</strong> US$3k if interested · <strong>Goal:</strong> Earn interest.</p></div>
+          <div class="mentor-card"><div class="mini-h">Gate 2: Qualify (12m)</div><p><strong>Entry:</strong> US$2k · <strong>Payout:</strong> US$8k / US$5k / US$0 · <strong>Goal:</strong> Prove with evidence.</p></div>
+          <div class="mentor-card"><div class="mini-h">Gate 3: Negotiate (15m)</div><p><strong>Entry:</strong> US$3k · <strong>Payout:</strong> US$15k / US$10k / US$0 · <strong>Goal:</strong> Close a deal.</p></div>
         </div>
       </div>
     </div>
 
-    <!-- ROLES TAB -->
+    <!-- ROLES -->
     <div id="roles" class="content">
       <div class="card">
         <h2>👥 Roles & Mission Briefing</h2>
-
         <div class="role-grid">
           <div class="role-card volker">
-            <div class="role-title">🎤 VOLKER (MC)</div>
-            <div class="role-subtitle">Energy & Timekeeper</div>
+            <div class="role-title">VOLKER (MC)</div>
+            <div class="role-subtitle">Energy Conductor & Timekeeper</div>
             <p><strong>Mission:</strong> Enforce time strictly. Deliver announcements with drama. Keep momentum.</p>
-            <ul>
-              <li>Call phase transitions at exact times</li>
-              <li>Build excitement during key moments</li>
-              <li>Manage flow between meetings</li>
-              <li>Announce checkpoints dramatically</li>
-            </ul>
           </div>
-
           <div class="role-card kyle">
-            <div class="role-title">📊 KYLE (TRACKER)</div>
-            <div class="role-subtitle">Accuracy & Truth</div>
-            <p><strong>Mission:</strong> Digital leaderboard at 3 checkpoints. Your sheet overrides disputes. ~50 texts total.</p>
-            <ul>
-              <li>Maintain Google Sheet with 3 tabs</li>
-              <li>Update scores at each checkpoint</li>
-              <li>Project leaderboard for all to see</li>
-              <li>Final arbiter on all disputes</li>
-            </ul>
+            <div class="role-title">KYLE (Tracker)</div>
+            <div class="role-subtitle">Accuracy & Source of Truth</div>
+            <p><strong>Mission:</strong> Digital leaderboard at checkpoints. Your sheet overrides disputes. Manage ~50 texts.</p>
           </div>
-
           <div class="role-card jade">
-            <div class="role-title">💰 JADE (OPS)</div>
-            <div class="role-subtitle">Cash Desk</div>
-            <p><strong>Mission:</strong> Collect entry fees. Locked box. Quick processing during rushes.</p>
-            <ul>
-              <li>Set up entry fee collection station</li>
-              <li>Process payments quickly before meetings</li>
-              <li>Keep cash secure in locked box</li>
-              <li>Handle 18+ transactions in 30 minutes</li>
-            </ul>
+            <div class="role-title">JADE (Ops)</div>
+            <div class="role-subtitle">Cash Collection & Check-in</div>
+            <p><strong>Mission:</strong> Collect all entry fees quickly. Maintain a secure cash desk.</p>
           </div>
-
           <div class="role-card ken">
-            <div class="role-title">⚔️ KEN (WAR ROOM)</div>
-            <div class="role-subtitle">Strategic Advisor</div>
-            <p><strong>Mission:</strong> Morning US$200, Afternoon US$300–US$500. Track usage, report to Kyle.</p>
-            <ul>
-              <li>Provide strategy consulting to teams</li>
-              <li>Help with buyer selection & email review</li>
-              <li>Assist with Gate 3 deal prep</li>
-              <li>Track all consulting fees</li>
-            </ul>
+            <div class="role-title">KEN HUANG (War Room)</div>
+            <div class="role-subtitle">Strategic Mentor & Consultant</div>
+            <p><strong>Mission:</strong> Paid high-value consulting. Morning: US$200. Afternoon: US$300–US$500. Track usage and report to Kyle.</p>
           </div>
-
           <div class="role-card buyers">
-            <div class="role-title">💼 BUYERS (7 MENTORS)</div>
+            <div class="role-title">BUYERS (7 Mentors)</div>
             <div class="role-subtitle">Decision Makers</div>
-            <p><strong>Mission:</strong> Simple tiers. Text Kyle immediately. Stay in character.</p>
-            <ul>
-              <li>Evaluate startups authentically</li>
-              <li>Make decisions based on your persona</li>
-              <li>Text Kyle after every decision</li>
-              <li>Hand out cash from pre-counted envelopes</li>
-            </ul>
+            <p><strong>Mission:</strong> Use simple tiers. Text Kyle immediately after each decision. Stay in persona.</p>
           </div>
         </div>
 
         <div class="box box-warning" style="margin-top:1rem;">
-          <h3 style="color:var(--warning);">⚡ Critical Role Rules</h3>
+          <h3 style="color:var(--warning);">Critical Role Rules</h3>
           <ul>
-            <li><span class="warning">Buyers:</span> Must text Kyle within 30 seconds of every decision</li>
-            <li><span class="warning">Kyle:</span> Only updates at 3 checkpoints, not in real-time</li>
-            <li><span class="warning">Jade:</span> No refunds - teams responsible for their money</li>
-            <li><span class="warning">All:</span> Stay in character - this simulates real CES pressure</li>
+            <li><strong>Buyers:</strong> Text Kyle within 30 seconds after each decision.</li>
+            <li><strong>Kyle:</strong> Update only at checkpoints (not real-time).</li>
+            <li><strong>Jade:</strong> No refunds; teams are responsible for their money.</li>
+            <li><strong>Ken:</strong> Acts as a mentor; consulting is billable and recorded.</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- CHECKLIST TAB -->
+    <!-- MENTOR ROLE CARDS -->
+    <div id="mentors" class="content">
+      <div class="card">
+        <h2>🧑‍🏫 Mentor Role Cards</h2>
+        <p style="color:var(--text-secondary);margin-bottom:.8rem;">Each card shows the mentor’s title for this game, background, buying focus, evaluation lens, and gate heuristics.</p>
+
+        <div class="grid-cards">
+          <!-- Johnny Yu -->
+          <div class="mentor-card">
+            <div class="mentor-head">
+              <div>
+                <div class="mentor-name">Johnny Yu</div>
+                <div class="mentor-title">Healthcare Venture Investor · Mosaic Venture Lab</div>
+              </div>
+              <span class="chip">3 slots</span>
+            </div>
+            <div class="mini-h">Title in Game</div>
+            <p><strong>Healthcare Buyer (Devices, Diagnostics, Digital Health, Clinical AI)</strong></p>
+            <div class="mini-h">I Buy</div>
+            <ul>
+              <li>Medical devices & diagnostics</li>
+              <li>Digital health platforms, healthcare B2B SaaS</li>
+              <li>Clinical AI with clear clinical utility</li>
+            </ul>
+            <div class="mini-h">I Evaluate</div>
+            <ul>
+              <li>Clinical validation data</li>
+              <li>Regulatory pathway (FDA/CE)</li>
+              <li>Reimbursement model and payer/hospital economics</li>
+            </ul>
+            <div class="mini-h">Gate Heuristics</div>
+            <ul>
+              <li><strong>G1:</strong> Healthcare relevance + personalized email</li>
+              <li><strong>G2:</strong> Strong = validated clinical results; Decent = promising early data</li>
+              <li><strong>G3:</strong> Deal = clear FDA path + reimbursement case</li>
+            </ul>
+          </div>
+
+          <!-- Josh Fu -->
+          <div class="mentor-card">
+            <div class="mentor-head">
+              <div>
+                <div class="mentor-name">Josh Fu</div>
+                <div class="mentor-title">Consumer/Retail Strategist · Akohub (CRO), ex-TimeWarner</div>
+              </div>
+              <span class="chip">3 slots</span>
+            </div>
+            <div class="mini-h">Title in Game</div>
+            <p><strong>Consumer/Retail Buyer (Electronics, Wearables, Lifestyle Tech)</strong></p>
+            <div class="mini-h">I Buy</div>
+            <ul>
+              <li>Retail-ready devices and home products</li>
+              <li>Wearables and lifestyle tech with traction</li>
+            </ul>
+            <div class="mini-h">I Evaluate</div>
+            <ul>
+              <li>PMF evidence; sales velocity</li>
+              <li>Unit economics, retail channel readiness</li>
+            </ul>
+            <div class="mini-h">Gate Heuristics</div>
+            <ul>
+              <li><strong>G1:</strong> Consumer readiness + bid seriousness</li>
+              <li><strong>G2:</strong> Strong = proven sales; Decent = good reviews some traction</li>
+              <li><strong>G3:</strong> Deal = retail partner path identified</li>
+            </ul>
+          </div>
+
+          <!-- Deborah Magid -->
+          <div class="mentor-card">
+            <div class="mentor-head">
+              <div>
+                <div class="mentor-name">Deborah Magid</div>
+                <div class="mentor-title">Enterprise Strategic Partnerships · Independent VC Advisor, ex-IBM VP</div>
+              </div>
+              <span class="chip">3 slots</span>
+            </div>
+            <div class="mini-h">Title in Game</div>
+            <p><strong>Enterprise Buyer (B2B SaaS, BI, Security)</strong></p>
+            <div class="mini-h">I Buy</div>
+            <ul>
+              <li>Enterprise software and platforms</li>
+              <li>Security and BI linked to Fortune 500 needs</li>
+            </ul>
+            <div class="mini-h">I Evaluate</div>
+            <ul>
+              <li>Enterprise readiness and integrations</li>
+              <li>References, cycle time, and deployment complexity</li>
+            </ul>
+            <div class="mini-h">Gate Heuristics</div>
+            <ul>
+              <li><strong>G1:</strong> Enterprise-grade signal and fit</li>
+              <li><strong>G2:</strong> Strong = 3+ enterprise customers; Decent = early pilots</li>
+              <li><strong>G3:</strong> Deal = Fortune-500-ready proof</li>
+            </ul>
+          </div>
+
+          <!-- Dr. Volker Kaese -->
+          <div class="mentor-card">
+            <div class="mentor-head">
+              <div>
+                <div class="mentor-name">Dr. Volker Kaese</div>
+                <div class="mentor-title">Automotive & Mobility Innovation · Ingenev Mobility (CEO), ex-Audi</div>
+              </div>
+              <span class="chip">2 slots</span>
+            </div>
+            <div class="mini-h">Title in Game</div>
+            <p><strong>Automotive Buyer (EV, Sensors, ADAS/AD, Auto AI)</strong></p>
+            <div class="mini-h">I Buy</div>
+            <ul>
+              <li>Automotive-grade technologies with OEM paths</li>
+              <li>In-vehicle sensors, safety, and integration</li>
+            </ul>
+            <div class="mini-h">I Evaluate</div>
+            <ul>
+              <li>Standards, certifications, and volume scalability</li>
+              <li>OEM integration feasibility</li>
+            </ul>
+            <div class="mini-h">Gate Heuristics</div>
+            <ul>
+              <li><strong>G1:</strong> Clear auto relevance</li>
+              <li><strong>G2:</strong> Strong = automotive-grade proven</li>
+              <li><strong>G3:</strong> Deal = OEM-ready path</li>
+            </ul>
+          </div>
+
+          <!-- Ashley Hsueh -->
+          <div class="mentor-card">
+            <div class="mentor-head">
+              <div>
+                <div class="mentor-name">Ashley Hsueh</div>
+                <div class="mentor-title">Corporate Strategy · Bain & Company (Partner)</div>
+              </div>
+              <span class="chip">2 slots</span>
+            </div>
+            <div class="mini-h">Title in Game</div>
+            <p><strong>Strategy Buyer (Cross-vertical B2B, M&A lenses)</strong></p>
+            <div class="mini-h">I Buy</div>
+            <ul>
+              <li>B2B startups with defensible moats</li>
+              <li>M&A-viable targets and scalable GTM</li>
+            </ul>
+            <div class="mini-h">I Evaluate</div>
+            <ul>
+              <li>Competitive defensibility and GTM clarity</li>
+              <li>Acquisition potential</li>
+            </ul>
+            <div class="mini-h">Gate Heuristics</div>
+            <ul>
+              <li><strong>G1:</strong> Sound business model + personalization</li>
+              <li><strong>G2:</strong> Strong = clear moat; Decent = solid but copyable</li>
+              <li><strong>G3:</strong> Deal = strategic clarity for M&A</li>
+            </ul>
+          </div>
+
+          <!-- Shafeen Charania -->
+          <div class="mentor-card">
+            <div class="mentor-head">
+              <div>
+                <div class="mentor-name">Shafeen Charania</div>
+                <div class="mentor-title">Enterprise Ops & Scaling · fluency (COO), ex-Microsoft/IBM</div>
+              </div>
+              <span class="chip">3 slots</span>
+            </div>
+            <div class="mini-h">Title in Game</div>
+            <p><strong>Scale Buyer (Enterprise SaaS, Deep Tech Ops)</strong></p>
+            <div class="mini-h">I Buy</div>
+            <ul>
+              <li>Platforms that can scale 10 → 1,000 customers</li>
+              <li>Hardware/SaaS with mature ops</li>
+            </ul>
+            <div class="mini-h">I Evaluate</div>
+            <ul>
+              <li>Onboarding process and support model</li>
+              <li>Operational maturity and breakpoints</li>
+            </ul>
+            <div class="mini-h">Gate Heuristics</div>
+            <ul>
+              <li><strong>G1:</strong> Signals of scale readiness</li>
+              <li><strong>G2:</strong> Strong = proven scale ops</li>
+              <li><strong>G3:</strong> Deal = infra ready to scale</li>
+            </ul>
+          </div>
+
+          <!-- Ken Huang: War Room Mentor -->
+          <div class="mentor-card">
+            <div class="mentor-head">
+              <div>
+                <div class="mentor-name">Ken Huang</div>
+                <div class="mentor-title">War Room Lead · Strategic Mentor (MVL)</div>
+              </div>
+              <span class="chip">Consulting</span>
+            </div>
+            <div class="mini-h">Title in Game</div>
+            <p><strong>War Room Mentor (Paid Consulting)</strong></p>
+            <div class="mini-h">What I Do</div>
+            <ul>
+              <li>Buyer targeting, bid strategy, and email reviews (morning)</li>
+              <li>Gate-3 deal structuring and negotiation prep (afternoon)</li>
+            </ul>
+            <div class="mini-h">Pricing</div>
+            <ul>
+              <li>Morning: <strong>US$200</strong> per consult</li>
+              <li>Afternoon: <strong>US$300–US$500</strong> per consult (complexity-based)</li>
+            </ul>
+            <div class="mini-h">Scoring Impact</div>
+            <ul>
+              <li>Improves conversion at Gate 1 and recovery in the afternoon</li>
+              <li>All consulting spend tracked and reported to Kyle at checkpoints</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHECKLIST -->
     <div id="checklist" class="content">
       <div class="card">
         <h2>✅ Pre-Event Checklist (24 Hours Before)</h2>
-
-        <h3>💰 Money & Prizes</h3>
         <div class="box">
-          <ul class="checklist">
-            <li>US$200k fake money counted into envelopes (20 teams + 7 mentors + Ken)</li>
-            <li>US$200 cash prize ready</li>
-            <li>Consulting vouchers ready (2nd/3rd place)</li>
-          </ul>
-        </div>
-
-        <h3>📄 Printed Materials</h3>
-        <div class="box box-success">
-          <ul class="checklist">
-            <li>7 mentor persona cards printed</li>
-            <li>20 startup quick guides printed</li>
-            <li>All station signs ready (War Room, Intel Station, Cash Desk)</li>
-            <li>Buyer cheat sheets (7 copies)</li>
-            <li>MC script cards for Volker</li>
-          </ul>
-        </div>
-
-        <h3>💻 Tech Setup</h3>
-        <div class="box">
-          <ul class="checklist">
-            <li>Kyle's Google Sheet created (3 tabs: CP1, CP2, Final)</li>
-            <li>Sheet connected to projector, tested</li>
-            <li>Display tested and visible from all areas</li>
-            <li>Backup power for projector</li>
-            <li>WiFi password shared with all participants</li>
-          </ul>
-        </div>
-
-        <h3>🪑 Venue Setup</h3>
-        <div class="box box-success">
-          <ul class="checklist">
-            <li>8 tables set up (7 buyers + Ken's War Room)</li>
-            <li>Intel Station with "Available Now" board + markers</li>
-            <li>Jade's locked cash box at entry desk</li>
-            <li>Name cards for each buyer station</li>
-            <li>Comfortable seating arrangements</li>
-            <li>Clock visible to all participants</li>
-          </ul>
-        </div>
-
-        <h3>🍽️ Food & Beverage</h3>
-        <div class="box">
-          <ul class="checklist">
-            <li>Lunch ordered (35 people, 12 PM delivery)</li>
-            <li>Water stations throughout venue</li>
-            <li>Coffee/tea available all day</li>
-          </ul>
-        </div>
-
-        <h3>👔 People Confirmation</h3>
-        <div class="box box-warning">
-          <ul class="checklist">
-            <li>All 7 buyers confirmed and briefed</li>
-            <li>Ken confirmed and briefed</li>
-            <li>Volker script prepared</li>
-            <li>Kyle Google Sheet template ready</li>
-            <li>Jade cash handling protocols reviewed</li>
-            <li>Backup staff identified for each role</li>
+          <ul>
+            <li>Confirm all 7 buyers + Ken are briefed on personas.</li>
+            <li>Create Google Sheet (Roster, CP1, CP2, Final Count) and test projector.</li>
+            <li>Print: US$200 cash prize, US$200,000 fake money, 7 mentor persona cards, 20 startup quick guides.</li>
+            <li>Dry-run Gate-1 entry payment + text flow with staff.</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- PRIZES TAB -->
+    <!-- PRIZES -->
     <div id="prizes" class="content">
       <div class="card">
         <h2>🏆 Prize Structure</h2>
-
         <table class="prize-table">
-          <tr>
-            <td>🥇 1st Place</td>
-            <td><strong>US$200</strong></td>
-          </tr>
-          <tr>
-            <td>🥈 2nd Place</td>
-            <td><strong>2 consulting hours</strong> with Mosaic Venture Lab’s VC team</td>
-          </tr>
-          <tr>
-            <td>🥉 3rd Place</td>
-            <td><strong>1 consulting hour</strong> with MVL’s Business Development executive for <strong>US market development</strong></td>
-          </tr>
+          <tr><td>🥇 1st Place</td><td><strong>US$200</strong> cash</td></tr>
+          <tr><td>🥈 2nd Place</td><td><strong>2 consulting hours</strong> with MVL VC team</td></tr>
+          <tr><td>🥉 3rd Place</td><td><strong>1 consulting hour</strong> with MVL BD exec (US market)</td></tr>
         </table>
-
-        <h3>🎯 Buyer Decision Guide</h3>
-        <p style="margin-bottom:1rem;font-size:1.05rem;">Keep it simple! Buyers should focus on authentic evaluation, not complex scoring.</p>
-
-        <h3>GATE 1 AUCTION - Who to Accept?</h3>
-        <div class="decision-matrix">
-          <div class="decision-card accept">
-            <div class="decision-title" style="color:var(--success);">✅ ACCEPT IF:</div>
-            <ul>
-              <li>Startup is relevant to what you buy</li>
-              <li>Email is personalized (mentions you specifically)</li>
-              <li>Good bid amount (US$3k+)</li>
-              <li>Professional communication</li>
-            </ul>
-          </div>
-          <div class="decision-card decline">
-            <div class="decision-title" style="color:var(--danger);">❌ DECLINE IF:</div>
-            <ul>
-              <li>Wrong fit for your focus area</li>
-              <li>Generic template email</li>
-              <li>Low bid + weak personalization</li>
-              <li>Unprofessional approach</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="box box-success">
-          <h3>Tie-breaker Rule</h3>
-          <p>If 2 startups are equally relevant, <strong>higher bid wins</strong>. This shows confidence and seriousness.</p>
-          <p style="margin-top:.6rem;"><strong>Example:</strong> Two healthcare startups email Johnny (Healthcare CVC). Both relevant. One bids <strong>US$2,500</strong>, one bids <strong>US$4,000</strong>. → Accept the <strong>US$4,000</strong> bid.</p>
-        </div>
-
-        <h3>GATE 2 & 3 - Simple Tiers</h3>
-        <div class="gate-comparison">
-          <div class="gate-column gate2">
-            <div class="gate-header">GATE 2</div>
-            <p><strong>Strong (US$8k):</strong> Proven, impressive, ready</p>
-            <p><strong>Decent (US$5k):</strong> Good potential, needs work</p>
-            <p><strong>Weak (US$0):</strong> Not convinced, too early</p>
-          </div>
-          <div class="gate-column gate3">
-            <div class="gate-header">GATE 3</div>
-            <p><strong>Deal (US$15k):</strong> Would commit, strong fit, ready to go</p>
-            <p><strong>Conditional (US$10k):</strong> Interested but concerns remain</p>
-            <p><strong>No Deal (US$0):</strong> Not ready or wrong fit</p>
-          </div>
-        </div>
-
-        <div class="box box-warning" style="margin-top:1rem;">
-          <h3>📱 Remember: Text Kyle Immediately!</h3>
-          <p>After each decision, text: <strong>"Team [Name] - Gate [1/2/3] - US$[Amount]"</strong></p>
-          <p>Example: "Team CardioMirror - Gate 1 - US$3k"</p>
+        <div class="box box-warning">
+          <strong>Note:</strong> No beer reception and no other cash awards. Only the items above.
         </div>
       </div>
     </div>
 
-    <!-- STARTUP FLOW TAB -->
+    <!-- STARTUP FLOW -->
     <div id="flow-startup" class="content">
       <div class="card">
-        <h2>🚀 Startup Perspective: The Complete Journey</h2>
-
+        <h2>🚀 Startup Perspective</h2>
         <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-time">9:30 AM</div>
-            <div class="timeline-phase">START: RECEIVE US$10k</div>
-            <p>You get your envelope with US$10k fake money + packet. This is your capital to invest.</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">10:00 AM - 10:45 AM</div>
-            <div class="timeline-phase">RESEARCH PHASE</div>
-            <p><strong>Task:</strong> Build 20-person CES target list</p>
-            <ul>
-              <li>Who would actually buy your product at CES?</li>
-              <li>Research real buyers, get contact info</li>
-              <li><span class="emphasis">Optional:</span> War Room help (US$200)</li>
-            </ul>
-            <p style="margin-top:.6rem;"><strong>Submit to mentor for review:</strong> Earn US$0 / US$100 / US$200</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">10:45 AM - 11:15 AM</div>
-            <div class="timeline-phase">BUYER STUDY SESSION</div>
-            <p>Listen to each of the 7 buyers explain what they buy (5 min each)</p>
-            <ul>
-              <li>Identify your 2–3 best-fit buyers</li>
-              <li>Take notes on their priorities</li>
-            </ul>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">11:15 AM - 11:30 AM</div>
-            <div class="timeline-phase">AUCTION PREP</div>
-            <p><strong>Critical Task:</strong> Draft personalized auction email</p>
-            <ul>
-              <li>Choose your primary buyer target</li>
-              <li>Decide bid amount (US$2k–US$5k)</li>
-              <li>Personalize - mention specific things about them!</li>
-              <li><span class="emphasis">Optional:</span> War Room email review (US$200)</li>
-            </ul>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">11:30 AM - 12:00 PM</div>
-            <div class="timeline-phase">🔥 GATE 1 AUCTION</div>
-            <p><strong>EMAIL YOUR BUYER IMMEDIATELY!</strong></p>
-            <ul>
-              <li>Higher bids = better chance</li>
-              <li>Wait for response (buyers check every 5 min)</li>
-              <li>If declined → Email backup buyer NOW</li>
-              <li>~18 of 20 teams typically get accepted</li>
-            </ul>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">12:30 PM - 1:30 PM</div>
-            <div class="timeline-phase">✅ GATE 1: PITCH MEETING (If Accepted)</div>
-            <p><strong>Pay Jade your bid amount first!</strong></p>
-            <ul>
-              <li>5-minute pitch with deck</li>
-              <li>Answer 2–3 questions</li>
-              <li>Earn <span class="emphasis">US$3k if interested</span> / US$0 if pass</li>
-            </ul>
-            <p style="margin-top:.6rem;"><strong>12:35 PM: CHECKPOINT 1</strong> - Count your cash, report to Kyle</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">1:30 PM - 2:00 PM</div>
-            <div class="timeline-phase">BREAK & GATE 2 PREP</div>
-            <p>If you advanced to Gate 2, prepare proof documents</p>
-            <ul>
-              <li>Customer testimonials</li>
-              <li>Demo videos</li>
-              <li>Technical specs</li>
-              <li>Financial projections</li>
-            </ul>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">2:00 PM - 3:15 PM</div>
-            <div class="timeline-phase">✅ GATE 2: QUALIFICATION</div>
-            <p><strong>Pay Jade US$2k entry fee</strong></p>
-            <ul>
-              <li>12-minute session</li>
-              <li>NO PITCH - buyer interrogates you!</li>
-              <li>Show proof documents</li>
-              <li>Earn <span class="emphasis">US$8k (strong)</span> / US$5k (decent) / US$0 (weak)</li>
-            </ul>
-            <p style="margin-top:.6rem;"><strong>2:00 PM: CHECKPOINT 2</strong> - Count your cash, report to Kyle</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">2:30 PM</div>
-            <div class="timeline-phase">🎁 HOT LEAD SURPRISE</div>
-            <p>One buyer suddenly needs a startup! All 20 teams compete.</p>
-            <ul>
-              <li>5 minutes to email them</li>
-              <li>Winner gets <span class="emphasis">US$5k + meeting slot</span></li>
-            </ul>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">2:00 PM - 3:45 PM</div>
-            <div class="timeline-phase">💼 INTEL STATION (Optional)</div>
-            <p>Visit buyers for 8-minute sessions</p>
-            <ul>
-              <li>Great for teams not in Gate 2</li>
-              <li>Can visit multiple buyers</li>
-              <li>Earn US$500–US$1,500 per session</li>
-              <li>Practice pitching, get feedback</li>
-            </ul>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">3:15 PM - 4:00 PM</div>
-            <div class="timeline-phase">✅ GATE 3: DEAL CLOSING</div>
-            <p><strong>Pay Jade US$3k entry fee</strong></p>
-            <ul>
-              <li>15-minute negotiation</li>
-              <li>Present deal structure</li>
-              <li>Negotiate terms</li>
-              <li>Earn <span class="emphasis">US$15k (deal)</span> / US$10k (conditional) / US$0 (no deal)</li>
-            </ul>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">4:00 PM</div>
-            <div class="timeline-phase">🏆 FINAL COUNT</div>
-            <p><strong>THIS DETERMINES THE WINNER!</strong></p>
-            <ul>
-              <li>Count all your money</li>
-              <li>Call out amount to Kyle loudly</li>
-              <li>Kyle updates final leaderboard</li>
-            </ul>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">4:30 PM</div>
-            <div class="timeline-phase">AWARDS CEREMONY</div>
-            <p>Winner announced, prizes awarded, buyers share lessons</p>
-          </div>
-        </div>
-
-        <h3>🎯 Strategic Tips</h3>
-        <div class="box box-success">
-          <ul>
-            <li><span class="emphasis">Which buyer to target?</span> FIT MATTERS MOST! Match your product to their buying focus</li>
-            <li><span class="emphasis">How much to bid?</span> Higher bid = better chance, but costs more. Suggested: US$3k–US$4k for good fit, US$5k if very confident</li>
-            <li><span class="emphasis">Use War Room?</span> Costs money but improves strategy. Worth it if you're unsure.</li>
-            <li><span class="emphasis">Intel Station strategy?</span> Great way to earn US$2k–US$6k if you have time. Build relationships!</li>
-          </ul>
+          <div class="timeline-item"><div class="timeline-time">9:30 AM</div><div class="timeline-phase">Start: Receive US$10k</div><p>This is your capital to invest.</p></div>
+          <div class="timeline-item"><div class="timeline-time">10:00–10:45</div><div class="timeline-phase">Research</div><p>Build a 20-person CES target list. Optional War Room consult (US$200).</p></div>
+          <div class="timeline-item"><div class="timeline-time">10:45–11:15</div><div class="timeline-phase">Buyer Study</div><p>Hear what each buyer actually buys; choose your best fits.</p></div>
+          <div class="timeline-item"><div class="timeline-time">11:15–11:30</div><div class="timeline-phase">Auction Prep</div><p>Draft personalized email; set bid (US$2k–US$5k).</p></div>
+          <div class="timeline-item"><div class="timeline-time">11:30–12:00</div><div class="timeline-phase">Gate 1 Auction</div><p>Email immediately. If declined, pivot to backup buyer.</p></div>
+          <div class="timeline-item"><div class="timeline-time">12:30–1:30</div><div class="timeline-phase">Gate 1 Meetings</div><p>Pay Jade first; 5-minute pitch; earn US$3k if interested.</p></div>
+          <div class="timeline-item"><div class="timeline-time">2:00–3:15</div><div class="timeline-phase">Gate 2 Qualification</div><p>Pay US$2k; 12-minute diligence; earn US$8k/US$5k/US$0.</p></div>
+          <div class="timeline-item"><div class="timeline-time">2:30</div><div class="timeline-phase">Hot Lead Surprise</div><p>5-minute open competition; bonus US$5k for the winner.</p></div>
+          <div class="timeline-item"><div class="timeline-time">3:15–4:00</div><div class="timeline-phase">Gate 3 Negotiation</div><p>Pay US$3k; 15-minute negotiation; earn US$15k/US$10k/US$0.</p></div>
+          <div class="timeline-item"><div class="timeline-time">4:00</div><div class="timeline-phase">Final Count</div><p>Count cash and report to Kyle. Highest total wins.</p></div>
         </div>
       </div>
     </div>
 
-    <!-- BUYER FLOW TAB -->
+    <!-- BUYER FLOW -->
     <div id="flow-buyer" class="content">
       <div class="card">
-        <h2>💼 Buyer/Mentor Perspective: Evaluation Protocol</h2>
-
+        <h2>💼 Buyer/Mentor Perspective</h2>
         <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-time">9:00 AM</div>
-            <div class="timeline-phase">ARRIVAL & BRIEFING</div>
-            <p>Arrive, get briefed by Volker (10 min)</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">9:30 AM</div>
-            <div class="timeline-phase">STAGE INTRODUCTION</div>
-            <p>Introduce yourself on stage (2 min) - who you are, what you buy</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">10:00 AM - 10:45 AM</div>
-            <div class="timeline-phase">OBSERVE RESEARCH PHASE</div>
-            <p>Relax and observe. Teams are building target lists.</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">10:45 AM - 11:15 AM</div>
-            <div class="timeline-phase">TARGET LIST REVIEW</div>
-            <p>Present "What I Buy" (5 min detailed)</p>
-            <ul>
-              <li>Review 2–3 startup target lists if they ask</li>
-              <li>Pay them US$0 / US$100 / US$200 directly (your judgment)</li>
-            </ul>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">11:30 AM - 12:00 PM</div>
-            <div class="timeline-phase">📧 GATE 1 AUCTION</div>
-            <p><strong>Check emails every 5 minutes:</strong> 11:35, 11:40, 11:45, 11:50, 11:55, 12:00</p>
-            <ul>
-              <li>Accept your best 2–3 startups</li>
-              <li>Look for: Relevant to your focus + Good bid + Personalized email</li>
-              <li>Reply: "Accepted for [time]"</li>
-            </ul>
-            <div class="box box-warning" style="margin-top:.6rem;">
-              <strong>Decision Rule:</strong> If 2 equally relevant startups, higher bid wins!
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">12:30 PM - 1:30 PM</div>
-            <div class="timeline-phase">🤝 GATE 1 MEETINGS</div>
-            <p>Your 2–3 teams, 5 minutes each:</p>
-            <ol>
-              <li>Listen to pitch (3 min)</li>
-              <li>Ask 2–3 questions (2 min)</li>
-              <li>Decide: <span class="emphasis">Interested (US$3k)</span> or Pass (US$0)</li>
-              <li>Hand them pre-counted cash envelope</li>
-              <li><strong>TEXT KYLE:</strong> "Team X - Gate 1 - US$3k"</li>
-            </ol>
-            <p style="margin-top:.6rem;"><strong>12:35 PM: CHECKPOINT 1</strong> (teams count cash)</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">1:30 PM - 2:00 PM</div>
-            <div class="timeline-phase">BREAK</div>
-            <p>Free time or prepare for Gate 2</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">2:00 PM - 3:15 PM</div>
-            <div class="timeline-phase">🔍 GATE 2 MEETINGS</div>
-            <p>Your 1–2 teams, 12 minutes each:</p>
-            <ol>
-              <li><strong>NO PITCH ALLOWED</strong> - You interrogate them!</li>
-              <li>Ask tough questions (6 min)</li>
-              <li>Review proof documents (4 min)</li>
-              <li>Decide tier:
-                <ul>
-                  <li><span class="emphasis">Strong (US$8k):</span> Proven, impressive, ready</li>
-                  <li>Decent (US$5k): Good potential, needs work</li>
-                  <li>Weak (US$0): Not convinced</li>
-                </ul>
-              </li>
-              <li>Hand them cash</li>
-              <li><strong>TEXT KYLE:</strong> "Team Y - Gate 2 - US$8k"</li>
-            </ol>
-            <p style="margin-top:.6rem;"><strong>2:00 PM: CHECKPOINT 2</strong> (teams count cash)</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">2:00 PM - 3:45 PM</div>
-            <div class="timeline-phase">💼 INTEL STATION (When Free)</div>
-            <p>Post your name as "Available" when you have time</p>
-            <ul>
-              <li>8-minute sessions with any team</li>
-              <li>They pay you US$0 / US$500 / US$1,500 (you decide value)</li>
-              <li>Track amounts yourself</li>
-            </ul>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">3:15 PM - 4:00 PM</div>
-            <div class="timeline-phase">🤝 GATE 3 MEETINGS</div>
-            <p>Your 0–1 team, 15 minutes:</p>
-            <ol>
-              <li>They present deal structure (5 min)</li>
-              <li>You negotiate terms (8 min)</li>
-              <li>Decide:
-                <ul>
-                  <li><span class="emphasis">Deal (US$15k):</span> Would commit, strong fit, ready</li>
-                  <li>Conditional (US$10k): Interested but concerns</li>
-                  <li>No Deal (US$0): Not ready</li>
-                </ul>
-              </li>
-              <li>Hand them cash</li>
-              <li><strong>TEXT KYLE:</strong> "Team Z - Gate 3 - US$15k"</li>
-            </ol>
-            <p style="margin-top:.6rem;"><strong>4:00 PM: FINAL CHECKPOINT</strong></p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">4:30 PM</div>
-            <div class="timeline-phase">🏆 AWARDS</div>
-            <p>Share 30-sec CES lesson during ceremony</p>
-          </div>
-        </div>
-
-        <h3>⏰ Your Time Breakdown</h3>
-        <div class="box box-success">
-          <p><strong>✅ Active work:</strong> ~3 hours (meetings, decisions, texting)</p>
-          <p><strong>✅ Downtime:</strong> ~4 hours (observe, Intel Station, breaks)</p>
+          <div class="timeline-item"><div class="timeline-time">9:00</div><div class="timeline-phase">Arrival & Briefing</div><p>10-minute huddle with MC.</p></div>
+          <div class="timeline-item"><div class="timeline-time">10:45–11:15</div><div class="timeline-phase">“What I Buy”</div><p>Give specifics; optionally review 2–3 lists (US$0/US$100/US$200).</p></div>
+          <div class="timeline-item"><div class="timeline-time">11:30–12:00</div><div class="timeline-phase">Gate 1 Auction</div><p>Check email every 5 minutes; accept best 2–3; tie-break by higher bid if equal relevance.</p></div>
+          <div class="timeline-item"><div class="timeline-time">12:30–1:30</div><div class="timeline-phase">Gate 1 Meetings</div><p>Decide Interested (US$3k) or Pass (US$0); text Kyle after each decision.</p></div>
+          <div class="timeline-item"><div class="timeline-time">2:00–3:15</div><div class="timeline-phase">Gate 2 Meetings</div><p>Interrogate; pay US$8k/US$5k/US$0; text Kyle.</p></div>
+          <div class="timeline-item"><div class="timeline-time">2:00–3:45</div><div class="timeline-phase">Intel Station</div><p>Post “Available Now”; 8-minute sessions; US$0/US$500/US$1,500 at your discretion; track yourself.</p></div>
+          <div class="timeline-item"><div class="timeline-time">3:15–4:00</div><div class="timeline-phase">Gate 3 Meetings</div><p>Deal (US$15k) / Conditional (US$10k) / No Deal (US$0); text Kyle.</p></div>
         </div>
       </div>
     </div>
 
-    <!-- MC FLOW TAB -->
-    <div id="flow-mc" class="content">
+    <!-- SURPRISE & RECOVERY -->
+    <div id="surprise" class="content">
       <div class="card">
-        <h2>🎤 MC (Volker) Perspective: The Conductor's Script</h2>
-
-        <div class="box box-warning">
-          <h3>🎯 YOUR JOB</h3>
-          <ul>
-            <li><strong>Keep time STRICT</strong> - exact announcements at exact times</li>
-            <li><strong>Build DRAMA</strong> - energy peaks at key moments</li>
-            <li><strong>Maintain ENERGY</strong> - momentum never drops</li>
-          </ul>
+        <h2>⚡ Surprise & Recovery (For Teams Without Morning Meetings)</h2>
+        <div class="box box-danger">
+          <strong>Reality Check:</strong> Typically ~18 of 20 teams secure Gate-1 meetings. <strong>Two teams may get none.</strong>
         </div>
-
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-time">8:30 AM</div>
-            <div class="timeline-phase">PREP</div>
-            <p>Arrive, test mic, review MC notes, prepare script cards</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">9:00 AM</div>
-            <div class="timeline-phase">BRIEF BUYERS</div>
-            <p>Quick 10-min huddle with all buyers - review roles, texting protocol</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">9:30 AM - 10:00 AM</div>
-            <div class="timeline-phase">🎬 OPENING CEREMONY</div>
-            <p><strong>Your script:</strong></p>
-            <ul>
-              <li>Welcome everyone with energy</li>
-              <li>Explain rules clearly</li>
-              <li>Buyers introduce themselves (2 min each)</li>
-              <li>Distribute US$10k envelopes dramatically</li>
-            </ul>
-            <div class="box" style="margin-top:.6rem;">
-              <strong>Sample Line:</strong> "You have US$10,000 to invest. Spend it wisely, earn it back strategically. The team with the most money at 4 PM wins <strong>US$200</strong> cash. Your competition starts... NOW!"
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">10:00 AM - 10:45 AM</div>
-            <div class="timeline-phase">📚 RESEARCH PHASE</div>
-            <p><strong>10:00 AM:</strong> "Build your 20-person CES target list. War Room is open. BEGIN!"</p>
-            <p><strong>10:15 AM:</strong> Observe (Josh Fu teaches cold outreach)</p>
-            <p><strong>10:45 AM:</strong> Buyers present "What I Buy"</p>
-            <p><strong>11:15 AM:</strong> "15 minutes to prep your auction emails!"</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">11:30 AM - 12:00 PM</div>
-            <div class="timeline-phase">🔥 AUCTION - PEAK ENERGY!</div>
-            <p><strong>11:30:00 AM EXACTLY:</strong></p>
-            <div class="box box-danger">
-              🔊 "AUCTION IS OPEN! EMAIL YOUR BUYER NOW! GO GO GO!"
-            </div>
-            <p style="margin-top:.6rem;"><strong>Call updates every 5 minutes:</strong></p>
-            <ul>
-              <li>11:35 - "First responses going out!"</li>
-              <li>11:40 - "Half the slots filling up!"</li>
-              <li>11:45 - "Final slots going fast!"</li>
-              <li>11:50 - "Last chance!"</li>
-              <li>11:55 - "One minute remaining!"</li>
-            </ul>
-            <p><strong>12:00 PM:</strong> "AUCTION CLOSED! Buyers, finalize your selections!"</p>
-            <p>Announce results (expect ~18 teams booked)</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">12:30 PM - 1:30 PM</div>
-            <div class="timeline-phase">🤝 GATE 1 MEETINGS</div>
-            <p><strong>12:30:00:</strong> 🔔 "WAVE 1, BEGIN!"</p>
-            <p><strong>12:35:00:</strong> "CHECKPOINT 1! COUNT YOUR CASH, REPORT TO KYLE!"</p>
-            <p>Then call subsequent waves:</p>
-            <ul>
-              <li>12:40 - Wave 2</li>
-              <li>12:45 - Wave 3</li>
-              <li>12:50 - Wave 4</li>
-            </ul>
-            <p><strong>1:30 PM:</strong> "30-minute break! Gate 2 booking opens now!"</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">2:00 PM - 3:15 PM</div>
-            <div class="timeline-phase">🔍 GATE 2</div>
-            <p><strong>2:00:00:</strong> "CHECKPOINT 2! COUNT AND REPORT TO KYLE!"</p>
-            <p><strong>2:00 PM:</strong> "GATE 2 BEGINS! Buyers, start your interrogations!"</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">2:30 PM</div>
-            <div class="timeline-phase">💥 HOT LEAD SURPRISE - PEAK DRAMA!</div>
-            <div class="box box-danger">
-              <p><strong>2:30:00 EXACTLY:</strong></p>
-              <p>🔊 "STOP! ATTENTION EVERYONE!"</p>
-              <p>[Pause for effect]</p>
-              <p>[Open envelope dramatically]</p>
-              <p>"[BUYER NAME] just got emergency budget for US$100K project!"</p>
-              <p>"ONE EXTRA SLOT! <strong>US$5,000</strong> INSTANT BONUS!"</p>
-              <p>"FIVE MINUTES to email them!"</p>
-              <p>"Subject line: HOT LEAD - [Your Company]!"</p>
-              <p>"GO!"</p>
-            </div>
-            <p style="margin-top:.6rem;"><strong>2:35 PM:</strong> Announce winner dramatically</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">3:00 PM - 4:00 PM</div>
-            <div class="timeline-phase">🤝 GATE 3</div>
-            <p><strong>3:00 PM:</strong> "Gate 3 booking opens now!"</p>
-            <p><strong>3:15:00:</strong> 🔔 "GATE 3 BEGINS! Final negotiations start!"</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">4:00 PM - 5:00 PM</div>
-            <div class="timeline-phase">🏆 FINAL COUNT & AWARDS</div>
-            <p><strong>4:00:00:</strong></p>
-            <div class="box box-success">
-              "FINAL CHECKPOINT! THIS DETERMINES THE WINNER! COUNT EVERY DOLLAR!"
-            </div>
-            <p><strong>4:05 PM:</strong> Verify top 3 with Kyle (spot-check physical cash)</p>
-            <p><strong>4:30 PM:</strong> AWARDS CEREMONY</p>
-            <ul>
-              <li>Announce 3rd place (build suspense)</li>
-              <li>Announce 2nd place</li>
-              <li>Announce CHAMPION with drama!</li>
-              <li>Present prizes</li>
-              <li>Photos</li>
-              <li>Buyers share 30-second CES lessons</li>
-            </ul>
-          </div>
+        <h3>1) Hot Lead Surprise (2:30 PM)</h3>
+        <ul>
+          <li>MC announces an urgent buyer need.</li>
+          <li>All 20 teams have 5 minutes to email a targeted response.</li>
+          <li><strong>Winner earns US$5k</strong> and an extra meeting slot.</li>
+          <li>Best use for teams without earlier wins or cash—<strong>go all-out here</strong>.</li>
+        </ul>
+        <h3>2) Intel Station (2:00–3:45 PM)</h3>
+        <ul>
+          <li>Buyers post “Available Now.” Walk-up, 8-minute sessions.</li>
+          <li><strong>Earn US$500–US$1,500 per session</strong> (mentor decides value).</li>
+          <li>Stack multiple sessions across buyers to recover cash.</li>
+          <li>Use <strong>Ken’s War Room</strong> before each attempt for quick sharpening.</li>
+        </ul>
+        <div class="box box-success">
+          <strong>Recovery Plan for the 2 Teams:</strong>
+          <ol>
+            <li><strong>2:00 PM:</strong> Book Intel Station immediately (2–3 back-to-back sessions).</li>
+            <li><strong>2:20 PM:</strong> 10-minute War Room tune-up for Hot Lead positioning.</li>
+            <li><strong>2:30 PM:</strong> Execute Hot Lead email flawlessly.</li>
+            <li><strong>2:35–3:45 PM:</strong> Continue Intel Station to rebuild cash for Gate-3 attempt.</li>
+          </ol>
+        </div>
+        <h3>3) Ken’s War Room = Mentor Leverage</h3>
+        <ul>
+          <li>Morning consults (US$200) increase acceptance at Gate 1.</li>
+          <li>Afternoon consults (US$300–US$500) <strong>optimize recovery</strong> + Gate-3 deal structures.</li>
+        </ul>
+        <div class="box box-warning">
+          <strong>MC Cueing:</strong> The MC will explicitly call out recovery opportunities and time-box transitions so late-morning misses don’t cascade.
         </div>
       </div>
     </div>
 
-    <!-- SCHEDULE TAB -->
+    <!-- SCHEDULE -->
     <div id="schedule" class="content">
       <div class="card">
         <h2>⏱️ Master Day Schedule</h2>
-        <p style="margin-bottom:1rem;">Complete timeline for all participants</p>
-
         <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-time">9:00 AM</div>
-            <div class="timeline-phase">STAFF & BUYER ARRIVAL</div>
-            <p>Volker gives quick huddle. Buyers receive final packet & briefing.</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">9:30 AM - 10:45 AM</div>
-            <div class="timeline-phase">OPENING & RESEARCH PHASE</div>
-            <p>Volker sets tone. Teams build CES target lists (Lead Gen). War Room open (US$200).</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">10:45 AM - 11:30 AM</div>
-            <div class="timeline-phase">BUYER STUDY SESSION</div>
-            <p>Each of the 7 Buyers explains what they buy (5 min each). Teams prepare auction bids.</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">11:30 AM - 12:00 PM</div>
-            <div class="timeline-phase">🔥 GATE 1 AUCTION</div>
-            <p>Buyers check email every 5 min. Award 18 slots (First-come + Quality).</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">12:00 PM - 12:30 PM</div>
-            <div class="timeline-phase">LUNCH BREAK</div>
-            <p>35 people, food delivered at noon</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">12:30 PM - 1:30 PM</div>
-            <div class="timeline-phase">GATE 1 MEETINGS & CP1</div>
-            <p>5-min Pitch Waves. <strong>CP1 called at 12:35 PM.</strong> Teams must pay Jade entry fee.</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">1:30 PM - 2:00 PM</div>
-            <div class="timeline-phase">BREAK</div>
-            <p>Teams prep for Gate 2, War Room consults available (US$300–US$500)</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">2:00 PM - 3:15 PM</div>
-            <div class="timeline-phase">GATE 2 MEETINGS & CP2</div>
-            <p>12-min Q&A/Diligence Waves. Intel Station opens (Recovery Path). <strong>CP2 called at 2:00 PM.</strong></p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">2:30 PM</div>
-            <div class="timeline-phase">💥 HOT LEAD SURPRISE</div>
-            <p>All 20 teams compete for one bonus slot + US$5k. Volker announces winner at 2:35 PM.</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">3:15 PM - 4:00 PM</div>
-            <div class="timeline-phase">GATE 3 MEETINGS</div>
-            <p>15-min Deal Negotiations. Final gates close.</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">4:00 PM - 4:30 PM</div>
-            <div class="timeline-phase">🏆 FINAL COUNT</div>
-            <p>Kyle verifies top 3. Leaderboard finalized.</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">4:30 PM</div>
-            <div class="timeline-phase">AWARDS CEREMONY</div>
-            <p>Champion announced. Buyers share key lessons. 1st prize: <strong>US$200</strong>.</p>
-          </div>
+          <div class="timeline-item"><div class="timeline-time">9:00</div><div class="timeline-phase">Staff & Buyer Arrival</div><p>Briefing and setup.</p></div>
+          <div class="timeline-item"><div class="timeline-time">9:30–10:45</div><div class="timeline-phase">Opening & Research</div><p>Teams build target lists; War Room open.</p></div>
+          <div class="timeline-item"><div class="timeline-time">10:45–11:30</div><div class="timeline-phase">Buyer Study</div><p>“What I Buy” segments; auction prep.</p></div>
+          <div class="timeline-item"><div class="timeline-time">11:30–12:00</div><div class="timeline-phase">Gate 1 Auction</div><p>Mentors check inbox every 5 minutes; accept best 2–3.</p></div>
+          <div class="timeline-item"><div class="timeline-time">12:30–1:30</div><div class="timeline-phase">Gate 1 Meetings & CP1</div><p>US$3k if interested; CP1 at 12:35.</p></div>
+          <div class="timeline-item"><div class="timeline-time">2:00–3:15</div><div class="timeline-phase">Gate 2 & CP2</div><p>US$8k/US$5k/US$0 tiers; CP2 at 2:00.</p></div>
+          <div class="timeline-item"><div class="timeline-time">2:30</div><div class="timeline-phase">Hot Lead Surprise</div><p>5-minute sprint; US$5k bonus.</p></div>
+          <div class="timeline-item"><div class="timeline-time">3:15–4:00</div><div class="timeline-phase">Gate 3</div><p>Deal/Conditional/No Deal.</p></div>
+          <div class="timeline-item"><div class="timeline-time">4:00–4:30</div><div class="timeline-phase">Final Count</div><p>Leaderboard finalization and verification.</p></div>
+          <div class="timeline-item"><div class="timeline-time">4:30</div><div class="timeline-phase">Awards</div><p>US$200 cash prize; consulting awards.</p></div>
         </div>
       </div>
     </div>
 
-    <!-- FLOWCHART TAB -->
+    <!-- FLOWCHART -->
     <div id="flowchart" class="content">
       <div class="card">
         <h2>📊 Visual Deal Funnel</h2>
-        <p style="font-size:1.05rem;margin-bottom:1rem;">The complete journey from research to victory</p>
-
-        <div class="flowchart">
-          <div class="flow-node">
-            <strong>9:30 AM: START</strong><br/>
-            Research & Target Selection<br/>
-            <span style="font-size:.9em;color:var(--text-secondary);">Build 20-person CES list</span>
-          </div>
-
-          <div class="flow-arrow">↓</div>
-
-          <div class="flow-node gate">
-            <strong>11:30 AM: GATE 1 AUCTION</strong><br/>
-            Email Competition<br/>
-            <span style="font-size:.9em;color:var(--text-secondary);">Bid US$2k–US$5k to book meeting</span>
-          </div>
-
-          <div class="flow-arrow">↓</div>
-
-          <div class="flow-node gate">
-            <strong>12:30 PM: GATE 1 - PITCH</strong><br/>
-            5-Minute Discovery<br/>
-            <span style="font-size:.9em;color:var(--text-secondary);">Present deck, answer questions</span>
-          </div>
-
-          <div class="flow-arrow">↓</div>
-
-          <div class="flow-node checkpoint">
-            <strong>⏺ CHECKPOINT 1 (12:35 PM)</strong><br/>
-            Count cash, report to Kyle
-          </div>
-
-          <div class="flow-arrow">↓</div>
-
-          <div class="flow-node">
-            <strong>1:30 PM: BREAK</strong><br/>
-            Prep proof documents<br/>
-            <span style="font-size:.9em;color:var(--text-secondary);">War Room consults available</span>
-          </div>
-
-          <div class="flow-arrow">↓</div>
-
-          <div class="flow-node gate">
-            <strong>2:00 PM: GATE 2 - QUALIFY</strong><br/>
-            12-Minute Interrogation<br/>
-            <span style="font-size:.9em;color:var(--text-secondary);">No pitch - prove your claims</span>
-          </div>
-
-          <div class="flow-arrow">↓</div>
-
-          <div class="flow-node checkpoint">
-            <strong>⏺ CHECKPOINT 2 (2:00 PM)</strong><br/>
-            Count cash, report to Kyle
-          </div>
-
-          <div class="flow-arrow" style="color:var(--accent-gold);">
-            ⚡ 2:30 PM: HOT LEAD SURPRISE<br/>
-            <span style="font-size:.85em;">Bonus US$5k opportunity</span>
-          </div>
-
-          <div class="flow-node" style="background:rgba(41,221,255,.1);border-color:var(--accent-cyan);">
-            <strong>2:00–3:45 PM: INTEL STATION</strong><br/>
-            Optional Recovery Path<br/>
-            <span style="font-size:.9em;color:var(--text-secondary);">8-min sessions, earn US$500–US$1,500 each</span>
-          </div>
-
-          <div class="flow-arrow">↓</div>
-
-          <div class="flow-node gate">
-            <strong>3:15 PM: GATE 3 - CLOSE</strong><br/>
-            15-Minute Negotiation<br/>
-            <span style="font-size:.9em;color:var(--text-secondary);">Structure real deal terms</span>
-          </div>
-
-          <div class="flow-arrow">↓</div>
-
-          <div class="flow-node checkpoint" style="background:linear-gradient(135deg,var(--accent-gold),var(--accent-pink));border-color:var(--accent-gold);">
-            <strong>🏆 FINAL COUNT (4:00 PM)</strong><br/>
-            DETERMINES WINNER!<br/>
-            <span style="font-size:.9em;">Every dollar matters</span>
-          </div>
-
-          <div class="flow-arrow">↓</div>
-
-          <div class="flow-node" style="background:linear-gradient(135deg,rgba(255,217,90,.18),rgba(192,91,255,.18));">
-            <strong>4:30 PM: VICTORY</strong><br/>
-            Awards & Recognition<br/>
-            <span style="font-size:.9em;color:var(--text-secondary);">US$200 cash to champion</span>
-          </div>
-        </div>
-
-        <h3 style="margin-top:1rem;">Alternative Paths</h3>
-        <div class="gate-comparison">
-          <div class="gate-column gate1">
-            <div class="gate-header">❌ NOT ACCEPTED</div>
-            <ul style="margin-top:.6rem;">
-              <li>Email backup buyer immediately</li>
-              <li>Focus on Hot Lead Surprise (2:30 PM)</li>
-              <li>Hit Intel Station hard</li>
-              <li>War Room free coaching</li>
-            </ul>
-          </div>
-          <div class="gate-column gate2">
-            <div class="gate-header">❌ DIDN'T ADVANCE</div>
-            <ul style="margin-top:.6rem;">
-              <li>Intel Station becomes primary path</li>
-              <li>Can earn US$2k–US$6k total</li>
-              <li>Practice with multiple buyers</li>
-              <li>Build relationships for real CES</li>
-            </ul>
-          </div>
-          <div class="gate-column gate3">
-            <div class="gate-header">✅ RECOVERY STRATEGY</div>
-            <ul style="margin-top:.6rem;">
-              <li>Not out of the game!</li>
-              <li>Intel Station can recover US$3k–US$4k</li>
-              <li>Hot Lead worth US$5k</li>
-              <li>Many ways to win</li>
-            </ul>
-          </div>
-        </div>
+        <p>Research → Auction → Pitch → Qualify → Negotiate → Final Count.</p>
       </div>
     </div>
 
-    <!-- MENTAL MAP TAB -->
+    <!-- MENTAL MAP -->
     <div id="mental" class="content">
       <div class="card">
-        <h2>🧠 Mental Perspective: The Psychology of War Games</h2>
-        <p style="font-size:1.05rem;margin-bottom:1rem;">Understanding the emotional and strategic journey</p>
-
-        <h3>Phase 1: Pre-Game Emotions</h3>
-        <div class="mental-map">
-          <div class="mental-node emotion">
-            <div class="mental-icon">😰</div>
-            <div class="mental-title">Anxiety</div>
-            <div class="mental-desc">"Am I ready for this?" - Normal pre-competition nerves</div>
-          </div>
-          <div class="mental-node emotion">
-            <div class="mental-icon">🤔</div>
-            <div class="mental-title">Analysis</div>
-            <div class="mental-desc">Sizing up competition, planning strategy</div>
-          </div>
-          <div class="mental-node emotion">
-            <div class="mental-icon">🔥</div>
-            <div class="mental-title">Determination</div>
-            <div class="mental-desc">"I'm going to win this" - Competitive fire ignites</div>
-          </div>
-        </div>
-
-        <h3>Phase 2: Auction Pressure</h3>
-        <div class="mental-map">
-          <div class="mental-node pressure">
-            <div class="mental-icon">⚡</div>
-            <div class="mental-title">Decision Paralysis</div>
-            <div class="mental-desc">"Which buyer? How much to bid?" - First major decision</div>
-          </div>
-          <div class="mental-node pressure">
-            <div class="mental-icon">😱</div>
-            <div class="mental-title">FOMO</div>
-            <div class="mental-desc">Watching others get accepted while waiting</div>
-          </div>
-          <div class="mental-node pressure">
-            <div class="mental-icon">🎯</div>
-            <div class="mental-title">Commitment</div>
-            <div class="mental-desc">Clicked send - no turning back now</div>
-          </div>
-        </div>
-
-        <h3>Phase 3: Gate 1 Reality Check</h3>
-        <div class="mental-map">
-          <div class="mental-node strategy">
-            <div class="mental-icon">🎤</div>
-            <div class="mental-title">Performance Mode</div>
-            <div class="mental-desc">Adrenaline kicks in during 5-min pitch</div>
-          </div>
-          <div class="mental-node emotion">
-            <div class="mental-icon">😅</div>
-            <div class="mental-title">Relief or Despair</div>
-            <div class="mental-desc">Got US$3k... or got US$0. Massive swing.</div>
-          </div>
-          <div class="mental-node strategy">
-            <div class="mental-icon">💭</div>
-            <div class="mental-title">Recalculation</div>
-            <div class="mental-desc">"Do I have enough to continue?"</div>
-          </div>
-        </div>
-
-        <h3>Phase 4: Mid-Game Stress</h3>
-        <div class="mental-map">
-          <div class="mental-node pressure">
-            <div class="mental-icon">📊</div>
-            <div class="mental-title">Leaderboard Anxiety</div>
-            <div class="mental-desc">Seeing your rank vs. competitors</div>
-          </div>
-          <div class="mental-node strategy">
-            <div class="mental-icon">⚔️</div>
-            <div class="mental-title">Strategic Pivot</div>
-            <div class="mental-desc">Adapting based on what's working</div>
-          </div>
-          <div class="mental-node emotion">
-            <div class="mental-icon">😤</div>
-            <div class="mental-title">Resilience</div>
-            <div class="mental-desc">Fighting back from setbacks</div>
-          </div>
-        </div>
-
-        <h3>Phase 5: Final Push</h3>
-        <div class="mental-map">
-          <div class="mental-node emotion">
-            <div class="mental-icon">💪</div>
-            <div class="mental-title">All-In Mentality</div>
-            <div class="mental-desc">Gate 3: giving everything you have</div>
-          </div>
-          <div class="mental-node pressure">
-            <div class="mental-icon">⏰</div>
-            <div class="mental-title">Time Pressure</div>
-            <div class="mental-desc">"This is my last chance"</div>
-          </div>
-          <div class="mental-node emotion">
-            <div class="mental-icon">🙏</div>
-            <div class="mental-title">Hope</div>
-            <div class="mental-desc">Waiting for final checkpoint results</div>
-          </div>
-        </div>
-
-        <h3>Key Mental Lessons</h3>
-        <div class="box box-success">
-          <h4 style="color:var(--success);margin-bottom:.6rem;">What War Games Teaches</h4>
-          <ul>
-            <li><span class="emphasis">Risk Management:</span> Every decision has opportunity cost</li>
-            <li><span class="emphasis">Rejection Handling:</span> Hearing "no" and moving forward immediately</li>
-            <li><span class="emphasis">Time Pressure:</span> Making good decisions quickly</li>
-            <li><span class="emphasis">Authentic Communication:</span> Generic approaches fail, personalized wins</li>
-            <li><span class="emphasis">Resilience:</span> Comeback strategies when things go wrong</li>
-            <li><span class="emphasis">Evidence Over Promises:</span> Proof matters more than pitch</li>
-          </ul>
-        </div>
-
-        <h3>Buyer Mental Journey</h3>
-        <div class="mental-map">
-          <div class="mental-node strategy">
-            <div class="mental-icon">🎭</div>
-            <div class="mental-title">Character Immersion</div>
-            <div class="mental-desc">Staying true to your buyer persona</div>
-          </div>
-          <div class="mental-node pressure">
-            <div class="mental-icon">📧</div>
-            <div class="mental-title">Inbox Overload</div>
-            <div class="mental-desc">20 emails in 30 minutes - real CES chaos</div>
-          </div>
-          <div class="mental-node strategy">
-            <div class="mental-icon">⚖️</div>
-            <div class="mental-title">Fair Judgment</div>
-            <div class="mental-desc">Balancing authenticity with encouragement</div>
-          </div>
-          <div class="mental-node emotion">
-            <div class="mental-icon">🏆</div>
-            <div class="mental-title">Pride</div>
-            <div class="mental-desc">Seeing teams grow and improve</div>
-          </div>
-        </div>
-
-        <div class="box box-warning">
-          <h4 style="color:var(--warning);margin-bottom:.6rem;">Managing Emotional Swings</h4>
-          <p><strong>For Startups:</strong> The game creates real emotional highs and lows. This is intentional - it mirrors real CES. Stay focused on learning, not just winning.</p>
-          <p style="margin-top:.6rem;"><strong>For Buyers:</strong> Your feedback matters. Balance authenticity (real CES would be harsh) with encouragement (they're learning). Be tough but fair.</p>
-        </div>
+        <h2>🧠 Mental Perspective</h2>
+        <p>Expect pressure waves at Auction, CP1, Hot Lead, and Gate-3. Use Ken/Intel Station to reduce variance.</p>
       </div>
     </div>
 
-    <!-- MECHANICS TAB -->
+    <!-- MECHANICS -->
     <div id="mechanics" class="content">
       <div class="card">
-        <h2>⚙️ Mechanics & Risk Mitigation</h2>
-
-        <h3>💰 Money Flow System</h3>
+        <h2>⚙️ Mechanics & Risk</h2>
         <div class="box box-success">
-          <h4>Kyle's Tracking System</h4>
-          <ul>
-            <li>Maintains Google Sheet with 3 tabs (CP1, CP2, Final)</li>
-            <li>Updates ONLY at checkpoints (not real-time)</li>
-            <li>Receives texts from buyers after each decision</li>
-            <li>Projects leaderboard on screen</li>
-            <li><strong>Kyle's sheet is final truth for disputes</strong></li>
-          </ul>
+          <strong>Tracking:</strong> Kyle’s sheet is final truth. Texts support; physical cash spot-checked only for top-3 at final count.
         </div>
-
-        <div class="box">
-          <h4>Jade's Cash Desk</h4>
-          <ul>
-            <li>Collects entry fees before Gate meetings</li>
-            <li>Locked box keeps all collected money secure</li>
-            <li>No refunds policy - teams responsible for their capital</li>
-            <li>Quick processing during auction rush</li>
-          </ul>
-        </div>
-
-        <div class="box">
-          <h4>Buyer Payout System</h4>
-          <ul>
-            <li>Pre-counted envelopes for each payout amount</li>
-            <li>Buyers don't count - just hand appropriate envelope</li>
-            <li>Eliminates counting delays during meetings</li>
-            <li>Text Kyle immediately after decision</li>
-          </ul>
-        </div>
-
-        <h3>⚠️ Critical Risk Mitigation</h3>
-        <div class="gate-comparison">
-          <div class="gate-column gate1" style="border-top-color:var(--danger);">
-            <div class="gate-header">PROBLEM: Buyer Text Delay</div>
-            <p><strong>Risk:</strong> Buyers forget to text Kyle after decisions</p>
-            <p><strong>Impact:</strong> Leaderboard becomes inaccurate</p>
-            <p><strong>Solution:</strong></p>
-            <ul style="margin-top:.4rem;">
-              <li>Volker reminds buyers during breaks</li>
-              <li>Kyle can ask buyers directly</li>
-              <li>Update retroactively if needed</li>
-              <li>Cheat sheets remind buyers to text</li>
-            </ul>
-          </div>
-
-          <div class="gate-column gate2" style="border-top-color:var(--danger);">
-            <div class="gate-header">PROBLEM: Lost Cash</div>
-            <p><strong>Risk:</strong> Team loses or miscounts money</p>
-            <p><strong>Impact:</strong> Score disputes</p>
-            <p><strong>Solution:</strong></p>
-            <ul style="margin-top:.4rem;">
-              <li>Team's responsibility (stated upfront)</li>
-              <li>No reimbursement (game design feature)</li>
-              <li>Kyle's tracker is final authority</li>
-              <li>Spot-check top 3 at final count</li>
-            </ul>
-          </div>
-
-          <div class="gate-column gate3" style="border-top-color:var(--danger);">
-            <div class="gate-header">PROBLEM: Auction Chaos</div>
-            <p><strong>Risk:</strong> Too many emails, buyers overwhelmed</p>
-            <p><strong>Impact:</strong> Slow responses, team frustration</p>
-            <p><strong>Solution:</strong></p>
-            <ul style="margin-top:.4rem;">
-              <li>30-minute auction window</li>
-              <li>Buyers check every 5 minutes</li>
-              <li>Accept best 2–3 only</li>
-              <li>Clear decision criteria</li>
-            </ul>
-          </div>
-        </div>
-
-        <h3>🔧 Operational Details</h3>
         <div class="box box-warning">
-          <h4>War Room Pricing</h4>
-          <p><strong>Morning (10:00 AM - 12:00 PM): US$200</strong></p>
-          <ul>
-            <li>Buyer target selection</li>
-            <li>Email review before sending</li>
-            <li>Bid amount strategy</li>
-          </ul>
-          <p style="margin-top:.6rem;"><strong>Afternoon (2:00 PM - 3:45 PM): US$300–US$500</strong></p>
-          <ul>
-            <li>Gate 3 deal structure</li>
-            <li>Negotiation strategy</li>
-            <li>Objection preparation</li>
-            <li>Recovery planning</li>
-          </ul>
-          <p style="margin-top:.6rem;"><strong>Ken tracks usage, reports totals to Kyle at checkpoints</strong></p>
+          <strong>Auction Chaos:</strong> Tie-break equal relevance by higher bid. Buyers check inbox on the 5-minute marks.
         </div>
-
-        <div class="box">
-          <h4>Intel Station Mechanics</h4>
-          <ul>
-            <li>Open 2:00 PM - 3:45 PM</li>
-            <li>Buyers post name when available</li>
-            <li>8-minute sessions</li>
-            <li>Buyers decide payout: US$0 / US$500 / US$1,500</li>
-            <li>Buyers track their own earnings</li>
-            <li>Great recovery path for teams not in Gate 2</li>
-          </ul>
-        </div>
-
-        <h3>📊 Checkpoint Protocol</h3>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-time">12:35 PM - Checkpoint 1</div>
-            <p>After Gate 1 waves begin, Volker announces checkpoint</p>
-            <ul>
-              <li>Teams count all cash</li>
-              <li>Call out amount to Kyle loudly</li>
-              <li>Kyle updates leaderboard</li>
-              <li>First glimpse of standings</li>
-            </ul>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">2:00 PM - Checkpoint 2</div>
-            <p>Before Gate 2 begins, Volker announces checkpoint</p>
-            <ul>
-              <li>Critical mid-game update</li>
-              <li>Shows who's pulling ahead</li>
-              <li>Informs strategy decisions</li>
-            </ul>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">4:00 PM - Final Count</div>
-            <p>Determines winner - most important checkpoint</p>
-            <ul>
-              <li>Dramatic announcement by Volker</li>
-              <li>Every dollar matters</li>
-              <li>Kyle verifies top 3 with physical count</li>
-              <li>Spot-check to prevent disputes</li>
-            </ul>
-          </div>
-        </div>
-
-        <h3>🎯 Decision Authority</h3>
         <div class="box box-danger">
-          <h4>Dispute Resolution Hierarchy</h4>
-          <ol>
-            <li><strong>Kyle's Tracker:</strong> Primary source of truth</li>
-            <li><strong>Buyer Text History:</strong> Supporting evidence</li>
-            <li><strong>Physical Cash Count:</strong> Only for top 3 at final</li>
-            <li><strong>Volker's Call:</strong> Final arbiter if ambiguous</li>
-          </ol>
+          <strong>Timing Fragility:</strong> MC must hard-stop meetings; waves move regardless of stragglers.
         </div>
       </div>
     </div>
@@ -1520,31 +599,19 @@
   </div>
 
   <script>
-    // Smooth tab switching with sticky offset-aware scrolling
     function showTab(tabName, el){
-      // Deactivate current
       document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-
-      // Activate target content
       const target = document.getElementById(tabName);
       if(target){ target.classList.add('active'); }
-
-      // Activate clicked tab
       if(el && el.classList.contains('tab')){ el.classList.add('active'); }
-
-      // Compute sticky offset (tabs height + small padding)
       const tabsBar = document.getElementById('tabsContainer');
       const offset = (tabsBar ? tabsBar.offsetHeight : 0) + 8;
-
-      // Scroll section into view then adjust for sticky
       if(target){
         const rectTop = target.getBoundingClientRect().top + window.pageYOffset;
         window.scrollTo({ top: rectTop - offset, behavior: 'smooth' });
       }
     }
-
-    // Enhance internal anchor behavior (if any appear later)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e){
         e.preventDefault();
