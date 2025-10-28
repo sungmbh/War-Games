@@ -1,749 +1,373 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CES2026 Deal Sprint - Execution Brief</title>
-    <style>
-        /* General Setup & Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-            background: #0a0f0a;
-            color: #e8f5e8;
-            line-height: 1.7;
-            -webkit-text-size-adjust: 100%;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px; 
-        }
-
-        /* Header (Compact & Styled to new concept) */
-        .header {
-            text-align: center;
-            padding: 20px 15px 40px 15px;
-            background: linear-gradient(135deg, #1a1538 0%, #0d0a21 100%);
-            border-radius: 0 0 15px 15px; 
-            margin-bottom: 20px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-            position: relative;
-        }
-
-        .header h1 {
-            font-size: 2.2em; 
-            margin-bottom: 5px;
-            color: #d8c2ff;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        .header p {
-            font-size: 1.1em; 
-            color: #b0a0e0;
-            font-weight: 500;
-        }
-        
-        /* Stats */
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-
-        .stat {
-            background: linear-gradient(135deg, #3f2b96 0%, #4c39a0 100%);
-            padding: 15px 20px;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(100, 80, 160, 0.3);
-            min-width: 100px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .stat-num {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: white;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
-        }
-
-        .stat-label {
-            color: #d8c2ff;
-            font-size: 0.8em;
-            text-transform: uppercase;
-            margin-top: 3px;
-        }
-
-        /* Tabs */
-        .tabs-wrapper {
-            background: linear-gradient(135deg, #2a2253 0%, #1e173d 100%);
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            margin-bottom: 25px;
-        }
-        .tabs {
-            display: flex;
-            gap: 8px;
-            overflow-x: scroll;
-            -webkit-overflow-scrolling: touch;
-        }
-        .tabs::-webkit-scrollbar { display: none; }
-        .tabs { -ms-overflow-style: none; scrollbar-width: none; }
-
-        .tab {
-            flex-shrink: 0; 
-            padding: 12px 15px; 
-            background: #3f2b96;
-            border: none;
-            color: #d8c2ff;
-            cursor: pointer;
-            font-size: 0.9em; 
-            font-weight: 600;
-            border-radius: 6px;
-            white-space: nowrap;
-            transition: all 0.2s ease;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-
-        .tab.active {
-            background: #654ce4;
-            color: white;
-            box-shadow: 0 2px 10px rgba(101, 76, 228, 0.6);
-            transform: translateY(-1px);
-        }
-        
-        /* Content & Cards */
-        .content { display: none; }
-        .content.active { display: block; animation: fadeIn 0.4s ease; }
-
-        .card {
-            background: #1a1538;
-            padding: 25px; 
-            border-radius: 12px;
-            margin-bottom: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .card h2 {
-            color: #d8c2ff;
-            margin-bottom: 20px;
-            font-size: 1.8em; 
-            border-bottom: 2px solid rgba(216, 194, 255, 0.2);
-            padding-bottom: 8px;
-        }
-
-        .card h3 {
-            color: #654ce4;
-            margin: 20px 0 10px; 
-            font-size: 1.3em;
-        }
-        
-        /* Grid Layouts (Mobile first) */
-        .grid-2 { display: grid; grid-template-columns: 1fr; gap: 15px; margin: 15px 0; }
-        .grid-3 { display: grid; grid-template-columns: 1fr; gap: 15px; margin: 15px 0; }
-        
-        /* Box Styling */
-        .box {
-            background: #2a2253;
-            padding: 15px;
-            border-left: 4px solid #654ce4;
-            border-radius: 8px;
-        }
-
-        .box-accent {
-            background: rgba(101, 76, 228, 0.1);
-            border-left-color: #654ce4;
-        }
-
-        .box-warning {
-            background: rgba(251, 191, 36, 0.1);
-            border-left-color: #fbbf24;
-        }
-        
-        /* Gate Card Design */
-        .gate-card {
-            background: #1e173d; 
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
-
-        .gate-title {
-            font-size: 2.5em;
-            font-weight: 700;
-            color: #d8c2ff;
-            margin-bottom: 5px;
-        }
-        
-        .gate-subtitle {
-            font-size: 1.2em;
-            font-weight: 600;
-            color: #654ce4;
-            border-bottom: 3px solid #654ce4;
-            display: inline-block;
-            padding-bottom: 3px;
-            margin-bottom: 15px;
-        }
-        
-        .gate-detail {
-            font-size: 0.9em;
-            color: #cccccc;
-            line-height: 1.4;
-        }
-        
-        /* Timeline */
-        .timeline-item {
-            display: flex;
-            flex-direction: column; 
-            gap: 10px;
-            margin-bottom: 15px;
-            padding: 15px; 
-            border-left: 4px solid #654ce4;
-            background: #1e173d;
-            border-radius: 4px;
-        }
-
-        .time {
-            font-weight: bold;
-            color: #d8c2ff;
-            min-width: 100%;
-            font-size: 1em;
-        }
-        
-        .emphasis {
-            background: rgba(101, 76, 228, 0.2);
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-weight: 600;
-            color: #654ce4;
-            display: inline-block;
-        }
-        
-        /* Checklist Style */
-        .checklist {
-            list-style: none;
-            margin-left: 0;
-        }
-
-        .checklist li {
-            padding: 8px 8px 8px 25px;
-            position: relative;
-            margin-bottom: 5px;
-            line-height: 1.5;
-        }
-
-        .checklist li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            width: 18px;
-            height: 18px;
-            background: #654ce4;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 10px;
-            color: white;
-            box-shadow: 0 2px 8px rgba(101, 76, 228, 0.6);
-        }
-
-        /* Buyer List */
-        .buyer-name { font-weight: bold; color: #d8c2ff; font-size: 1.1em; }
-        .buyer-role { font-size: 0.9em; color: #654ce4; }
-        .buyer-buys { font-size: 0.9em; color: #cccccc; margin-top: 3px; }
-        
-        /* PROGRAM FLOW VISUAL STYLES - Simple version */
-        .flow-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 0;
-        }
-        
-        .flow-node {
-            background: #2a2253;
-            padding: 10px 15px;
-            border-radius: 6px;
-            text-align: center;
-            min-width: 200px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        .flow-arrow {
-            font-size: 1.5em;
-            color: #654ce4;
-            font-weight: 700;
-        }
-        
-        .flow-node.gate {
-            background: linear-gradient(135deg, #654ce4 0%, #4c39a0 100%);
-            color: white;
-            font-weight: bold;
-        }
-        .flow-node.checkpoint {
-            background: #fbbf24;
-            color: #0a0f0a;
-            font-weight: bold;
-        }
-
-        /* Agenda Specific Styles */
-        .agenda-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-        }
-
-        .agenda-time {
-            font-weight: bold;
-            color: #d8c2ff;
-            font-size: 1.1em;
-            padding: 10px;
-            background: #3f2b96;
-            border-radius: 6px;
-        }
-        
-        .agenda-item {
-            background: #1e173d;
-            padding: 15px;
-            border-left: 4px solid #654ce4;
-            border-radius: 4px;
-        }
-
-        .agenda-phase {
-            font-weight: bold;
-            color: #654ce4;
-            font-size: 1.1em;
-            margin-bottom: 5px;
-        }
-
-
-        /* Desktop Media Queries */
-        @media (min-width: 768px) {
-            .grid-2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
-            .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-            
-            .timeline-item {
-                flex-direction: row; 
-            }
-            
-            .time {
-                min-width: 140px;
-                text-align: right;
-            }
-            
-            .flow-container {
-                padding: 20px 0;
-            }
-
-            .agenda-grid {
-                grid-template-columns: 140px 1fr;
-                gap: 10px;
-            }
-            .agenda-time {
-                text-align: right;
-                padding: 15px 10px;
-                height: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: flex-end;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <!-- Header (Compact & Styled) -->
-        <div class="header">
-            <h1>CES2026 DEAL SPRINT</h1>
-            <p>Execution Brief | Taiwan Tech Arena - Nov 5, 2025</p>
-
-            <div class="stats">
-                <div class="stat"><div class="stat-num">8</div><div class="stat-label">Hours</div></div>
-                <div class="stat"><div class="stat-num">20</div><div class="stat-label">Startups</div></div>
-                <div class="stat"><div class="stat-num">7</div><div class="stat-label">Corporate Buyers</div></div>
-                <div class="stat"><div class="stat-num">$500</div><div class="stat-label">Grand Prize</div></div>
-            </div>
+<div class="stats">
+            <div class="stat"><div class="stat-num">8</div><div class="stat-label">Hours</div></div>
+            <div class="stat"><div class="stat-num">20</div><div class="stat-label">Startups</div></div>
+            <div class="stat"><div class="stat-num">7</div><div class="stat-label">Corporate Buyers</div></div>
+            <div class="stat"><div class="stat-num">$500</div><div class="stat-label">Grand Prize</div></div>
         </div>
-
-        <!-- Tabs (Horizontal Scroll on Mobile) -->
-        <div class="tabs-wrapper">
-            <div class="tabs">
-                <button class="tab active" onclick="showTab('program-overview')">🌐 Overview</button>
-                <button class="tab" onclick="showTab('assessment')">✅ Assessment</button>
-                <button class="tab" onclick="showTab('game-gates')">🚪 The 3 Gates</button>
-                <button class="tab" onclick="showTab('all-buyers')">🎭 The 7 Buyers</button>
-                <button class="tab" onclick="showTab('meeting-mechanics')">🤝 Meeting Mechanics</button>
-                <button class="tab" onclick="showTab('program-flow')">➡️ Program Flow</button>
-                <button class="tab" onclick="showTab('game-schedule')">⏱️ Day Schedule</button>
-                <button class="tab" onclick="showTab('mentor-prep')">📋 For Mentors</button>
-            </div>
-        </div>
-
-        <!-- TAB 1: PROGRAM OVERVIEW & GOALS -->
-        <div id="program-overview" class="content active">
-            <div class="card">
-                <h2>🌐 Program Overview & Goals</h2>
-                
-                <p style="font-size: 1.1em; margin-bottom: 20px; color: #cccccc;">
-                    The CES2026 Deal Sprint is an 8-hour, high-intensity simulation designed to teach Taiwan startups the core principles needed for success at the Consumer Electronics Show.
-                </p>
-
-                <div class="grid-2">
-                    <div class="box box-accent">
-                        <h3>KEY LEARNING OBJECTIVES</h3>
-                        <ul class="checklist">
-                            <li><span style="font-weight: bold;">Lead Generation:</span> Build a usable 20-person CES target list (Research Phase).</li>
-                            <li><span style="font-weight: bold;">Selling Principles:</span> Practice pitching to 7 distinct buyer personas (Gate 1).</li>
-                            <li><span style="font-weight: bold;">Deal Negotiation:</span> Negotiate commercial terms under pressure (Gate 3).</li>
-                        </ul>
-                    </div>
-                    <div class="box box-accent">
-                        <h3>CORE DYNAMICS</h3>
-                        <ul style="list-style-type: disc; margin-left: 20px; font-size: 0.95em;">
-                            <li><span style="font-weight: bold;">Scarcity:</span> Only 18 Gate 1 slots for 20 teams (Auction Format).</li>
-                            <li><span style="font-weight: bold;">Recovery Paths:</span> The <span class="emphasis">Hot Lead Surprise</span> and <span class="emphasis">Intel Station</span> ensure that all 20 teams remain engaged and have a path to earning cash.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- TAB 2: PROGRAM ASSESSMENT -->
-        <div id="assessment" class="content">
-            <div class="card">
-                <h2>✅ Program Assessment (First-Time Execution)</h2>
-                
-                <h3 style="color: #654ce4;">STRENGTHS (Built-in Success Factors)</h3>
-                <div class="box">
-                    <ul class="checklist">
-                        <li><span style="font-weight: bold;">Low Tracking Overhead:</span> Kyle only tracks 3 official checkpoints (CP1, CP2, Final Count).</li>
-                        <li><span style="font-weight: bold;">Robust Structure:</span> The "Pitch $\rightarrow$ Proof $\rightarrow$ Negotiate" progression is a highly effective pedagogical design.</li>
-                        <li><span style="font-weight: bold;">Mentor Clarity:</span> Persona cards give mentors clear, scripted decision criteria.</li>
-                    </ul>
-                </div>
-
-                <h3 style="color: #fbbf24;">HIGH RISKS (Recommendations for Staff)</h3>
-                <div class="box box-warning">
-                    <ul style="list-style-type: disc; margin-left: 20px; font-size: 0.95em;">
-                        <li><span style="font-weight: bold;">Timing Collapse:</span> Volker's MC role is critical. Must use a loud timer and rigidly call "Time's Up" for all meetings/waves.</li>
-                        <li><span style="font-weight: bold;">Mentor Compliance:</span> The "TEXT KYLE IMMEDIATELY" step must be practiced by all 7 buyers to keep the leaderboard accurate.</li>
-                        <li><span style="font-weight: bold;">Staff Practice:</span> Run a 10-minute dry run of the Gate 1 $\rightarrow$ Checkpoint 1 cash/text flow the day before.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB 3: THE 3 GATES -->
-        <div id="game-gates" class="content">
-            <div class="card">
-                <h2>🚪 The 3 Gates Explained</h2>
-                <p style="font-size: 1.1em; margin-bottom: 20px; color: #cccccc;">
-                    Each gate requires different materials and tests a new skill.
-                </p>
-
-                <div class="grid-3">
-                    <div class="gate-card">
-                        <div class="gate-title">GATE 1</div>
-                        <div class="gate-subtitle">Discovery (12:30 PM)</div>
-                        <div class="gate-detail"><strong>Skill:</strong> Pitching & Targeting (5 min).</div>
-                        <div class="gate-detail"><strong>Cost:</strong> $2k-$5k (auction bid). <strong>Earn:</strong> $3k.</div>
-                        <div class="gate-detail"><strong>Result:</strong> 18/20 teams advance.</div>
-                    </div>
-
-                    <div class="gate-card">
-                        <div class="gate-title">GATE 2</div>
-                        <div class="gate-subtitle">Qualification (2:00 PM)</div>
-                        <div class="gate-detail"><strong>Skill:</strong> Proof & Diligence (12 min, Q&A only).</div>
-                        <div class="gate-detail"><strong>Cost:</strong> $2k. <strong>Earn:</strong> $5k-$8k.</div>
-                        <div class="gate-detail"><strong>Result:</strong> $\sim$12 teams advance.</div>
-                    </div>
-
-                    <div class="gate-card">
-                        <div class="gate-title">GATE 3</div>
-                        <div class="gate-subtitle">Deal Closing (3:15 PM)</div>
-                        <div class="gate-detail"><strong>Skill:</strong> Negotiation (15 min).</div>
-                        <div class="gate-detail"><strong>Cost:</strong> $3k. <strong>Earn:</strong> $10k-$15k.</div>
-                        <div class="gate-detail"><strong>Result:</strong> $\sim$9 teams participate.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB 4: THE 7 BUYERS (NEUTRALIZED) -->
-        <div id="all-buyers" class="content">
-            <div class="card">
-                <h2>🎭 The 7 Corporate Buyers (Generalized Focus)</h2>
-                <p style="font-size: 1.1em; margin-bottom: 20px; color: #cccccc;">
-                    Roles are generalized to apply to both hardware and software startups, focusing on the corporate function.
-                </p>
-
-                <div class="grid-2">
-                    <div class="box">
-                        <div class="buyer-name">1. JOHNNY YU</div>
-                        <div class="buyer-role">CVC - Corporate Venture Capital</div>
-                        <div class="buyer-buys"><span style="font-weight: bold;">Focus:</span> Equity Investments. <span style="font-weight: bold;">Criteria:</span> Series A stage, traction.</div>
-                    </div>
-                    <div class="box">
-                        <div class="buyer-name">2. JOSH FU</div>
-                        <div class="buyer-role">Head of Procurement</div>
-                        <div class="buyer-buys"><span style="font-weight: bold;">Focus:</span> Vendor Contracts. <span style="font-weight: bold;">Criteria:</span> Pricing at volume, reliability, SLAs.</div>
-                    </div>
-                    <div class="box">
-                        <div class="buyer-name">3. DEBORAH MAGID</div>
-                        <div class="buyer-role">Head of Open Innovation</div>
-                        <div class="buyer-buys"><span style="font-weight: bold;">Focus:</span> Paid Pilots/POCs. <span style="font-weight: bold;">Criteria:</span> Pilot plan, 90-day proof point.</div>
-                    </div>
-                    <div class="box">
-                        <div class="buyer-name">4. VOLKER KAESE</div>
-                        <div class="buyer-role">Head of Strategic Partnerships</div>
-                        <div class="buyer-buys"><span style="font-weight: bold;">Focus:</span> Co-development/JV. <span style="font-weight: bold;">Criteria:</span> Mutual value, market fit.</div>
-                    </div>
-                    <div class="box">
-                        <div class="buyer-name">5. ASHLEY HSUEH</div>
-                        <div class="buyer-role">Head of M&A / Corporate Dev</div>
-                        <div class="buyer-buys"><span style="font-weight: bold;">Focus:</span> Acquisitions. <span style="font-weight: bold;">Criteria:</span> Acquisition-worthy, tech moat.</div>
-                    </div>
-                    <div class="box">
-                        <div class="buyer-name">6. SHAFFEN CHARANIA</div>
-                        <div class="buyer-role">Head of New Product Integration & Technology</div>
-                        <div class="buyer-buys"><span style="font-weight: bold;">Focus:</span> Integration Contracts. <span style="font-weight: bold;">Criteria:</span> Technical readiness, scalability.</div>
-                    </div>
-                    <div class="box">
-                        <div class="buyer-name">7. CHANDER KANT</div>
-                        <div class="buyer-role">Head of Technical Compliance & GTM Readiness</div>
-                        <div class="buyer-buys"><span style="font-weight: bold;">Focus:</span> Compliance/Certifications. <span style="font-weight: bold;">Criteria:</span> Regulatory pathway, liability.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB 5: MEETING MECHANICS -->
-        <div id="meeting-mechanics" class="content">
-            <div class="card">
-                <h2>🤝 Meeting Mechanics & Booking Process</h2>
-                <p style="font-size: 1.1em; margin-bottom: 20px; color: #cccccc;">
-                    A detailed breakdown of how each set of meetings is secured.
-                </p>
-                
-                <h3 style="color: #654ce4;">Gate 1: Auction Booking (11:30 AM)</h3>
-                <div class="box box-accent">
-                    <p style="margin-bottom: 5px;"><strong>Method:</strong> Email Auction (First-come + Quality = Success). <strong>Capacity:</strong> Only 18 slots total.</p>
-                    <ul style="list-style-type: disc; margin-left: 20px; font-size: 0.95em;">
-                        <li><strong>Process:</strong> Teams email their chosen buyer with a bid ($\$2k-\$5k$).</li>
-                        <li><strong>Buyer Action:</strong> Buyers check emails every 5 min. They select the highest quality/most relevant bids.</li>
-                    </ul>
-                </div>
-                
-                <h3 style="color: #654ce4;">Gate 2 & 3: Physical Booking (1:30 PM Break)</h3>
-                <div class="grid-2">
-                    <div class="box box-accent">
-                        <strong>Gate 2 Booking (1:30 PM)</strong>
-                        <p style="margin-top: 5px; font-size: 0.9em;">Teams who **Passed Gate 1** physically book their 12-min time slot at the Buyer Station on a First-Come, First-Served basis (approx 3-5 meetings/buyer).</p>
-                    </div>
-                    <div class="box box-accent">
-                        <strong>Gate 3 Booking (1:30 PM)</strong>
-                        <p style="margin-top: 5px; font-size: 0.9em;">Teams who **Passed Gate 2** physically book their 15-min time slot. Capacity is limited (approx 3 meetings/buyer).</p>
-                    </div>
-                </div>
-
-                <h3 style="color: #654ce4;">Recovery Path Booking</h3>
-                <div class="box box-warning">
-                    <ul style="list-style-type: disc; margin-left: 20px; font-size: 0.95em;">
-                        <li><span class="emphasis">HOT LEAD (2:30 PM):</span> All 20 teams compete via email for **one** bonus Gate 2 slot. Winner gets the meeting and the **$5,000 bonus**.</li>
-                        <li><span class="emphasis">INTEL STATION (2:00 PM):</span> Idle teams walk over, post name on "Available Now" board, and wait for a free buyer to come for a session.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- TAB 6: PROGRAM FLOW -->
-        <div id="program-flow" class="content">
-            <div class="card">
-                <h2>➡️ Visual Program Flow (The Deal Funnel)</h2>
-                <p style="font-size: 1.1em; margin-bottom: 20px; color: #cccccc;">
-                    The core sales funnel. <strong>Start $\rightarrow$ Pitch $\rightarrow$ Prove $\rightarrow$ Negotiate $\rightarrow$ Finish.</strong>
-                </p>
-
-                <div class="flow-container">
-                    
-                    <div class="flow-node">9:30 AM: <span style="font-weight: bold;">START: RESEARCH & SETUP</span></div>
-                    <div class="flow-arrow">↓</div>
-                    
-                    <div class="flow-node">11:30 AM: <span style="font-weight: bold;">GATE 1 AUCTION</span> (Booking)</div>
-                    <div class="flow-arrow">↓</div>
-                    
-                    <div class="flow-node gate">12:30 PM: <span style="font-weight: bold;">GATE 1: DISCOVERY</span> (Pitch)</div>
-                    <div class="flow-arrow">↓</div>
-
-                    <div class="flow-node checkpoint"><span style="font-weight: bold;">CHECKPOINT 1</span> (12:35 PM)</div>
-                    <div class="flow-arrow">↓</div>
-                    
-                    <div class="flow-node">1:30 PM: BREAK / G2 BOOKING <span style="font-size: 0.9em;">(War Room Consults)</span></div>
-                    <div class="flow-arrow">↓</div>
-
-                    <div class="flow-node gate">2:00 PM: <span style="font-weight: bold;">GATE 2: QUALIFICATION</span> (Proof)</div>
-                    <div class="flow-arrow" style="color: #fbbf24;">(2:30 PM: HOT LEAD / Intel Station)</div>
-                    
-                    <div class="flow-node checkpoint"><span style="font-weight: bold;">CHECKPOINT 2</span> (2:00 PM)</div>
-                    <div class="flow-arrow">↓</div>
-                    
-                    <div class="flow-node gate">3:15 PM: <span style="font-weight: bold;">GATE 3: DEAL CLOSING</span> (Negotiation)</div>
-                    <div class="flow-arrow">↓</div>
-
-                    <div class="flow-node checkpoint" style="background: #654ce4; color: white;"><span style="font-weight: bold;">FINAL COUNT</span> (4:00 PM)</div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- TAB 7: DAY SCHEDULE -->
-        <div id="game-schedule" class="content">
-            <div class="card">
-                <h2>⏱️ Day Schedule (Key Staff Timeline)</h2>
-                
-                <div class="agenda-grid">
-                    <div class="agenda-time">9:00 AM</div>
-                    <div class="agenda-item">
-                        <div class="agenda-phase">STAFF & BUYER ARRIVAL</div>
-                        <p>Volker gives quick huddle. Buyers receive final packet & briefing.</p>
-                    </div>
-
-                    <div class="agenda-time">9:30 AM - 10:45 AM</div>
-                    <div class="agenda-item">
-                        <div class="agenda-phase">OPENING & RESEARCH PHASE</div>
-                        <p>Volker sets tone. Teams build CES target lists (Lead Gen). War Room open.</p>
-                    </div>
-                    
-                    <div class="agenda-time">10:45 AM - 11:30 AM</div>
-                    <div class="agenda-item">
-                        <div class="agenda-phase">BUYER STUDY SESSION</div>
-                        <p>Each of the 7 Buyers explains what they buy (5 min each). Teams prepare auction bids.</p>
-                    </div>
-
-                    <div class="agenda-time">11:30 AM - 12:00 PM</div>
-                    <div class="agenda-item">
-                        <div class="agenda-phase">GATE 1 AUCTION</div>
-                        <p>Buyers check email every 5 min. Award 18 slots (First-come + Quality).</p>
-                    </div>
-
-                    <div class="agenda-time">12:30 PM - 1:30 PM</div>
-                    <div class="agenda-item">
-                        <div class="agenda-phase">GATE 1 MEETINGS & CP1</div>
-                        <p>5-min Pitch Waves. CP1 called at 12:35 PM. Teams must pay Jade entry fee.</p>
-                    </div>
-
-                    <div class="agenda-time">2:00 PM - 3:00 PM</div>
-                    <div class="agenda-item">
-                        <div class="agenda-phase">GATE 2 MEETINGS & CP2</div>
-                        <p>12-min Q&A/Diligence Waves. **Intel Station** opens (Recovery Path). CP2 called at 2:00 PM.</p>
-                    </div>
-
-                    <div class="agenda-time">2:30 PM</div>
-                    <div class="agenda-item">
-                        <div class="agenda-phase">HOT LEAD SURPRISE</div>
-                        <p>All 20 teams compete for one bonus slot + $5k. Volker announces winner at 2:35 PM.</p>
-                    </div>
-
-                    <div class="agenda-time">4:00 PM</div>
-                    <div class="agenda-item">
-                        <div class="agenda-phase">FINAL COUNT & AWARDS</div>
-                        <p>Kyle verifies top 3. Champion announced. Buyers share key lessons.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB 8: MENTOR PREP & GUIDE -->
-        <div id="mentor-prep" class="content">
-            <div class="card">
-                <h2>📋 Mentor Guide (Execution Protocol)</h2>
-                
-                <h3 style="margin-top: 10px;">VOLKER'S JOB: MC & CONDUCTOR</h3>
-                <div class="box">
-                    <ul style="list-style-type: disc; margin-left: 20px; font-size: 0.95em;">
-                        <li><span style="font-weight: bold;">Keep Momentum:</span> Focus on phase transitions and checkpoints (Medium Energy).</li>
-                        <li><span style="font-weight: bold;">Pre-Event:</span> Write MC script notes on cards for each phase.</li>
-                    </ul>
-                </div>
-
-                <h3 style="margin-top: 20px;">BUYER'S JOB: AUTHENTIC EVALUATION</h3>
-                <div class="box box-accent">
-                    <ul class="checklist">
-                        <li><span style="font-weight: bold;">Stay in Character:</span> Evaluate based on your specific Persona (CVC, Procurement, etc.).</li>
-                        <li><span style="font-weight: bold;">TEXT KYLE Immediately:</span> Final decision and amount must be texted instantly.</li>
-                        <li><span style="font-weight: bold;">Hand Out Payout Envelopes:</span> Give teams their pre-counted earnings (do not count).</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
-        <!-- TAB 9: MECHANICS & RISK -->
-        <div id="mech-risk" class="content">
-            <div class="card">
-                <h2>⚙️ Mechanics & Risk Mitigation (Staff Reference)</h2>
-                
-                <h3 style="margin-top: 10px;">STAFF MONEY MECHANICS (Kyle/Jade)</h3>
-                <div class="box box-accent">
-                    <ul class="checklist">
-                        <li><span style="font-weight: bold;">Kyle's Task:</span> Tracks digitally only at 3 checkpoints.</li>
-                        <li><span style="font-weight: bold;">Jade's Role:</span> Collects cash payments for gate entry (puts in locked box).</li>
-                        <li><span style="font-weight: bold;">Tracking Simplification:</span> Buyers pay out from pre-counted stacks (eliminates counting burden).</li>
-                    </ul>
-                </div>
-
-                <h3 style="margin-top: 20px;">CRITICAL RISK MITIGATION</h3>
-                <div class="grid-2">
-                    <div class="box box-warning">
-                        <strong style="color: #fbbf24;">PROBLEM: Mentor Text Delay</strong>
-                        <p style="margin-top: 5px;">**SOLUTION:** Volker reminds buyers during breaks. Kyle can ask buyers directly and update retroactively.</p>
-                    </div>
-                    <div class="box box-warning">
-                        <strong style="color: #fbbf24;">PROBLEM: Lost Cash</strong>
-                        <p style="margin-top: 5px;">**SOLUTION:** Team's responsibility. No reimbursement (Game design feature). Kyle's tracker is the final truth for disputes.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
-    <script>
-        function showTab(tabName) {
-            // Remove active class from all content and tabs
-            document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    <!-- Tabs (Horizontal Scroll on Mobile) -->
+    <div class="tabs-wrapper">
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('program-overview')">🌐 Overview</button>
+            <button class="tab" onclick="showTab('assessment')">✅ Assessment</button>
+            <button class="tab" onclick="showTab('game-gates')">🚪 The 3 Gates</button>
+            <button class="tab" onclick="showTab('all-buyers')">🎭 The 7 Buyers</button>
+            <button class="tab" onclick="showTab('meeting-mechanics')">🤝 Meeting Mechanics</button>
+            <button class="tab" onclick="showTab('program-flow')">➡️ Program Flow</button>
+            <button class="tab" onclick="showTab('game-schedule')">⏱️ Day Schedule</button>
+            <button class="tab" onclick="showTab('mentor-prep')">📋 For Mentors</button>
+        </div>
+    </div>
+
+    <!-- TAB 1: PROGRAM OVERVIEW & GOALS -->
+    <div id="program-overview" class="content active">
+        <div class="card">
+            <h2>🌐 Program Overview & Goals</h2>
             
-            // Add active class to the selected content and tab
-            document.getElementById(tabName).classList.add('active');
+            <p style="font-size: 1.1em; margin-bottom: 20px; color: #cccccc;">
+                The CES2026 Deal Sprint is an 8-hour, high-intensity simulation designed to teach Taiwan startups the core principles needed for success at the Consumer Electronics Show.
+            </p>
+
+            <div class="grid-2">
+                <div class="box box-accent">
+                    <h3>KEY LEARNING OBJECTIVES</h3>
+                    <ul class="checklist">
+                        <li><span style="font-weight: bold;">Lead Generation:</span> Build a usable 20-person CES target list (Research Phase).</li>
+                        <li><span style="font-weight: bold;">Selling Principles:</span> Practice pitching to 7 distinct buyer personas (Gate 1).</li>
+                        <li><span style="font-weight: bold;">Deal Negotiation:</span> Negotiate commercial terms under pressure (Gate 3).</li>
+                    </ul>
+                </div>
+                <div class="box box-accent">
+                    <h3>CORE DYNAMICS</h3>
+                    <ul style="list-style-type: disc; margin-left: 20px; font-size: 0.95em;">
+                        <li><span style="font-weight: bold;">Scarcity:</span> Only 18 Gate 1 slots for 20 teams (Auction Format).</li>
+                        <li><span style="font-weight: bold;">Recovery Paths:</span> The <span class="emphasis">Hot Lead Surprise</span> and <span class="emphasis">Intel Station</span> ensure that all 20 teams remain engaged and have a path to earning cash.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- TAB 2: PROGRAM ASSESSMENT -->
+    <div id="assessment" class="content">
+        <div class="card">
+            <h2>✅ Program Assessment (First-Time Execution)</h2>
             
-            // Get the clicked tab element (using event target which is more reliable in JS)
-            const clickedTab = event.target.closest('.tab');
-            if (clickedTab) {
-                clickedTab.classList.add('active');
+            <h3 style="color: #654ce4;">STRENGTHS (Built-in Success Factors)</h3>
+            <div class="box">
+                <ul class="checklist">
+                    <li><span style="font-weight: bold;">Low Tracking Overhead:</span> Kyle only tracks 3 official checkpoints (CP1, CP2, Final Count).</li>
+                    <li><span style="font-weight: bold;">Robust Structure:</span> The "Pitch $\rightarrow$ Proof $\rightarrow$ Negotiate" progression is a highly effective pedagogical design.</li>
+                    <li><span style="font-weight: bold;">Mentor Clarity:</span> Persona cards give mentors clear, scripted decision criteria.</li>
+                </ul>
+            </div>
+
+            <h3 style="color: #fbbf24;">HIGH RISKS (Recommendations for Staff)</h3>
+            <div class="box box-warning">
+                <ul style="list-style-type: disc; margin-left: 20px; font-size: 0.95em;">
+                    <li><span style="font-weight: bold;">Timing Collapse:</span> Volker's MC role is critical. Must use a loud timer and rigidly call "Time's Up" for all meetings/waves.</li>
+                    <li><span style="font-weight: bold;">Mentor Compliance:</span> The "TEXT KYLE IMMEDIATELY" step must be practiced by all 7 buyers to keep the leaderboard accurate.</li>
+                    <li><span style="font-weight: bold;">Staff Practice:</span> Run a 10-minute dry run of the Gate 1 $\rightarrow$ Checkpoint 1 cash/text flow the day before.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 3: THE 3 GATES -->
+    <div id="game-gates" class="content">
+        <div class="card">
+            <h2>🚪 The 3 Gates Explained</h2>
+            <p style="font-size: 1.1em; margin-bottom: 20px; color: #cccccc;">
+                Each gate requires different materials and tests a new skill.
+            </p>
+
+            <div class="grid-3">
+                <div class="gate-card">
+                    <div class="gate-title">GATE 1</div>
+                    <div class="gate-subtitle">Discovery (12:30 PM)</div>
+                    <div class="gate-detail"><strong>Skill:</strong> Pitching & Targeting (5 min).</div>
+                    <div class="gate-detail"><strong>Cost:</strong> $2k-$5k (auction bid). <strong>Earn:</strong> $3k.</div>
+                    <div class="gate-detail"><strong>Result:</strong> 18/20 teams advance.</div>
+                </div>
+
+                <div class="gate-card">
+                    <div class="gate-title">GATE 2</div>
+                    <div class="gate-subtitle">Qualification (2:00 PM)</div>
+                    <div class="gate-detail"><strong>Skill:</strong> Proof & Diligence (12 min, Q&A only).</div>
+                    <div class="gate-detail"><strong>Cost:</strong> $2k. <strong>Earn:</strong> $5k-$8k.</div>
+                    <div class="gate-detail"><strong>Result:</strong> $\sim$12 teams advance.</div>
+                </div>
+
+                <div class="gate-card">
+                    <div class="gate-title">GATE 3</div>
+                    <div class="gate-subtitle">Deal Closing (3:15 PM)</div>
+                    <div class="gate-detail"><strong>Skill:</strong> Negotiation (15 min).</div>
+                    <div class="gate-detail"><strong>Cost:</strong> $3k. <strong>Earn:</strong> $10k-$15k.</div>
+                    <div class="gate-detail"><strong>Result:</strong> $\sim$9 teams participate.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 4: THE 7 BUYERS (NEUTRALIZED) -->
+    <div id="all-buyers" class="content">
+        <div class="card">
+            <h2>🎭 The 7 Corporate Buyers (Generalized Focus)</h2>
+            <p style="font-size: 1.1em; margin-bottom: 20px; color: #cccccc;">
+                Roles are generalized to apply to both hardware and software startups, focusing on the corporate function.
+            </p>
+
+            <div class="grid-2">
+                <div class="box">
+                    <div class="buyer-name">1. JOHNNY YU</div>
+                    <div class="buyer-role">CVC - Corporate Venture Capital</div>
+                    <div class="buyer-buys"><span style="font-weight: bold;">Focus:</span> Equity Investments. <span style="font-weight: bold;">Criteria:</span> Series A stage, traction.</div>
+                </div>
+                <div class="box">
+                    <div class="buyer-name">2. JOSH FU</div>
+                    <div class="buyer-role">Head of Procurement</div>
+                    <div class="buyer-buys"><span style="font-weight: bold;">Focus:</span> Vendor Contracts. <span style="font-weight: bold;">Criteria:</span> Pricing at volume, reliability, SLAs.</div>
+                </div>
+                <div class="box">
+                    <div class="buyer-name">3. DEBORAH MAGID</div>
+                    <div class="buyer-role">Head of Open Innovation</div>
+                    <div class="buyer-buys"><span style="font-weight: bold;">Focus:</span> Paid Pilots/POCs. <span style="font-weight: bold;">Criteria:</span> Pilot plan, 90-day proof point.</div>
+                </div>
+                <div class="box">
+                    <div class="buyer-name">4. VOLKER KAESE</div>
+                    <div class="buyer-role">Head of Strategic Partnerships</div>
+                    <div class="buyer-buys"><span style="font-weight: bold;">Focus:</span> Co-development/JV. <span style="font-weight: bold;">Criteria:</span> Mutual value, market fit.</div>
+                </div>
+                <div class="box">
+                    <div class="buyer-name">5. ASHLEY HSUEH</div>
+                    <div class="buyer-role">Head of M&A / Corporate Dev</div>
+                    <div class="buyer-buys"><span style="font-weight: bold;">Focus:</span> Acquisitions. <span style="font-weight: bold;">Criteria:</span> Acquisition-worthy, tech moat.</div>
+                </div>
+                <div class="box">
+                    <div class="buyer-name">6. SHAFFEN CHARANIA</div>
+                    <div class="buyer-role">Head of New Product Integration & Technology</div>
+                    <div class="buyer-buys"><span style="font-weight: bold;">Focus:</span> Integration Contracts. <span style="font-weight: bold;">Criteria:</span> Technical readiness, scalability.</div>
+                </div>
+                <div class="box">
+                    <div class="buyer-name">7. CHANDER KANT</div>
+                    <div class="buyer-role">Head of Technical Compliance & GTM Readiness</div>
+                    <div class="buyer-buys"><span style="font-weight: bold;">Focus:</span> Compliance/Certifications. <span style="font-weight: bold;">Criteria:</span> Regulatory pathway, liability.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 5: MEETING MECHANICS -->
+    <div id="meeting-mechanics" class="content">
+        <div class="card">
+            <h2>🤝 Meeting Mechanics & Booking Process</h2>
+            <p style="font-size: 1.1em; margin-bottom: 20px; color: #cccccc;">
+                A detailed breakdown of how each set of meetings is secured.
+            </p>
+            
+            <h3 style="color: #654ce4;">Gate 1: Auction Booking (11:30 AM)</h3>
+            <div class="box box-accent">
+                <p style="margin-bottom: 5px;"><strong>Method:</strong> Email Auction (First-come + Quality = Success). <strong>Capacity:</strong> Only 18 slots total.</p>
+                <ul style="list-style-type: disc; margin-left: 20px; font-size: 0.95em;">
+                    <li><strong>Process:</strong> Teams email their chosen buyer with a bid ($\$2k-\$5k$).</li>
+                    <li><strong>Buyer Action:</strong> Buyers check emails every 5 min. They select the highest quality/most relevant bids.</li>
+                </ul>
+            </div>
+            
+            <h3 style="color: #654ce4;">Gate 2 & 3: Physical Booking (1:30 PM Break)</h3>
+            <div class="grid-2">
+                <div class="box box-accent">
+                    <strong>Gate 2 Booking (1:30 PM)</strong>
+                    <p style="margin-top: 5px; font-size: 0.9em;">Teams who **Passed Gate 1** physically book their 12-min time slot at the Buyer Station on a First-Come, First-Served basis (approx 3-5 meetings/buyer).</p>
+                </div>
+                <div class="box box-accent">
+                    <strong>Gate 3 Booking (1:30 PM)</strong>
+                    <p style="margin-top: 5px; font-size: 0.9em;">Teams who **Passed Gate 2** physically book their 15-min time slot. Capacity is limited (approx 3 meetings/buyer).</p>
+                </div>
+            </div>
+
+            <h3 style="color: #654ce4;">Recovery Path Booking</h3>
+            <div class="box box-warning">
+                <ul style="list-style-type: disc; margin-left: 20px; font-size: 0.95em;">
+                    <li><span class="emphasis">HOT LEAD (2:30 PM):</span> All 20 teams compete via email for **one** bonus Gate 2 slot. Winner gets the meeting and the **$5,000 bonus**.</li>
+                    <li><span class="emphasis">INTEL STATION (2:00 PM):</span> Idle teams walk over, post name on "Available Now" board, and wait for a free buyer to come for a session.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- TAB 6: PROGRAM FLOW -->
+    <div id="program-flow" class="content">
+        <div class="card">
+            <h2>➡️ Visual Program Flow (The Deal Funnel)</h2>
+            <p style="font-size: 1.1em; margin-bottom: 20px; color: #cccccc;">
+                The core sales funnel. <strong>Start $\rightarrow$ Pitch $\rightarrow$ Prove $\rightarrow$ Negotiate $\rightarrow$ Finish.</strong>
+            </p>
+
+            <div class="flow-container">
                 
-                // Scroll the tabs bar to center the active tab (UX improvement for mobile)
-                clickedTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-            }
+                <div class="flow-node">9:30 AM: <span style="font-weight: bold;">START: RESEARCH & SETUP</span></div>
+                <div class="flow-arrow">↓</div>
+                
+                <div class="flow-node">11:30 AM: <span style="font-weight: bold;">GATE 1 AUCTION</span> (Booking)</div>
+                <div class="flow-arrow">↓</div>
+                
+                <div class="flow-node gate">12:30 PM: <span style="font-weight: bold;">GATE 1: DISCOVERY</span> (Pitch)</div>
+                <div class="flow-arrow">↓</div>
+
+                <div class="flow-node checkpoint"><span style="font-weight: bold;">CHECKPOINT 1</span> (12:35 PM)</div>
+                <div class="flow-arrow">↓</div>
+                
+                <div class="flow-node">1:30 PM: BREAK / G2 BOOKING <span style="font-size: 0.9em;">(War Room Consults)</span></div>
+                <div class="flow-arrow">↓</div>
+
+                <div class="flow-node gate">2:00 PM: <span style="font-weight: bold;">GATE 2: QUALIFICATION</span> (Proof)</div>
+                <div class="flow-arrow" style="color: #fbbf24;">(2:30 PM: HOT LEAD / Intel Station)</div>
+                
+                <div class="flow-node checkpoint"><span style="font-weight: bold;">CHECKPOINT 2</span> (2:00 PM)</div>
+                <div class="flow-arrow">↓</div>
+                
+                <div class="flow-node gate">3:15 PM: <span style="font-weight: bold;">GATE 3: DEAL CLOSING</span> (Negotiation)</div>
+                <div class="flow-arrow">↓</div>
+
+                <div class="flow-node checkpoint" style="background: #654ce4; color: white;"><span style="font-weight: bold;">FINAL COUNT</span> (4:00 PM)</div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- TAB 7: DAY SCHEDULE -->
+    <div id="game-schedule" class="content">
+        <div class="card">
+            <h2>⏱️ Day Schedule (Key Staff Timeline)</h2>
             
-            // Scroll to the top of the content container for a clean switch effect
-            window.scrollTo(0, 0); 
+            <div class="agenda-grid">
+                <div class="agenda-time">9:00 AM</div>
+                <div class="agenda-item">
+                    <div class="agenda-phase">STAFF & BUYER ARRIVAL</div>
+                    <p>Volker gives quick huddle. Buyers receive final packet & briefing.</p>
+                </div>
+
+                <div class="agenda-time">9:30 AM - 10:45 AM</div>
+                <div class="agenda-item">
+                    <div class="agenda-phase">OPENING & RESEARCH PHASE</div>
+                    <p>Volker sets tone. Teams build CES target lists (Lead Gen). War Room open.</p>
+                </div>
+                
+                <div class="agenda-time">10:45 AM - 11:30 AM</div>
+                <div class="agenda-item">
+                    <div class="agenda-phase">BUYER STUDY SESSION</div>
+                    <p>Each of the 7 Buyers explains what they buy (5 min each). Teams prepare auction bids.</p>
+                </div>
+
+                <div class="agenda-time">11:30 AM - 12:00 PM</div>
+                <div class="agenda-item">
+                    <div class="agenda-phase">GATE 1 AUCTION</div>
+                    <p>Buyers check email every 5 min. Award 18 slots (First-come + Quality).</p>
+                </div>
+
+                <div class="agenda-time">12:30 PM - 1:30 PM</div>
+                <div class="agenda-item">
+                    <div class="agenda-phase">GATE 1 MEETINGS & CP1</div>
+                    <p>5-min Pitch Waves. CP1 called at 12:35 PM. Teams must pay Jade entry fee.</p>
+                </div>
+
+                <div class="agenda-time">2:00 PM - 3:00 PM</div>
+                <div class="agenda-item">
+                    <div class="agenda-phase">GATE 2 MEETINGS & CP2</div>
+                    <p>12-min Q&A/Diligence Waves. **Intel Station** opens (Recovery Path). CP2 called at 2:00 PM.</p>
+                </div>
+
+                <div class="agenda-time">2:30 PM</div>
+                <div class="agenda-item">
+                    <div class="agenda-phase">HOT LEAD SURPRISE</div>
+                    <p>All 20 teams compete for one bonus slot + $5k. Volker announces winner at 2:35 PM.</p>
+                </div>
+
+                <div class="agenda-time">4:00 PM</div>
+                <div class="agenda-item">
+                    <div class="agenda-phase">FINAL COUNT & AWARDS</div>
+                    <p>Kyle verifies top 3. Champion announced. Buyers share key lessons.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 8: MENTOR PREP & GUIDE -->
+    <div id="mentor-prep" class="content">
+        <div class="card">
+            <h2>📋 Mentor Guide (Execution Protocol)</h2>
+            
+            <h3 style="margin-top: 10px;">VOLKER'S JOB: MC & CONDUCTOR</h3>
+            <div class="box">
+                <ul style="list-style-type: disc; margin-left: 20px; font-size: 0.95em;">
+                    <li><span style="font-weight: bold;">Keep Momentum:</span> Focus on phase transitions and checkpoints (Medium Energy).</li>
+                    <li><span style="font-weight: bold;">Pre-Event:</span> Write MC script notes on cards for each phase.</li>
+                </ul>
+            </div>
+
+            <h3 style="margin-top: 20px;">BUYER'S JOB: AUTHENTIC EVALUATION</h3>
+            <div class="box box-accent">
+                <ul class="checklist">
+                    <li><span style="font-weight: bold;">Stay in Character:</span> Evaluate based on your specific Persona (CVC, Procurement, etc.).</li>
+                    <li><span style="font-weight: bold;">TEXT KYLE Immediately:</span> Final decision and amount must be texted instantly.</li>
+                    <li><span style="font-weight: bold;">Hand Out Payout Envelopes:</span> Give teams their pre-counted earnings (do not count).</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- TAB 9: MECHANICS & RISK -->
+    <div id="mech-risk" class="content">
+        <div class="card">
+            <h2>⚙️ Mechanics & Risk Mitigation (Staff Reference)</h2>
+            
+            <h3 style="margin-top: 10px;">STAFF MONEY MECHANICS (Kyle/Jade)</h3>
+            <div class="box box-accent">
+                <ul class="checklist">
+                    <li><span style="font-weight: bold;">Kyle's Task:</span> Tracks digitally only at 3 checkpoints.</li>
+                    <li><span style="font-weight: bold;">Jade's Role:</span> Collects cash payments for gate entry (puts in locked box).</li>
+                    <li><span style="font-weight: bold;">Tracking Simplification:</span> Buyers pay out from pre-counted stacks (eliminates counting burden).</li>
+                </ul>
+            </div>
+
+            <h3 style="margin-top: 20px;">CRITICAL RISK MITIGATION</h3>
+            <div class="grid-2">
+                <div class="box box-warning">
+                    <strong style="color: #fbbf24;">PROBLEM: Mentor Text Delay</strong>
+                    <p style="margin-top: 5px;">**SOLUTION:** Volker reminds buyers during breaks. Kyle can ask buyers directly and update retroactively.</p>
+                </div>
+                <div class="box box-warning">
+                    <strong style="color: #fbbf24;">PROBLEM: Lost Cash</strong>
+                    <p style="margin-top: 5px;">**SOLUTION:** Team's responsibility. No reimbursement (Game design feature). Kyle's tracker is the final truth for disputes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function showTab(tabName) {
+        // Remove active class from all content and tabs
+        document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        
+        // Add active class to the selected content and tab
+        document.getElementById(tabName).classList.add('active');
+        
+        // Get the clicked tab element (using event target which is more reliable in JS)
+        const clickedTab = event.target.closest('.tab');
+        if (clickedTab) {
+            clickedTab.classList.add('active');
+            
+            // Scroll the tabs bar to center the active tab (UX improvement for mobile)
+            clickedTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         }
-    </script>
-</body>
-</html>
+        
+        // Scroll to the top of the content container for a clean switch effect
+        window.scrollTo(0, 0); 
+    }
+</script>
