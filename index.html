@@ -1,44 +1,573 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CES 2026 Deal Sprint — War-Game EDM</title>
 <style>
-  /* ==== Header contrast fix ==== */
+  :root{
+    --ink:#03131d;
+    --ink-2:#051a28;
+    --teal:#00a6a6;
+    --teal-2:#00baba;
+    --teal-3:#11c5c5;
+    --paper:#ffffff;
+    --mist:#f4f6f8;
+    --line:#e5eaef;
+    --zebra:#f8fafc;
+    --note:#eef6f6;
+    --text:#1d252c;
+    --muted:#73808c;
+  }
+  html,body{margin:0;padding:0;background:var(--mist);color:var(--text);font-family:Arial,Helvetica,sans-serif;}
+  a{color:var(--teal);text-decoration:none;outline:0}
+  a:focus{outline:2px dashed var(--teal-2);outline-offset:2px}
+  /* Sticky Mast */
   .mast{
-    background:#03131d !important;          /* deeper ink */
-    border-bottom:1px solid #021018 !important;
-    box-shadow:0 8px 18px rgba(0,0,0,.22) !important;
-    opacity:1 !important;
-    filter:none !important;
+    position:sticky;top:0;z-index:9999;
+    background:var(--ink);
+    border-bottom:1px solid #021018;
+    box-shadow:0 8px 18px rgba(0,0,0,.22);
   }
-  .mast, .mast *{
-    opacity:1 !important;                    /* kill any inherited transparency */
+  .mast-inner{max-width:1080px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .h1{color:#fff;font-weight:900;font-size:22px;line-height:26px;letter-spacing:.1px;
+      text-shadow:0 1px 2px rgba(0,0,0,.45),0 0 1px rgba(0,0,0,.25)}
+  .sub{color:#dff6f6;font-weight:600;font-size:13px;text-shadow:0 1px 1px rgba(0,0,0,.35)}
+  /* Tab nav */
+  .tabs{
+    background:var(--ink-2);
+    border-top:1px solid rgba(255,255,255,.06);
+    border-bottom:1px solid rgba(0,0,0,.25);
   }
-  .mast .mast-inner{ padding:16px 20px !important; }
-
-  .h1{
-    color:#ffffff !important;
-    font-weight:900 !important;
-    text-shadow:0 1px 2px rgba(0,0,0,.45), 0 0 1px rgba(0,0,0,.25) !important;
-    letter-spacing:.1px !important;
-  }
-  .sub{
-    color:#dff6f6 !important;
-    font-weight:600 !important;
-    text-shadow:0 1px 1px rgba(0,0,0,.35) !important;
-  }
-
-  /* Tabs: slightly brighter + stronger hover */
-  .tabs{ background:#051a28 !important; }
+  .tabs-inner{max-width:1080px;margin:0 auto;display:flex;gap:8px;flex-wrap:wrap;padding:8px 12px}
   .tab{
-    background:#00a6a6 !important;
-    color:#ffffff !important;
-    font-weight:800 !important;
+    background:var(--teal);
+    color:#fff;
+    font-weight:800;
+    font-size:13px;
+    padding:8px 10px;
+    border-radius:10px;
+    transition:transform .12s ease, background .12s ease, box-shadow .12s ease;
+    white-space:nowrap;
   }
-  .tab:hover, .tab:focus{ background:#00baba !important; }
-  .tab[aria-current="true"]{
-    background:#11c5c5 !important;
-    box-shadow:0 0 0 2px #bff5f5 inset !important;
+  .tab:hover{background:var(--teal-2);box-shadow:0 0 0 2px #bff5f5 inset;transform:translateY(-1px)}
+  .tab[aria-current="true"]{background:var(--teal-3);box-shadow:0 0 0 2px #bff5f5 inset}
+  .tab:focus{box-shadow:0 0 0 3px #bff5f5}
+
+  /* Page container */
+  .wrap{max-width:1080px;margin:0 auto;background:var(--paper);box-shadow:0 4px 24px rgba(0,0,0,.06)}
+  .hero{padding:14px 20px;background:#0b2a3d;color:#fff}
+  .hero .title{font-weight:800;font-size:18px;margin:0}
+  .spacer{height:0} /* not needed because sticky mast sits on top */
+
+  /* Sections */
+  .section{padding:22px 24px;border-top:1px solid var(--line)}
+  .title{font-size:18px;line-height:22px;color:#0b2a3d;font-weight:900;margin:0 0 8px}
+  .p{font-size:14px;line-height:20px;margin:0 0 10px}
+  .accent{color:var(--teal);font-weight:900}
+  .note{font-size:13px;line-height:18px;color:#2a3b47;background:var(--note);border-left:4px solid var(--teal);padding:10px 12px;margin:10px 0;border-radius:6px}
+  .btn{background:var(--teal);color:#fff !important;padding:8px 12px;border-radius:8px;font-weight:800;display:inline-block}
+  .btn:hover{background:var(--teal-2)}
+  .grid{display:grid;gap:14px}
+  .two{grid-template-columns:1fr 1fr}
+  .three{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:860px){.two,.three{grid-template-columns:1fr}}
+
+  /* Tables */
+  table{border-collapse:collapse;width:100%}
+  .table{border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .th{background:#0b2a3d;color:#fff;font-size:13px;text-align:left;padding:10px}
+  .td{font-size:13px;color:var(--text);padding:10px;border-top:1px solid var(--line);vertical-align:top}
+  .tr-alt{background:var(--zebra)}
+  .small{font-size:12px;color:#3a4650}
+
+  /* Cards */
+  .card{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fff}
+  .card.zebra{background:var(--zebra)}
+  .pill{display:inline-block;font-size:12px;color:var(--teal);background:#e9f7f7;padding:2px 8px;border-radius:12px;font-weight:900}
+  .badge{display:inline-block;font-size:12px;color:#0b2a3d;background:#e6eef4;padding:2px 8px;border-radius:12px;font-weight:900}
+
+  /* SVG containers */
+  .svg-wrap{border:1px solid var(--line);border-radius:12px;overflow:auto;background:#fff}
+  .svg-wrap svg{display:block;max-width:100%}
+
+  /* Hover highlight for in-section links */
+  a[data-hover]{position:relative}
+  a[data-hover]:hover::after{
+    content:"";
+    position:absolute;left:-2px;right:-2px;bottom:-3px;height:6px;border-radius:4px;
+    background:rgba(0,166,166,.25);
   }
 
-  /* Spacer may need +4px because mast got a hair taller */
-  .spacer{ height:128px !important; }
-  @media (max-width:760px){ .spacer{ height:150px !important; } }
+  /* Mobile typography */
+  @media(max-width:640px){
+    .h1{font-size:18px;line-height:22px}
+    .sub{font-size:12px}
+    .title{font-size:16px}
+    .p,.td,.th{font-size:13px;line-height:18px}
+    .mast-inner{gap:8px}
+  }
 </style>
+</head>
+<body>
 
+<!-- ===== Sticky Header ===== -->
+<header class="mast" role="banner">
+  <div class="mast-inner">
+    <div class="h1">CES 2026 Deal Sprint — War-Game EDM</div>
+    <div class="sub">Taipei • Mobile + Desktop • Fake money in US$1,000 denominations</div>
+  </div>
+  <nav class="tabs" role="navigation" aria-label="Primary">
+    <div class="tabs-inner" id="tabbar">
+      <a class="tab" href="#overview">Overview</a>
+      <a class="tab" href="#agenda">Agenda</a>
+      <a class="tab" href="#flows">Flows</a>
+      <a class="tab" href="#booking">Booking</a>
+      <a class="tab" href="#restrictions">Restrictions</a>
+      <a class="tab" href="#money">Money</a>
+      <a class="tab" href="#mentors">Mentors</a>
+      <a class="tab" href="#intelwar">Intel vs War</a>
+      <a class="tab" href="#flowchart">Flowchart</a>
+      <a class="tab" href="#visuals">Visualizations</a>
+      <a class="tab" href="#checkpoints">Checkpoints</a>
+      <a class="tab" href="#prizes">Prizes</a>
+      <a class="tab" href="#comms">Comms</a>
+      <a class="tab" href="#risks">Risks</a>
+    </div>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <!-- ===== Overview ===== -->
+  <section class="section" id="overview">
+    <h2 class="title">Program Overview</h2>
+    <p class="p"><span class="accent">Goal:</span> Finish with the most cash by <b>4:00 PM</b>. Money is the single scoreboard. Auction pressure in the morning; diligence and negotiation in the afternoon.</p>
+    <div class="note"><b>Scarcity:</b> <b>18</b> teams advance from Gate-1. <b>≤7</b> total Gate-3 negotiations (max one per mentor).</div>
+
+    <table class="table" role="presentation">
+      <tr>
+        <th class="th" style="width:22%;">Phase</th>
+        <th class="th">What Happens</th>
+      </tr>
+      <tr class="tr-alt">
+        <td class="td"><b>Research</b> (10:00)</td>
+        <td class="td">Build CES target list (20 people + one-sentence “why” each). Optional War Room prep (<b>US$1,000</b>).</td>
+      </tr>
+      <tr>
+        <td class="td"><b>Gate-1</b> Auction → Discovery</td>
+        <td class="td">Bid <b>US$2,000–US$5,000</b> (1k steps) for a 5-min meeting. Payout: <b>US$3,000</b> if “Interested,” else US$0. <b>18</b> total meetings.</td>
+      </tr>
+      <tr class="tr-alt">
+        <td class="td"><b>Gate-2</b> Qualification</td>
+        <td class="td"><b>12-min</b> Q&A (no pitch). Fee: <b>US$2,000</b>. Payouts: <b>US$8,000 / US$5,000 / US$0</b> (Strong / Decent / Weak). Capacity: <b>18 total</b> across mentors (≤3 each).</td>
+      </tr>
+      <tr>
+        <td class="td"><b>Gate-3</b> Negotiation</td>
+        <td class="td"><b>15-min</b> deal discussion. Fee: <b>US$3,000</b>. Payouts (same regardless of instrument): <b>US$15,000 / US$10,000 / US$0</b> (Deal / Conditional / No Deal). <b>≤7</b> total.</td>
+      </tr>
+      <tr class="tr-alt">
+        <td class="td"><b>Intel Station</b></td>
+        <td class="td">Open 2:00–3:45. 8-min buyer consults. Payouts: <b>US$0 / US$1,000 / US$2,000</b>; mentor sets value; mentor tracks.</td>
+      </tr>
+      <tr>
+        <td class="td"><b>Hot Lead</b> (2:30)</td>
+        <td class="td">5-minute blitz. Winner earns <b>US$5,000</b> bonus + a meeting slot (recovery path for morning “outs”).</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- ===== Agenda ===== -->
+  <section class="section" id="agenda">
+    <h2 class="title">Agenda (All Stakeholders)</h2>
+    <div class="grid two">
+      <div class="card zebra">
+        <b class="accent">Morning</b>
+        <ul class="p" style="margin:6px 0 0 16px">
+          <li>09:30 — Check-in, envelopes distributed (US$10,000 fake)</li>
+          <li>10:00 — Research (20-person list + “why” each)</li>
+          <li>10:45 — Mentor list reviews (earn US$0/1k/2k)</li>
+          <li>11:15 — Draft auction email + bid (2k–5k)</li>
+          <li>11:30 — Gate-1 Auction (emails)</li>
+          <li>12:00 — Announce ~18 acceptances; Lunch</li>
+          <li>12:30 — Gate-1 5-min meetings; <b>CP1 12:35</b></li>
+        </ul>
+      </div>
+      <div class="card zebra">
+        <b class="accent">Afternoon</b>
+        <ul class="p" style="margin:6px 0 0 16px">
+          <li>14:00 — Gate-2 (12-min Q&A); <b>CP2 14:00</b></li>
+          <li>14:00–15:45 — Intel Station open</li>
+          <li>14:30 — Hot Lead blitz (+US$5k)</li>
+          <li>15:15 — Gate-3 (15-min deal)</li>
+          <li>16:00 — Final Count & Awards</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Flows (POV) ===== -->
+  <section class="section" id="flows">
+    <h2 class="title">Flows by Role</h2>
+    <div class="grid two">
+      <div class="card">
+        <b class="accent">Startup Flow</b>
+        <ol class="p" style="margin:6px 0 0 16px">
+          <li>Research 20 targets (+ one-sentence “why”).</li>
+          <li>Optional War Room prep (US$1k).</li>
+          <li>Auction email to your best-fit buyer (cc: ops address). If rejected, immediately email backup buyer(s) until slots fill.</li>
+          <li>If accepted, pay Jade your bid → Gate-1 5-min meeting → Earn US$3k (Interested) or US$0.</li>
+          <li>Gate-2 with same buyer if scheduled (12-min Q&A; pay US$2k; earn US$8k/5k/0).</li>
+          <li>Use Intel Station and Hot Lead to recover or stack cash.</li>
+          <li>Gate-3 (pay US$3k; earn US$15k/10k/0).</li>
+          <li>Final Count at 16:00.</li>
+        </ol>
+      </div>
+      <div class="card">
+        <b class="accent">Mentor Flow</b>
+        <ol class="p" style="margin:6px 0 0 16px">
+          <li>Review 2–3 lists per wave at 10:45 → award US$0/1k/2k.</li>
+          <li>During Auction (11:30–12:00) accept up to your <b>Gate-1 cap</b> via quick replies; if “over-popular,” follow router rule (auto-redirects overflow by ops).</li>
+          <li>Gate-1: 5-min meetings → text Kyle “Team – Gate 1 – Interested/Pass – 3000/0”.</li>
+          <li>Gate-2: up to <b>3 slots</b> (12-min, no pitch) → text Kyle “Strong/Decent/Weak – 8000/5000/0”.</li>
+          <li>Intel Station: post “Available” and price US$0/1k/2k → self-track.</li>
+          <li>Gate-3: ≤1 slot per mentor (Deal/Conditional/No Deal) → text Kyle “15000/10000/0”.</li>
+        </ol>
+      </div>
+      <div class="card">
+        <b class="accent">MC (Volker)</b>
+        <ul class="p" style="margin:6px 0 0 16px">
+          <li>Open, explain rules, call waves to the second.</li>
+          <li>Auction cadence: 11:30, 11:35, 11:40, 11:45, 11:50, 11:55, 12:00.</li>
+          <li>CP1 12:35, CP2 14:00, Final 16:00.</li>
+          <li>Hot Lead at 14:30 (drama + 5-min timer).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <b class="accent">Ops (Jade & Kyle)</b>
+        <ul class="p" style="margin:6px 0 0 16px">
+          <li><b>Router (manual):</b> Ops reassign overflow to under-subscribed mentors in real time.</li>
+          <li><b>Jade:</b> collect bids/fees; lockbox; fast check-in.</li>
+          <li><b>Kyle:</b> live leaderboard; slot board; receive standardized texts.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Booking / Slot Math ===== -->
+  <section class="section" id="booking">
+    <h2 class="title">Booking, Time & Slot Math</h2>
+    <table class="table">
+      <tr>
+        <th class="th" style="width:12%;">Gate</th>
+        <th class="th" style="width:12%;">Duration</th>
+        <th class="th" style="width:18%;">Capacity</th>
+        <th class="th">Booking Logic</th>
+      </tr>
+      <tr class="tr-alt">
+        <td class="td"><b>Gate-1</b></td>
+        <td class="td">5 min</td>
+        <td class="td"><b>18</b> total meetings</td>
+        <td class="td">Mentors accept via email; Jade takes team bid; Kyle logs “Interested/Pass.” Two teams get no meeting (email quality/fit/latency).</td>
+      </tr>
+      <tr>
+        <td class="td"><b>Gate-2</b></td>
+        <td class="td">12 min</td>
+        <td class="td"><b>18 total</b> (≤3 per mentor)</td>
+        <td class="td">Pair with same mentor whenever possible. Ops router can reassign to a second mentor if the first passed.</td>
+      </tr>
+      <tr class="tr-alt">
+        <td class="td"><b>Gate-3</b></td>
+        <td class="td">15 min</td>
+        <td class="td"><b>≤7 total</b> (≤1 per mentor)</td>
+        <td class="td">Mentor nominates best team for a negotiation slot. MC confirms board.</td>
+      </tr>
+    </table>
+    <div class="note"><b>Manual router:</b> No software needed—Ops maintains a whiteboard of remaining mentor capacity and redirects overflow accordingly.</div>
+  </section>
+
+  <!-- ===== Restrictions / Rule Cards ===== -->
+  <section class="section" id="restrictions">
+    <h2 class="title">Meeting Restrictions & Rule Cards</h2>
+    <div class="grid three">
+      <div class="card zebra"><b class="accent">Gate-1</b><br>Max <b>18</b> total meetings. Two teams may get <b>0</b> due to fit/quality/latency.</div>
+      <div class="card zebra"><b class="accent">Gate-2</b><br>Max <b>18</b> total; ≤<b>3</b> per mentor. 12-min, no pitch.</div>
+      <div class="card zebra"><b class="accent">Gate-3</b><br>≤<b>7</b> total; ≤<b>1</b> per mentor. 15-min negotiation.</div>
+      <div class="card"><b class="accent">Denominations</b><br>All fake money in <b>US$1,000</b> increments (bids, fees, payouts, Intel, War Room).</div>
+      <div class="card"><b class="accent">Parity at Gate-3</b><br>Same payout whether CVC term sheet or BU POC when “Deal” or “Conditional.”</div>
+      <div class="card"><b class="accent">Email Standards</b><br>Personalized, buyer-fit subject lines; weak/generic = decline.</div>
+    </div>
+  </section>
+
+  <!-- ===== Money Model ===== -->
+  <section class="section" id="money">
+    <h2 class="title">Money Model (All in Fake US$1,000s)</h2>
+    <table class="table">
+      <tr><th class="th" style="width:28%;">Activity</th><th class="th">When</th><th class="th" style="width:28%;">Cost / Earn</th></tr>
+      <tr class="tr-alt"><td class="td">War Room (Ken)</td><td class="td">10:00–12:00 / 14:00–15:45</td><td class="td">Pay 1 / 1–2</td></tr>
+      <tr><td class="td">List Review Award</td><td class="td">10:45</td><td class="td">Earn 0 / 1 / 2</td></tr>
+      <tr class="tr-alt"><td class="td">Gate-1 Bid</td><td class="td">11:30</td><td class="td">Pay 2–5</td></tr>
+      <tr><td class="td">Gate-1 Payout</td><td class="td">12:30</td><td class="td">Earn 3 or 0</td></tr>
+      <tr class="tr-alt"><td class="td">Gate-2 Entry</td><td class="td">14:00</td><td class="td">Pay 2</td></tr>
+      <tr><td class="td">Gate-2 Payout</td><td class="td">14:00–15:15</td><td class="td">Earn 8 / 5 / 0</td></tr>
+      <tr class="tr-alt"><td class="td">Intel Station</td><td class="td">14:00–15:45</td><td class="td">Earn 0 / 1 / 2 (per 8-min)</td></tr>
+      <tr><td class="td">Hot Lead</td><td class="td">14:30</td><td class="td">Earn 5 (bonus)</td></tr>
+      <tr class="tr-alt"><td class="td">Gate-3 Entry</td><td class="td">15:15</td><td class="td">Pay 3</td></tr>
+      <tr><td class="td">Gate-3 Payout</td><td class="td">15:15–16:00</td><td class="td">Earn 15 / 10 / 0</td></tr>
+    </table>
+  </section>
+
+  <!-- ===== Mentors ===== -->
+  <section class="section" id="mentors">
+    <h2 class="title">Mentor Roster (Archetypes • Approvals • Evidence)</h2>
+    <table class="table">
+      <tr>
+        <th class="th" style="width:18%;">Mentor</th>
+        <th class="th" style="width:22%;">Archetype</th>
+        <th class="th" style="width:30%;">What I Approve / Pay For</th>
+        <th class="th">What I Need To See</th>
+      </tr>
+      <tr class="tr-alt">
+        <td class="td"><b>Deborah Magid</b></td>
+        <td class="td">CVC / Strategic Investor</td>
+        <td class="td">CVC terms, strategic pilots, enterprise co-sell</td>
+        <td class="td">Enterprise readiness, references, integration plan, 18-mo sales motion</td>
+      </tr>
+      <tr>
+        <td class="td"><b>Dr. Volker Kaese</b></td>
+        <td class="td">Head of Engineering / NRE Owner</td>
+        <td class="td">POC/NRE funding, engineering validation, pilot gates</td>
+        <td class="td">Standards & safety, OEM integration, DVP&R, capacity to scale</td>
+      </tr>
+      <tr class="tr-alt">
+        <td class="td"><b>Ashley Hsueh</b></td>
+        <td class="td">Corp Strategy / M&A</td>
+        <td class="td">Spin-in options, M&A exploration, build-partner-buy</td>
+        <td class="td">Moat, defensibility, synergy model, value creation logic</td>
+      </tr>
+      <tr>
+        <td class="td"><b>Shafeen Charania</b></td>
+        <td class="td">Ops & Scale</td>
+        <td class="td">Scale-up plans, onboarding, support models</td>
+        <td class="td">Process maturity, SLOs, what breaks at 100→1000 customers</td>
+      </tr>
+      <tr class="tr-alt">
+        <td class="td"><b>Josh Fu</b></td>
+        <td class="td">Go-to-Market / Retail</td>
+        <td class="td">Retail readiness, channel fit, unit economics</td>
+        <td class="td">Velocity proof, margins, channel appetite</td>
+      </tr>
+      <tr>
+        <td class="td"><b>Johnny Yu</b></td>
+        <td class="td">Healthcare BD / Investor</td>
+        <td class="td">Medtech pilots, provider partnerships, digital health scale</td>
+        <td class="td">Clinical data, regulatory path, reimbursement logic</td>
+      </tr>
+      <tr class="tr-alt">
+        <td class="td"><b>Chander Kant</b></td>
+        <td class="td">Founder→Acquirer / Tech DD / M&A</td>
+        <td class="td">Tech diligence, carve-outs, SaaS infra partnerships</td>
+        <td class="td">Architecture soundness, GTM efficiency, acquirer fit</td>
+      </tr>
+    </table>
+    <p class="small">Each mentor: ≤<b>3 Gate-2</b> slots; ≤<b>1 Gate-3</b> slot.</p>
+  </section>
+
+  <!-- ===== Intel vs War ===== -->
+  <section class="section" id="intelwar">
+    <h2 class="title">Intel Station vs Ken’s War Room</h2>
+    <div class="grid two">
+      <div class="card zebra">
+        <b class="accent">Intel Station</b>
+        <ul class="p" style="margin:6px 0 0 16px">
+          <li>Walk-up 8-min consults with any available mentor.</li>
+          <li>Mentor sets value per session: Earn 0 / 1 / 2.</li>
+          <li>Great for recovery (morning outs) and stacking cash.</li>
+          <li>Mentor self-tracks; reported at checkpoints.</li>
+        </ul>
+      </div>
+      <div class="card zebra">
+        <b class="accent">War Room (Ken)</b>
+        <ul class="p" style="margin:6px 0 0 16px">
+          <li>Paid strategy deep-dives (10–12 min typical).</li>
+          <li>Pay 1 in morning; 1–2 in afternoon.</li>
+          <li>Focus: target selection, emails, bid sizing, Gate-3 deal framing.</li>
+          <li>Ken reports totals to Kyle at checkpoints.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Flowchart (SVG) ===== -->
+  <section class="section" id="flowchart">
+    <h2 class="title">Program Flowchart (High-Level)</h2>
+    <div class="svg-wrap">
+      <!-- Simple inline SVG flow -->
+      <svg viewBox="0 0 1100 340" xmlns="http://www.w3.org/2000/svg" aria-label="Flowchart">
+        <style>
+          .bx{fill:#fff;stroke:#0b2a3d;stroke-width:2}
+          .hl{stroke:#00a6a6;stroke-width:3;marker-end:url(#arr)}
+          .t{font:700 12px Arial;fill:#0b2a3d}
+          .s{font:400 11px Arial;fill:#1d252c}
+          .noteS{font:700 11px Arial;fill:#00a6a6}
+        </style>
+        <defs>
+          <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <path d="M0,0 L9,3 L0,6 z" fill="#00a6a6"/>
+          </marker>
+        </defs>
+        <!-- Boxes -->
+        <rect class="bx" x="20" y="20" width="200" height="70" rx="10"/>
+        <text class="t" x="120" y="42" text-anchor="middle">Research (10:00)</text>
+        <text class="s" x="120" y="60" text-anchor="middle">20 targets + “why” • War Room optional</text>
+
+        <rect class="bx" x="260" y="20" width="200" height="70" rx="10"/>
+        <text class="t" x="360" y="42" text-anchor="middle">Gate-1 Auction</text>
+        <text class="s" x="360" y="60" text-anchor="middle">Bid 2–5 • 18 accepts</text>
+
+        <rect class="bx" x="500" y="20" width="200" height="70" rx="10"/>
+        <text class="t" x="600" y="42" text-anchor="middle">Gate-1 Meetings</text>
+        <text class="s" x="600" y="60" text-anchor="middle">5 min • Earn 3 or 0</text>
+
+        <rect class="bx" x="740" y="20" width="200" height="70" rx="10"/>
+        <text class="t" x="840" y="42" text-anchor="middle">Gate-2 Qualification</text>
+        <text class="s" x="840" y="60" text-anchor="middle">12 min • Pay 2 • Earn 8/5/0</text>
+
+        <rect class="bx" x="980" y="20" width="100" height="70" rx="10"/>
+        <text class="t" x="1030" y="42" text-anchor="middle">Gate-3</text>
+        <text class="s" x="1030" y="60" text-anchor="middle">≤7 total</text>
+
+        <!-- Recovery lane -->
+        <rect class="bx" x="260" y="200" width="200" height="70" rx="10"/>
+        <text class="t" x="360" y="222" text-anchor="middle">Hot Lead (14:30)</text>
+        <text class="s" x="360" y="240" text-anchor="middle">+5 bonus • new slot</text>
+
+        <rect class="bx" x="500" y="200" width="200" height="70" rx="10"/>
+        <text class="t" x="600" y="222" text-anchor="middle">Intel Station</text>
+        <text class="s" x="600" y="240" text-anchor="middle">8-min • Earn 0/1/2</text>
+
+        <rect class="bx" x="740" y="200" width="200" height="70" rx="10"/>
+        <text class="t" x="840" y="222" text-anchor="middle">Gate-3</text>
+        <text class="s" x="840" y="240" text-anchor="middle">15 min • 15/10/0</text>
+
+        <!-- Lines -->
+        <line class="hl" x1="220" y1="55" x2="260" y2="55"/>
+        <line class="hl" x1="460" y1="55" x2="500" y2="55"/>
+        <line class="hl" x1="700" y1="55" x2="740" y2="55"/>
+        <line class="hl" x1="940" y1="55" x2="980" y2="55"/>
+        <text class="noteS" x="360" y="95" text-anchor="middle">CP1 12:35</text>
+        <text class="noteS" x="840" y="95" text-anchor="middle">CP2 14:00</text>
+
+        <line class="hl" x1="360" y1="90" x2="360" y2="200"/>
+        <line class="hl" x1="600" y1="90" x2="600" y2="200"/>
+        <line class="hl" x1="860" y1="90" x2="860" y2="200"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ===== Visualizations (Timeline) ===== -->
+  <section class="section" id="visuals">
+    <h2 class="title">Visualizations (Compact Timeline)</h2>
+    <div class="card zebra">
+      <b class="accent">Key Times</b>
+      <div class="p" style="margin-top:6px">
+        10:00 Research → 10:45 Reviews → <b>11:30 Auction</b> → 12:30 Gate-1 → <b>12:35 CP1</b> → <b>14:00 Gate-2 & CP2</b> → 14:00–15:45 Intel → <b>14:30 Hot Lead</b> → 15:15 Gate-3 → <b>16:00 Final</b>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Checkpoints ===== -->
+  <section class="section" id="checkpoints">
+    <h2 class="title">Checkpoints (Kyle’s Live Leaderboard)</h2>
+    <table class="table">
+      <tr><th class="th" style="width:24%;">Time</th><th class="th">Action</th></tr>
+      <tr class="tr-alt"><td class="td"><b>12:35</b> — CP1</td><td class="td">Teams count cash; report loudly. Rankings auto-update.</td></tr>
+      <tr><td class="td"><b>14:00</b> — CP2</td><td class="td">Same process. Intel/War Room earnings included.</td></tr>
+      <tr class="tr-alt"><td class="td"><b>16:00</b> — Final</td><td class="td">Spot-check top-3 physically. Final board declares winner.</td></tr>
+    </table>
+    <div class="note"><b>Text format to Kyle:</b> “TeamName – Gate [1/2/3] – Interested/Strong/… – 3000/8000/…”</div>
+  </section>
+
+  <!-- ===== Prizes ===== -->
+  <section class="section" id="prizes">
+    <h2 class="title">Prizes & Awards (Real USD)</h2>
+    <table class="table">
+      <tr><th class="th" style="width:26%;">Rank</th><th class="th">Award</th></tr>
+      <tr class="tr-alt"><td class="td"><b>1st Place</b></td><td class="td"><b>US$200</b> “CES Beer Budget” (no reception)</td></tr>
+      <tr><td class="td"><b>2nd Place</b></td><td class="td">Mosaic Venture Lab — 1h <b>Venture Capital</b> consulting</td></tr>
+      <tr class="tr-alt"><td class="td"><b>3rd Place</b></td><td class="td">Mosaic Venture Lab — 1h <b>Business Development</b> consulting</td></tr>
+    </table>
+    <p class="small">Gate-3 “Deal” payout parity: CVC term sheet and BU POC award identical fake-money outcomes.</p>
+  </section>
+
+  <!-- ===== Comms ===== -->
+  <section class="section" id="comms">
+    <h2 class="title">Communications Protocol (During Auction & Gates)</h2>
+    <div class="grid two">
+      <div class="card">
+        <b class="accent">Mentor Replies (during Auction)</b>
+        <ul class="p" style="margin:6px 0 0 16px">
+          <li><b>Accept:</b> “Accepted for [12:30/12:35/…] — see you.”</li>
+          <li><b>Decline (fit):</b> “Wrong focus for me; try [Mentor Name].”</li>
+          <li><b>Decline (quality):</b> “Email generic; refine to my mandate and resend.”</li>
+          <li><b>Overflow:</b> “Full. Ops will re-route you to [Mentor].”</li>
+        </ul>
+      </div>
+      <div class="card">
+        <b class="accent">Kyle Texts (examples)</b>
+        <ul class="p" style="margin:6px 0 0 16px">
+          <li>“Team X — Gate 1 — Interested — 3000”</li>
+          <li>“Team Y — Gate 2 — Strong — 8000”</li>
+          <li>“Team Z — Gate 3 — Deal — 15000”</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Risks & Mitigations ===== -->
+  <section class="section" id="risks">
+    <h2 class="title">Operational Risks & Mitigations</h2>
+    <table class="table">
+      <tr><th class="th" style="width:38%;">Risk</th><th class="th">Mitigation</th></tr>
+      <tr class="tr-alt"><td class="td">One mentor gets overloaded; others idle</td><td class="td">Manual router & hard per-mentor caps; MC prompts “try [X/Y]”.</td></tr>
+      <tr><td class="td">Cash disputes</td><td class="td">Kyle’s board is source of truth; spot-check at Final.</td></tr>
+      <tr class="tr-alt"><td class="td">Time slippage</td><td class="td">MC wave bell; strict cut-offs; compress breaks if needed.</td></tr>
+      <tr><td class="td">Morning “outs” disengage</td><td class="td">Intel Station + Hot Lead as explicit recovery paths.</td></tr>
+      <tr class="tr-alt"><td class="td">Generic emails → low acceptance</td><td class="td">War Room clinic; provide sample subject lines and templates.</td></tr>
+    </table>
+  </section>
+
+</main>
+
+<script>
+  // Smooth scroll + active tab state + hash handling
+  (function(){
+    const tabs = document.querySelectorAll('.tab');
+    const sections = Array.from(tabs).map(t => document.querySelector(t.getAttribute('href')));
+    function activate(hash){
+      tabs.forEach(t => t.setAttribute('aria-current', t.getAttribute('href')===hash ? 'true' : 'false'));
+    }
+    tabs.forEach(t=>{
+      t.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const id = t.getAttribute('href');
+        document.querySelector(id)?.scrollIntoView({behavior:'smooth',block:'start'});
+        history.replaceState(null,'',id);
+        activate(id);
+      });
+      // hover highlight (already by CSS, but ensure focus also shows)
+      t.addEventListener('focus',()=>t.classList.add('focus'));
+      t.addEventListener('blur',()=>t.classList.remove('focus'));
+    });
+    // On scroll: highlight nearest section
+    const obs = new IntersectionObserver((entries)=>{
+      const vis = entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+      if(vis){ activate('#'+vis.target.id); }
+    },{rootMargin:'-20% 0px -70% 0px',threshold:[0,0.25,0.5,0.75,1]});
+    sections.forEach(s=>s && obs.observe(s));
+    // Initialize from hash
+    if(location.hash){ activate(location.hash); }
+  })();
+</script>
+</body>
+</html>
