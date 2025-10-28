@@ -203,37 +203,25 @@
             line-height: 1.4;
         }
         
-        /* Agenda Specific Styles */
-        .agenda-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-        }
-
-        .agenda-time {
-            font-weight: bold;
-            color: #d8c2ff;
-            font-size: 1.1em;
-            padding: 10px;
-            background: #3f2b96;
-            border-radius: 6px;
-        }
-        
-        .agenda-item {
-            background: #1e173d;
-            padding: 15px;
+        /* Timeline */
+        .timeline-item {
+            display: flex;
+            flex-direction: column; 
+            gap: 10px;
+            margin-bottom: 15px;
+            padding: 15px; 
             border-left: 4px solid #654ce4;
+            background: #1e173d;
             border-radius: 4px;
         }
 
-        .agenda-phase {
+        .time {
             font-weight: bold;
-            color: #654ce4;
-            font-size: 1.1em;
-            margin-bottom: 5px;
+            color: #d8c2ff;
+            min-width: 100%;
+            font-size: 1em;
         }
         
-        /* Content specific formatting */
         .emphasis {
             background: rgba(101, 76, 228, 0.2);
             padding: 3px 8px;
@@ -243,6 +231,7 @@
             display: inline-block;
         }
         
+        /* Checklist Style */
         .checklist {
             list-style: none;
             margin-left: 0;
@@ -272,6 +261,11 @@
             box-shadow: 0 2px 8px rgba(101, 76, 228, 0.6);
         }
 
+        /* Buyer List */
+        .buyer-name { font-weight: bold; color: #d8c2ff; font-size: 1.1em; }
+        .buyer-role { font-size: 0.9em; color: #654ce4; }
+        .buyer-buys { font-size: 0.9em; color: #cccccc; margin-top: 3px; }
+        
         /* PROGRAM FLOW VISUAL STYLES - Simple version */
         .flow-container {
             display: flex;
@@ -306,6 +300,37 @@
             color: #0a0f0a;
             font-weight: bold;
         }
+
+        /* Agenda Specific Styles */
+        .agenda-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .agenda-time {
+            font-weight: bold;
+            color: #d8c2ff;
+            font-size: 1.1em;
+            padding: 10px;
+            background: #3f2b96;
+            border-radius: 6px;
+        }
+        
+        .agenda-item {
+            background: #1e173d;
+            padding: 15px;
+            border-left: 4px solid #654ce4;
+            border-radius: 4px;
+        }
+
+        .agenda-phase {
+            font-weight: bold;
+            color: #654ce4;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
 
         /* Desktop Media Queries */
         @media (min-width: 768px) {
@@ -362,10 +387,10 @@
                 <button class="tab" onclick="showTab('assessment')">✅ Assessment</button>
                 <button class="tab" onclick="showTab('game-gates')">🚪 The 3 Gates</button>
                 <button class="tab" onclick="showTab('all-buyers')">🎭 The 7 Buyers</button>
-                <button class="tab" onclick="showTab('meeting-mechanics')">🤝 Booking & Recovery</button>
-                <button class="tab" onclick="showTab('startup-journey')">🚀 Startup Journey</button>
+                <button class="tab" onclick="showTab('meeting-mechanics')">🤝 Meeting Mechanics</button>
                 <button class="tab" onclick="showTab('program-flow')">➡️ Program Flow</button>
                 <button class="tab" onclick="showTab('game-schedule')">⏱️ Day Schedule</button>
+                <button class="tab" onclick="showTab('mentor-prep')">📋 For Mentors</button>
             </div>
         </div>
 
@@ -510,7 +535,7 @@
         <!-- TAB 5: MEETING MECHANICS -->
         <div id="meeting-mechanics" class="content">
             <div class="card">
-                <h2>🤝 Booking Mechanics & Recovery Paths</h2>
+                <h2>🤝 Meeting Mechanics & Booking Process</h2>
                 <p style="font-size: 1.1em; margin-bottom: 20px; color: #cccccc;">
                     A detailed breakdown of how each set of meetings is secured.
                 </p>
@@ -547,74 +572,7 @@
         </div>
 
 
-        <!-- TAB 6: STARTUP JOURNEY MAP -->
-        <div id="startup-journey" class="content">
-            <div class="card">
-                <h2>🚀 Startup Journey: A Successful Path (Cardio Mirror Example)</h2>
-                <p style="font-size: 1.1em; margin-bottom: 20px; color: #cccccc;">
-                    A sample journey showing a successful path through all three gates and leveraging parallel opportunities.
-                </p>
-
-                <div class="agenda-grid">
-                    <div class="agenda-time">9:30 AM</div>
-                    <div class="agenda-item">
-                        <div class="agenda-phase">START: $10,000 CASH</div>
-                        <p>Strategy: Target CVC (Johnny) and Open Innovation (Deborah) for healthcare fit.</p>
-                    </div>
-
-                    <div class="agenda-time">10:00 AM</div>
-                    <div class="agenda-item">
-                        <div class="agenda-phase">RESEARCH & WAR ROOM</div>
-                        <p>Researched Johnny Yu (CVC). Paid Ken $200 for email review. Submitted 20-person CES list.</p>
-                    </div>
-
-                    <div class="agenda-time">11:30 AM</div>
-                    <div class="agenda-item">
-                        <div class="agenda-phase">GATE 1 BOOKED</div>
-                        <p>Emailed Johnny Yu with a specific bid ($2,500). **Result: ACCEPTED.**</p>
-                    </div>
-
-                    <div class="agenda-time">12:30 PM</div>
-                    <div class="agenda-item">
-                        <div class="agenda-phase">GATE 1 MEETING</div>
-                        <p>Presented deck on traction. Result: **INTERESTED** (Earn $\mathbf{\$3,000}$). **Cash: $\mathbf{\$10,500}$.**</p>
-                    </div>
-                    
-                    <div class="agenda-time">1:45 PM</div>
-                    <div class="agenda-item">
-                        <div class="agenda-phase">BREAK / WAR ROOM STRATEGY</div>
-                        <p>Paid Ken $300 for Gate 2 prep. Advised to prep financial model/runway. Booked G2 slot.</p>
-                    </div>
-
-                    <div class="agenda-time">2:15 PM</div>
-                    <div class="agenda-item">
-                        <div class="agenda-phase">GATE 2 MEETING</div>
-                        <p>Q&A on financials, contracts. Result: **STRONG PROOF** (Earn $\mathbf{\$8,000}$). **Cash: $\mathbf{\$16,200}$.**</p>
-                    </div>
-                    
-                    <div class="agenda-time">2:45 PM</div>
-                    <div class="agenda-item">
-                        <div class="agenda-phase">INTEL STATION (Idle Time)</div>
-                        <p>Presented competitive analysis to Deborah. Result: **EXCELLENT** (Earn $\mathbf{\$1,500}$). **Cash: $\mathbf{\$17,700}$.**</p>
-                    </div>
-
-                    <div class="agenda-time">3:20 PM</div>
-                    <div class="agenda-item">
-                        <div class="agenda-phase">GATE 3 MEETING</div>
-                        <p>Negotiation on valuation/terms. Result: **DEAL AGREED** (Earn $\mathbf{\$15,000}$).</p>
-                    </div>
-
-                    <div class="agenda-time">4:00 PM</div>
-                    <div class="agenda-item">
-                        <div class="agenda-phase">FINAL COUNT</div>
-                        <p>Final Cash: **$\mathbf{\$29,700}$ (2nd Place)**. Recognition: "Best ROI" (197% return).</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- TAB 7: PROGRAM FLOW -->
+        <!-- TAB 6: PROGRAM FLOW -->
         <div id="program-flow" class="content">
             <div class="card">
                 <h2>➡️ Visual Program Flow (The Deal Funnel)</h2>
@@ -654,7 +612,7 @@
         </div>
 
 
-        <!-- TAB 8: DAY SCHEDULE -->
+        <!-- TAB 7: DAY SCHEDULE -->
         <div id="game-schedule" class="content">
             <div class="card">
                 <h2>⏱️ Day Schedule (Key Staff Timeline)</h2>
@@ -711,7 +669,7 @@
             </div>
         </div>
 
-        <!-- TAB 9: MENTOR PREP & GUIDE -->
+        <!-- TAB 8: MENTOR PREP & GUIDE -->
         <div id="mentor-prep" class="content">
             <div class="card">
                 <h2>📋 Mentor Guide (Execution Protocol)</h2>
@@ -731,6 +689,34 @@
                         <li><span style="font-weight: bold;">TEXT KYLE Immediately:</span> Final decision and amount must be texted instantly.</li>
                         <li><span style="font-weight: bold;">Hand Out Payout Envelopes:</span> Give teams their pre-counted earnings (do not count).</li>
                     </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- TAB 9: MECHANICS & RISK -->
+        <div id="mech-risk" class="content">
+            <div class="card">
+                <h2>⚙️ Mechanics & Risk Mitigation (Staff Reference)</h2>
+                
+                <h3 style="margin-top: 10px;">STAFF MONEY MECHANICS (Kyle/Jade)</h3>
+                <div class="box box-accent">
+                    <ul class="checklist">
+                        <li><span style="font-weight: bold;">Kyle's Task:</span> Tracks digitally only at 3 checkpoints.</li>
+                        <li><span style="font-weight: bold;">Jade's Role:</span> Collects cash payments for gate entry (puts in locked box).</li>
+                        <li><span style="font-weight: bold;">Tracking Simplification:</span> Buyers pay out from pre-counted stacks (eliminates counting burden).</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 20px;">CRITICAL RISK MITIGATION</h3>
+                <div class="grid-2">
+                    <div class="box box-warning">
+                        <strong style="color: #fbbf24;">PROBLEM: Mentor Text Delay</strong>
+                        <p style="margin-top: 5px;">**SOLUTION:** Volker reminds buyers during breaks. Kyle can ask buyers directly and update retroactively.</p>
+                    </div>
+                    <div class="box box-warning">
+                        <strong style="color: #fbbf24;">PROBLEM: Lost Cash</strong>
+                        <p style="margin-top: 5px;">**SOLUTION:** Team's responsibility. No reimbursement (Game design feature). Kyle's tracker is the final truth for disputes.</p>
+                    </div>
                 </div>
             </div>
         </div>
